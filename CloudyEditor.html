@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monaco Editor - Comprehensive Roblox Lua Support</title>
+
+    <script src="js/A3BGHG6aqHTc.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        #editor {
+            width: 100%;
+            height: 100%;
+        }
+
+        .myErrorHighlight {
+            color: #f44237 !important; /* bright red */
+        }
+    </style>
+</head>
+<body>
+    <div id="editor"></div>
+
+    <script>
+        window.require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' } });
+
+        window.require(['vs/editor/editor.main'], function () {
+            const luaKeywords = [
+                'and', 'break', 'do', 'else', 'elseif', 'end', 'false', 'for', 
+                'function', 'if', 'in', 'local', 'nil', 'not', 'or', 'repeat', 
+                'return', 'then', 'true', 'until', 'while'
+            ];
+
+            const luaGlobals = [
+                // Standard Lua globals
+                'assert', 'collectgarbage', 'dofile', 'error', 'getfenv', 'getmetatable',
+                'ipairs', 'load', 'loadfile', 'loadstring', 'next', 'pairs', 'pcall', 'print',
+                'rawequal', 'rawget', 'rawset', 'require', 'select', 'setfenv', 'setmetatable',
+                'tonumber', 'tostring', 'type', 'unpack', 'xpcall', '_VERSION',
+
+                // Roblox-specific globals
+                'game', 'workspace', 'Players', 'ReplicatedStorage', 'ServerScriptService',
+                'ServerStorage', 'Teams', 'RunService', 'HttpService', 'Debris', 'MarketplaceService',
+                'TweenInfo', 'SoundService', 'Chat', 'ContextActionService', 'UserInputService',
+                'DataStoreService', 'PathfindingService', 'ContentProvider', 'GetService', 'GetTags', 'GetActor', 'GetStyled', 'GetChildren', 'GetFullName',
+                'GetAttribute', 'GetAttribute', 'GetAttributes', 'GetDescendants', 'GetAttributeChangedSignal', 'GetPropertyChangedSignal', 'rconsoleprint', 'GetPlayerFromCharacter', 'PlayerAdded', 'PlayerRemoving',
+                'Connect', 'NuageuxLikesGayPeople', 'plr', 'Name', 'LocalPlayer'
+                // Add more Roblox-specific globals as needed
+            ];
+
+            // Comprehensive Roblox API Structure
+            const robloxAPI = {
+                game: {
+                    methods: [
+                        { name: "GetService", description: "Gets a service from the Roblox game.", snippet: 'game:GetService("$1")' },
+                        { name: "GetTags", description: "Gets the tags of the game.", snippet: 'game:GetTags()' },
+                        { name: "GetActor", description: "Gets the actor of the game.", snippet: 'game:GetActor()' },
+                        { name: "GetStyled", description: "Gets the styled elements of the game.", snippet: 'game:GetStyled()' },
+                        { name: "GetChildren", description: "Gets the children of the game.", snippet: 'game:GetChildren()' },
+                        { name: "GetFullName", description: "Gets the full name of the game.", snippet: 'game:GetFullName()' },
+                        { name: "GetAttribute", description: "Gets a specific attribute of the game.", snippet: 'game:GetAttribute("$1")' },
+                        { name: "GetAttributes", description: "Gets all attributes of the game.", snippet: 'game:GetAttributes()' },
+                        { name: "GetDescendants", description: "Gets all descendants of the game.", snippet: 'game:GetDescendants()' },
+                        { name: "GetAttributeChangedSignal", description: "Gets the signal when a specific attribute changes.", snippet: 'game:GetAttributeChangedSignal("$1")' },
+                        { name: "GetPropertyChangedSignal", description: "Gets the signal when a specific property changes.", snippet: 'game:GetPropertyChangedSignal("$1")' },
+                        
+                        // Add more methods as needed
+                    ],
+                    properties: [
+                        { name: "Chat", description: "Access the game's chat service.", snippet: "game.Chat" },
+                        { name: "Name", description: "Gets the name of the game.", snippet: "game.Name" },
+                        { name: "Close", description: "Closes the game.", snippet: "game.Close()" },
+                        // Add more properties as needed
+                    ]
+                },
+                Players: {
+                    methods: [
+                        { name: "GetPlayerFromCharacter", description: "Gets a player from a character.", snippet: 'Players:GetPlayerFromCharacter($1)' },
+                        { name: "PlayerAdded", description: "Event fired when a player joins the game.", snippet: 'Players.PlayerAdded:Connect(function(player)\n\t$0\nend)' },
+                        { name: "PlayerRemoving", description: "Event fired when a player leaves the game.", snippet: 'Players.PlayerRemoving:Connect(function(player)\n\t$0\nend)' },
+                        // Add more methods as needed
+                    ],
+                    properties: [
+                        { name: "LocalPlayer", description: "The local player.", snippet: "Players.LocalPlayer" },
+                        { name: "PlayerCount", description: "Number of players in the game.", snippet: "Players.PlayerCount" },
+                        // Add more properties as needed
+                    ]
+                },
+                workspace: {
+                    methods: [
+                        { name: "FindPartOnRay", description: "Finds a part along a ray.", snippet: 'workspace:FindPartOnRay($1)' },
+                        { name: "WaitForChild", description: "Waits for a child to be added to workspace.", snippet: 'workspace:WaitForChild("$1")' },
+                        
+
+                        // Add more methods as needed
+                    ],
+                    properties: [
+                        { name: "Gravity", description: "The gravity setting of the workspace.", snippet: "workspace.Gravity" },
+                        { name: "CurrentCamera", description: "The current camera in the workspace.", snippet: "workspace.CurrentCamera" },
+                        // Add more properties as needed
+                    ]
+                },
+                // Add more Roblox objects with their methods and properties as needed
+            };
+
+            monaco.languages.register({ id: 'lua' });
+
+            const globalFunctionsPattern = `\\b(${luaGlobals.join('|')})\\b`;
+
+            monaco.languages.setMonarchTokensProvider('lua', {
+                tokenizer: {
+                    root: [
+                        [/--\[\[.*?\]\]/, 'comment'],
+                        [/--.*$/, 'comment'],
+                        [/"([^"\\]|\\.)*"/, 'string'],
+                        [/'([^'\\]|\\.)*'/, 'string'],
+
+                        [new RegExp(globalFunctionsPattern), 'support.function'],
+                        [new RegExp(`\\b(${luaKeywords.join('|')})\\b`), 'keyword'],
+
+                        [/\b\d+(\.\d+)?\b/, 'number'],
+                        [/[=+\-*/%^#<>~]/, 'operator'], // Corrected line
+                        [/[a-zA-Z_]\w*/, 'identifier']
+                    ]
+                }
+            });
+
+            monaco.languages.setLanguageConfiguration('lua', {
+                comments: {
+                    lineComment: '--',
+                    blockComment: ['--[[', ']]']
+                },
+                brackets: [
+                    ['{', '}'],
+                    ['[', ']'],
+                    ['(', ')']
+                ],
+                autoClosingPairs: [
+                    { open: '"', close: '"' },
+                    { open: '\'', close: '\'' },
+                    { open: '(', close: ')' },
+                    { open: '[', close: ']' },
+                    { open: '{', close: '}' }
+                ]
+            });
+
+            monaco.editor.defineTheme('myCustomDark', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { token: 'keyword', foreground: '6495ed' },
+                    { token: 'string', foreground: 'a9c4f5' },
+                    { token: 'number', foreground: 'f99157' },
+                    { token: 'comment', foreground: '6D7381' },
+                    { token: 'operator', foreground: 'B0B7C4' },
+                    { token: 'identifier', foreground: 'B0B7C4' },
+                    { token: 'support.function', foreground: '6495ed', fontStyle: 'bold' }
+                ],
+                colors: {
+                    'editor.foreground': '#b0b7c4',
+                    'editor.background': '#1A1E26'
+                }
+            });
+
+            monaco.languages.registerCompletionItemProvider('lua', {
+                provideCompletionItems: function (model, position) {
+                    const code = model.getValue();
+                    const { userDefinedFunctions, userDefinedVariables } = collectUserDefinedIdentifiers(code, luaKeywords, luaGlobals);
+
+                    const suggestions = [];
+
+                    // Snippets
+                    suggestions.push({
+                        label: 'print',
+                        kind: monaco.languages.CompletionItemKind.Snippet,
+                        documentation: 'Insert print(...)',
+                        insertText: 'print($1)$0',
+                        insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        sortText: '0000'
+                    });
+
+                    suggestions.push({
+                        label: 'function',
+                        kind: monaco.languages.CompletionItemKind.Snippet,
+                        documentation: 'Insert a Lua function template',
+                        insertText: 
+`function ($2)
+\t$0
+end`,
+                        insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        sortText: '0000'
+                    });
+
+                    suggestions.push({
+                        label: 'local function',
+                        kind: monaco.languages.CompletionItemKind.Snippet,
+                        documentation: 'Insert a local Lua function template',
+                        insertText: 
+`local function $1($2)
+\t$0
+end`,
+                        insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                        sortText: '0000'
+                    });
+
+                    // Keywords
+                    for (const kw of luaKeywords) {
+                        suggestions.push({
+                            label: kw,
+                            kind: monaco.languages.CompletionItemKind.Keyword,
+                            insertText: kw,
+                            range: null,
+                            sortText: 'zzzz'
+                        });
+                    }
+
+                    // Standard Globals
+                    const robloxGlobals = [
+                        'game', 'workspace', 'Players', 'ReplicatedStorage', 'ServerScriptService',
+                        'ServerStorage', 'Teams', 'RunService', 'HttpService', 'Debris', 'MarketplaceService',
+                        'TweenInfo', 'SoundService', 'Chat', 'ContextActionService', 'UserInputService',
+                        'DataStoreService', 'PathfindingService', 'ContentProvider',
+                        // Add more Roblox-specific globals as needed
+                    ];
+
+                    for (const global of luaGlobals.filter(g => !robloxGlobals.includes(g))) {
+                        suggestions.push({
+                            label: global,
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            insertText: global + '($0)',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                            range: null,
+                            sortText: 'zzzz'
+                        });
+                    }
+
+                    // Roblox Globals
+                    for (const robloxGlobal of robloxGlobals) {
+                        suggestions.push({
+                            label: robloxGlobal,
+                            kind: monaco.languages.CompletionItemKind.Variable,
+                            insertText: robloxGlobal,
+                            documentation: `Roblox global object: ${robloxGlobal}`,
+                            sortText: 'aaaa'
+                        });
+                    }
+
+                    // User-defined functions
+                    for (const funcName of userDefinedFunctions) {
+                        suggestions.push({
+                            label: funcName,
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            insertText: funcName + '($0)',
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                            range: null,
+                            sortText: 'zzzz'
+                        });
+                    }
+
+                    // User-defined variables
+                    for (const varName of userDefinedVariables) {
+                        suggestions.push({
+                            label: varName,
+                            kind: monaco.languages.CompletionItemKind.Variable,
+                            insertText: varName,
+                            range: null,
+                            sortText: 'zzzz'
+                        });
+                    }
+
+                    // Roblox API Snippets
+                    for (const [objectName, objectDetails] of Object.entries(robloxAPI)) {
+                        // Methods
+                        objectDetails.methods.forEach(method => {
+                            suggestions.push({
+                                label: `${objectName}:${method.name}`,
+                                kind: monaco.languages.CompletionItemKind.Function,
+                                documentation: method.description,
+                                insertText: method.snippet,
+                                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                                sortText: '0001'
+                            });
+                        });
+
+                        // Properties
+                        objectDetails.properties.forEach(property => {
+                            suggestions.push({
+                                label: `${objectName}.${property.name}`,
+                                kind: monaco.languages.CompletionItemKind.Variable,
+                                documentation: property.description,
+                                insertText: property.snippet,
+                                sortText: '0002'
+                            });
+                        });
+                    }
+
+                    return { suggestions: suggestions };
+                },
+                triggerCharacters: ['.', ':']
+            });
+
+            const editor = monaco.editor.create(document.getElementById('editor'), {
+                value: `-- CLOUDY EDITOR
+local greeting = "hi "
+local player = game.Players.LocalPlayer
+function greetplr(plr)
+    return greeting .. plr .. " welcome to cloudy"
+end
+
+print(greetplr(player.Name))
+
+`,
+                language: 'lua',
+                theme: 'myCustomDark',
+                dragAndDrop: true,
+                links: true,
+                automaticLayout: true,
+                autoClosingBrackets: 'always',
+                autoClosingQuotes: 'always',
+                suggestOnTriggerCharacters: true,
+                wordBasedSuggestions: false,
+                smoothScrolling: true,
+                cursorBlinking: "smooth",
+                cursorSmoothCaretAnimation: true,
+                scrollBeyondLastLine: false
+            });
+
+            let currentDecorations = [];
+
+            function validateLuaCode() {
+                const code = editor.getValue();
+                const markers = [];
+
+                // Check forbidden keyword
+                const forbiddenKeyword = 'forbidden';
+                let forbiddenIndex = code.indexOf(forbiddenKeyword);
+                if (forbiddenIndex !== -1) {
+                    const { lineNumber, column } = getLineNumberAndColumn(code, forbiddenIndex);
+                    markers.push({
+                        startLineNumber: lineNumber,
+                        startColumn: column,
+                        endLineNumber: lineNumber,
+                        endColumn: column + forbiddenKeyword.length,
+                        message: 'The use of "forbidden" is not allowed!',
+                        severity: monaco.MarkerSeverity.Error
+                    });
+                }
+
+                // Check unmatched quotes
+                let singleQuoteCount = 0;
+                let doubleQuoteCount = 0;
+                for (let i = 0; i < code.length; i++) {
+                    const ch = code[i];
+                    if (ch === '"') doubleQuoteCount++;
+                    if (ch === '\'') singleQuoteCount++;
+                }
+
+                if (doubleQuoteCount % 2 !== 0) {
+                    const lineInfo = getLineNumberAndColumn(code, code.length);
+                    markers.push({
+                        startLineNumber: lineInfo.lineNumber,
+                        startColumn: lineInfo.column,
+                        endLineNumber: lineInfo.lineNumber,
+                        endColumn: lineInfo.column,
+                        message: 'Unmatched double quote detected.',
+                        severity: monaco.MarkerSeverity.Error
+                    });
+                }
+                if (singleQuoteCount % 2 !== 0) {
+                    const lineInfo = getLineNumberAndColumn(code, code.length);
+                    markers.push({
+                        startLineNumber: lineInfo.lineNumber,
+                        startColumn: lineInfo.column,
+                        endLineNumber: lineInfo.lineNumber,
+                        endColumn: lineInfo.column,
+                        message: 'Unmatched single quote detected.',
+                        severity: monaco.MarkerSeverity.Error
+                    });
+                }
+
+                // Highlight unknown identifiers outside of strings/comments
+                const { userDefinedFunctions, userDefinedVariables } = collectUserDefinedIdentifiers(code, luaKeywords, luaGlobals);
+                const known = new Set([...luaKeywords, ...luaGlobals, ...userDefinedFunctions, ...userDefinedVariables]);
+
+                const lines = code.split('\n');
+                let inBlockComment = false;
+
+                for (let lineNo = 0; lineNo < lines.length; lineNo++) {
+                    const line = lines[lineNo];
+                    const maskedLine = maskStringsAndComments(line, inBlockComment);
+                    inBlockComment = maskedLine.inBlockComment;
+
+                    const identifierRegex = /\b([a-zA-Z_]\w*)\b/g;
+                    let match;
+                    while ((match = identifierRegex.exec(maskedLine.text)) !== null) {
+                        const word = match[1];
+                        if (!known.has(word)) {
+                            markers.push({
+                                startLineNumber: lineNo + 1,
+                                startColumn: match.index + 1,
+                                endLineNumber: lineNo + 1,
+                                endColumn: match.index + 1 + word.length,
+                                message: `Unknown identifier "${word}"`,
+                                severity: monaco.MarkerSeverity.Error
+                            });
+                        }
+                    }
+                }
+
+                monaco.editor.setModelMarkers(editor.getModel(), 'lua-lint', markers);
+
+                // Add decorations for errors to make text red
+                // Convert markers to decorations
+                const decorations = markers.map(m => {
+                    return {
+                        range: new monaco.Range(m.startLineNumber, m.startColumn, m.endLineNumber, m.endColumn),
+                        options: {
+                            inlineClassName: 'myErrorHighlight'
+                        }
+                    };
+                });
+
+                currentDecorations = editor.deltaDecorations(currentDecorations, decorations);
+            }
+
+            // Validate on startup
+            validateLuaCode();
+
+            // Validate on change with debouncing
+            let validateTimeout;
+            editor.onDidChangeModelContent(() => {
+                clearTimeout(validateTimeout);
+                validateTimeout = setTimeout(validateLuaCode, 300);
+            });
+
+            // *** Start of Auto-Insertion Logic ***
+            editor.onDidChangeModelContent((e) => {
+                e.changes.forEach(change => {
+                    if (change.text === 'function') {
+                        const position = editor.getPosition();
+                        const model = editor.getModel();
+                        const lineNumber = position.lineNumber;
+                        const column = position.column;
+
+                        // Get the content of the current line up to the 'function' keyword
+                        const lineContent = model.getLineContent(lineNumber);
+                        const beforeFunction = lineContent.substring(0, column - 'function'.length);
+
+                        // Check if 'function' is at the start of the line or after indentation
+                        if (/^\s*$/.test(beforeFunction)) {
+                            // Determine the current indentation
+                            const indentMatch = beforeFunction.match(/^\s*/);
+                            const indent = indentMatch ? indentMatch[0] : '';
+
+                            // Prepare the 'end' statement with matching indentation
+                            const endLine = indent + 'end';
+
+                            // Insert 'end' on the next line
+                            editor.executeEdits('', [{
+                                range: new monaco.Range(lineNumber + 1, 1, lineNumber + 1, 1),
+                                text: endLine + '\n',
+                                forceMoveMarkers: true
+                            }]);
+
+                            // Move the cursor to the line between 'function' and 'end'
+                            editor.setPosition({
+                                lineNumber: lineNumber + 1,
+                                column: indent.length + 1
+                            });
+
+                            // Optional: Trigger a layout update to ensure the cursor is visible
+                            editor.revealLineInCenterIfOutsideViewport(lineNumber + 1);
+                        }
+                    }
+                });
+            });
+            // *** End of Auto-Insertion Logic ***
+
+            // Helper functions
+            function getLineNumberAndColumn(code, index) {
+                const lines = code.substring(0, index).split('\n');
+                const lineNumber = lines.length;
+                const column = lines[lines.length - 1].length + 1;
+                return { lineNumber, column };
+            }
+
+            function collectUserDefinedIdentifiers(code, keywords, globals) {
+                const userDefinedFunctions = new Set();
+                const userDefinedVariables = new Set();
+                const lines = code.split('\n');
+
+                for (let line of lines) {
+                    line = line.trim();
+
+                    // local var = ...
+                    let localVarMatch = line.match(/^local\s+([a-zA-Z_]\w*)\s*=/);
+                    if (localVarMatch && localVarMatch[1]) {
+                        userDefinedVariables.add(localVarMatch[1]);
+                    }
+
+                    // function name(args)
+                    let funcMatch = line.match(/^function\s+([a-zA-Z_]\w*)\s*\(/);
+                    if (funcMatch && funcMatch[1]) {
+                        userDefinedFunctions.add(funcMatch[1]);
+                    }
+
+                    // local function name(args)
+                    let localFuncMatch = line.match(/^local\s+function\s+([a-zA-Z_]\w*)\s*\(/);
+                    if (localFuncMatch && localFuncMatch[1]) {
+                        userDefinedFunctions.add(localFuncMatch[1]);
+                    }
+                }
+
+                return { userDefinedFunctions, userDefinedVariables };
+            }
+
+            function maskStringsAndComments(line, inBlockComment) {
+                let result = '';
+                let i = 0;
+                let inString = false;
+                let stringChar = null; // ' or "
+                let length = line.length;
+
+                while (i < length) {
+                    if (inBlockComment) {
+                        // Inside a block comment until we find ]]
+                        if (line.slice(i, i+2) === ']]') {
+                            inBlockComment = false;
+                            result += '  ';
+                            i += 2;
+                        } else {
+                            result += ' ';
+                            i++;
+                        }
+                        continue;
+                    }
+
+                    if (!inString) {
+                        // Check for start of block comment
+                        if (line.slice(i, i+4) === '--[[') {
+                            inBlockComment = true;
+                            result += '    ';
+                            i += 4;
+                            continue;
+                        }
+
+                        // Check for line comment
+                        if (line.slice(i, i+2) === '--') {
+                            // rest of line is comment
+                            const restLen = length - i;
+                            result += ' '.repeat(restLen);
+                            i = length;
+                            continue;
+                        }
+
+                        // Check for string start
+                        if (line[i] === '"' || line[i] === '\'') {
+                            inString = true;
+                            stringChar = line[i];
+                            result += ' ';
+                            i++;
+                            continue;
+                        }
+
+                        // Normal character outside string/comment
+                        result += line[i];
+                        i++;
+                    } else {
+                        // We are inside a string
+                        if (line[i] === '\\' && i + 1 < length) {
+                            // Escape character, skip the next character
+                            result += '  ';
+                            i += 2;
+                        } else if (line[i] === stringChar) {
+                            // End of string
+                            inString = false;
+                            stringChar = null;
+                            result += ' ';
+                            i++;
+                        } else {
+                            // Inside string, just mask as space
+                            result += ' ';
+                            i++;
+                        }
+                    }
+                }
+
+                return { text: result, inBlockComment };
+            }
+        });
+    </script>
+
+
+</body></html>
