@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ghosty - The Ultimate External Cheat Tool for Euro Truck Simulator 2 and TruckersMP" />
+  <title>Ghosty | External Cheat Companion</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <style>
+    :root{
+      --bg0:#07070b;
+      --bg1:#0c0c12;
+      --bg2:#111120;
+      --surface:rgba(22, 22, 36, .65);
+      --surface2:rgba(30, 30, 48, .55);
+      --border:rgba(255,255,255,.12);
+      --border2:rgba(140,92,247,.25);
+
+      --text:#f7f7ff;
+      --muted:rgba(255,255,255,.68);
+
+      --p:#8c5cf7;
+      --p2:#c46efa;
+      --p3:#a988ff;
+
+      --r:#ff4c4c;
+
+      --grad:linear-gradient(135deg, var(--p) 0%, var(--p2) 100%);
+      --grad-soft:linear-gradient(135deg, rgba(140,92,247,.35) 0%, rgba(196,110,250,.22) 100%);
+      --grad-elite:linear-gradient(135deg, #ff4c4c 0%, #ff8b8b 100%);
+
+      --shadow:0 22px 60px rgba(0,0,0,.45);
+      --shadow2:0 16px 40px rgba(0,0,0,.35);
+
+      --radius:18px;
+      --radius2:24px;
+
+      --ease:cubic-bezier(.175,.885,.32,1.275);
+      --ease2:cubic-bezier(.22,1,.36,1);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 20% 15%, rgba(140,92,247,.16), transparent 55%),
+                  radial-gradient(900px 600px at 85% 30%, rgba(196,110,250,.12), transparent 60%),
+                  radial-gradient(700px 550px at 40% 85%, rgba(255,76,76,.08), transparent 60%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
+      overflow-x:hidden;
+      cursor:crosshair;
+      -webkit-user-select:none; user-select:none;
+    }
+
+    /* Subtle film grain */
+    body::before{
+      content:"";
+      position:fixed; inset:-20%;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
+      pointer-events:none;
+      mix-blend-mode:overlay;
+      opacity:.18;
+      transform:translateZ(0);
+      z-index:-1;
+    }
+
+    /* Fancy background blobs */
+    .bg-blobs{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .blob{
+      position:absolute;
+      width:520px; height:520px;
+      border-radius:999px;
+      filter:blur(50px);
+      opacity:.25;
+      animation:blob 16s var(--ease2) infinite;
+      transform:translate3d(0,0,0);
+    }
+    .blob.b1{left:-140px; top:-140px; background:rgba(140,92,247,.65)}
+    .blob.b2{right:-180px; top:120px; background:rgba(196,110,250,.55); animation-delay:-6s}
+    .blob.b3{left:30%; bottom:-260px; background:rgba(255,76,76,.35); animation-delay:-10s}
+    @keyframes blob{
+      0%,100%{transform:translate(0,0) scale(1)}
+      50%{transform:translate(50px,30px) scale(1.1)}
+    }
+
+    /* Stars + particles (kept, refined) */
+    .static-stars, .particle-container{
+      position:fixed; inset:0; pointer-events:none;
+    }
+    .static-stars{z-index:1}
+    .particle-container{z-index:2}
+    .static-star{
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:rgba(255,255,255,.9);
+      opacity:.65;
+      animation:twinkle 3s ease-in-out infinite;
+    }
+    .static-star.medium{width:3px;height:3px; box-shadow:0 0 8px rgba(255,255,255,.55)}
+    .static-star.large{width:4px;height:4px; box-shadow:0 0 12px rgba(255,255,255,.55)}
+    @keyframes twinkle{0%,100%{opacity:.2; transform:scale(.85)}50%{opacity:1; transform:scale(1.2)}}
+
+    .particle{
+      position:absolute;
+      width:8px;height:8px;border-radius:999px;
+      background:rgba(140,92,247,.6);
+      opacity:0;
+      filter:blur(2px);
+      box-shadow:0 0 18px rgba(140,92,247,.7), 0 0 28px rgba(196,110,250,.4);
+      animation:float 9s ease-in-out infinite;
+    }
+    .particle.small{width:4px;height:4px; filter:blur(1px)}
+    .particle.medium{width:8px;height:8px; animation-duration:11s}
+    .particle.large{width:12px;height:12px; animation-duration:13s}
+    .particle.star{
+      width:12px;height:12px;
+      background:rgba(255,255,255,.75);
+      clip-path:polygon(50%0%,61%35%,98%35%,68%57%,79%91%,50%70%,21%91%,32%57%,2%35%,39%35%);
+      box-shadow:0 0 18px rgba(255,255,255,.7), 0 0 28px rgba(140,92,247,.45);
+      animation-duration:15s;
+    }
+    @keyframes float{
+      0%{transform:translateY(110vh) translateX(0) rotate(0deg) scale(1); opacity:0}
+      8%{opacity:1}
+      45%{transform:translateY(55vh) translateX(60px) rotate(180deg) scale(1.1); opacity:.9}
+      100%{transform:translateY(-10vh) translateX(-90px) rotate(360deg) scale(0); opacity:0}
+    }
+
+    /* Layout helpers */
+    .container{width:min(1160px, 92vw); margin:0 auto}
+    .grid{display:grid; gap:18px}
+    .pill{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:.55rem .85rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .pill i{color:var(--p3)}
+    .shine{
+      position:relative; overflow:hidden;
+    }
+    .shine::after{
+      content:"";
+      position:absolute; inset:-40% -80%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      transform:translateX(-60%) rotate(10deg);
+      transition:transform .7s ease;
+    }
+    .shine:hover::after{transform:translateX(60%) rotate(10deg)}
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(10,10,16,.55);
+      border-bottom:1px solid rgba(140,92,247,.22);
+      backdrop-filter:blur(18px);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .logo{
+      display:flex; align-items:center; gap:.9rem;
+      text-decoration:none;
+    }
+    .logo-mark{
+      width:44px; height:44px; border-radius:14px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(140,92,247,.25), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 40px rgba(140,92,247,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo-mark::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(220px 160px at 30% 25%, rgba(140,92,247,.55), transparent 60%);
+      filter:blur(10px);
+      opacity:.55;
+    }
+    .logo-mark svg{position:relative; z-index:1; filter:drop-shadow(0 0 14px rgba(140,92,247,.45))}
+    .logo-text{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .logo-text strong{
+      font-size:1.15rem;
+      letter-spacing:.02em;
+      background:linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,.85) 40%, rgba(169,136,255,.95) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{
+      font-size:.82rem; color:rgba(255,255,255,.6); font-weight:600;
+    }
+
+    .nav-links{
+      display:flex; align-items:center; gap:12px;
+    }
+    .nav-link{
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.7rem .95rem;
+      border-radius:12px;
+      text-decoration:none;
+      color:rgba(255,255,255,.88);
+      font-weight:700;
+      border:1px solid transparent;
+      transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    }
+    .nav-link:hover{
+      transform:translateY(-2px);
+      background:rgba(140,92,247,.10);
+      border-color:rgba(140,92,247,.25);
+    }
+    .nav-link.active{
+      background:rgba(140,92,247,.16);
+      border-color:rgba(140,92,247,.35);
+      color:#fff;
+    }
+    .nav-link i{color:rgba(169,136,255,.95)}
+    .nav-cta{
+      margin-left:8px;
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:.8rem 1.05rem;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:900;
+      color:#fff;
+      background:var(--grad);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 16px 40px rgba(140,92,247,.28);
+      transition:transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
+    }
+    .nav-cta:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 22px 55px rgba(140,92,247,.38); filter:brightness(1.05)}
+    .nav-toggle{
+      display:none;
+      width:44px; height:44px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      place-items:center;
+      transition:transform .25s ease, background .25s ease;
+    }
+    .nav-toggle:hover{transform:translateY(-2px); background:rgba(140,92,247,.12)}
+    .nav-toggle i{font-size:1.1rem}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:82px 0 40px;
+      z-index:5;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:26px;
+      align-items:center;
+    }
+    .hero h1{
+      margin:14px 0 12px;
+      font-size:clamp(2.25rem, 4vw, 3.65rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+      background:linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,.86) 35%, rgba(169,136,255,.98) 70%, rgba(196,110,250,.98) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      text-shadow:0 18px 50px rgba(140,92,247,.10);
+    }
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:clamp(1.02rem, 1.25vw, 1.18rem);
+      line-height:1.7;
+      max-width:60ch;
+    }
+    .hero-badges{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:8px}
+    .hero-cta{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top:18px;
+      align-items:center;
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:16px;
+      padding:1.05rem 1.25rem;
+      display:inline-flex;
+      align-items:center;
+      gap:.65rem;
+      text-decoration:none;
+      font-weight:900;
+      cursor:pointer;
+      transition:transform .25s var(--ease), box-shadow .25s ease, filter .25s ease, background .25s ease;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(14px);
+    }
+    .btn i{filter:drop-shadow(0 0 10px rgba(255,255,255,.15))}
+    .btn-primary{
+      background:var(--grad);
+      color:#fff;
+      box-shadow:0 18px 50px rgba(140,92,247,.35), inset 0 0 14px rgba(255,255,255,.12);
+    }
+    .btn-primary:hover{transform:translateY(-4px) scale(1.02); box-shadow:0 26px 70px rgba(140,92,247,.45); filter:brightness(1.06)}
+    .btn-elite{
+      background:var(--grad-elite);
+      color:#fff;
+      box-shadow:0 18px 50px rgba(255,76,76,.28), inset 0 0 14px rgba(255,255,255,.12);
+    }
+    .btn-elite:hover{transform:translateY(-4px) scale(1.02); box-shadow:0 26px 70px rgba(255,76,76,.36); filter:brightness(1.06)}
+    .btn-ghost{
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.92);
+    }
+    .btn-ghost:hover{transform:translateY(-3px); background:rgba(140,92,247,.10)}
+    .badge-paid{
+      font-size:.78rem; font-weight:900; letter-spacing:.06em;
+      text-transform:uppercase;
+      padding:.3rem .55rem;
+      border-radius:999px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .hero-note{
+      margin-top:16px;
+      border:1px solid rgba(140,92,247,.22);
+      background:linear-gradient(135deg, rgba(140,92,247,.11), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      padding:14px 14px;
+      color:rgba(255,255,255,.86);
+      box-shadow:var(--shadow2);
+      display:flex; gap:12px; align-items:flex-start;
+    }
+    .hero-note i{color:var(--p3); margin-top:2px}
+    .hero-note strong{color:#fff}
+    .hero-note a{color:var(--p3); font-weight:900; text-decoration:none}
+    .hero-note a:hover{text-decoration:underline}
+
+    .hero-card{
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(24,24,38,.62), rgba(12,12,20,.45));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transform:translateZ(0);
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(600px 300px at 30% 25%, rgba(140,92,247,.35), transparent 60%),
+                 radial-gradient(500px 260px at 80% 60%, rgba(196,110,250,.22), transparent 60%);
+      opacity:.7;
+      pointer-events:none;
+      filter:blur(8px);
+    }
+    .hero-card-inner{
+      position:relative;
+      padding:14px;
+      z-index:1;
+    }
+    .hero-preview{
+      width:100%; height:auto;
+      display:block;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 55px rgba(0,0,0,.35);
+      pointer-events:none;
+      user-drag:none; -webkit-user-drag:none;
+    }
+    .hero-card-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 10px 14px;
+    }
+    .ghost-tag{
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.45rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      font-weight:900;
+      color:rgba(255,255,255,.88);
+    }
+    .ghost-tag i{color:var(--p3)}
+    .ghost-dots{display:flex; gap:7px; opacity:.9}
+    .ghost-dots span{
+      width:10px; height:10px; border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .ghost-dots span:nth-child(1){background:rgba(255,76,76,.55)}
+    .ghost-dots span:nth-child(2){background:rgba(255,255,255,.18)}
+    .ghost-dots span:nth-child(3){background:rgba(140,92,247,.55)}
+
+    /* Sections */
+    section{position:relative; z-index:5}
+    .section{
+      padding:58px 0;
+    }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom:18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:clamp(1.6rem, 2.5vw, 2.15rem);
+      letter-spacing:-.02em;
+      background:linear-gradient(135deg, #fff 0%, rgba(255,255,255,.86) 40%, rgba(169,136,255,.98) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .section-head p{
+      margin:0;
+      color:rgba(255,255,255,.66);
+      max-width:60ch;
+      font-weight:600;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column:span 4;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      padding:18px 18px;
+      transition:transform .25s var(--ease), border-color .25s ease, background .25s ease, box-shadow .25s ease;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(16px);
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(420px 240px at var(--x,30%) var(--y,30%), rgba(140,92,247,.22), transparent 60%);
+      opacity:.65;
+      pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(140,92,247,.35);
+      background:linear-gradient(145deg, rgba(140,92,247,.10), rgba(255,255,255,.03));
+      box-shadow:0 24px 60px rgba(0,0,0,.38);
+    }
+    .card-icon{
+      width:46px; height:46px; border-radius:16px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(140,92,247,.22), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 14px 30px rgba(140,92,247,.16);
+      margin-bottom:12px;
+    }
+    .card-icon i{color:#fff; filter:drop-shadow(0 0 14px rgba(140,92,247,.45))}
+    .card h3{margin:0 0 8px; font-size:1.18rem; letter-spacing:-.01em}
+    .card p{margin:0; color:rgba(255,255,255,.68); line-height:1.65; font-weight:600}
+    .card .chiprow{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      font-weight:900;
+      font-size:.78rem;
+      color:rgba(255,255,255,.86);
+      padding:.35rem .55rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+    }
+
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    .stat{
+      grid-column:span 4;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      padding:16px 16px;
+      box-shadow:var(--shadow2);
+      display:flex; gap:12px; align-items:center;
+      backdrop-filter: blur(14px);
+    }
+    .stat .n{
+      font-size:1.35rem; font-weight:900;
+      background:var(--grad);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .stat .t{font-weight:800; color:rgba(255,255,255,.88)}
+    .stat .d{font-weight:700; color:rgba(255,255,255,.62); font-size:.9rem}
+
+    /* Timeline */
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
+    .step{
+      grid-column:span 4;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      padding:16px 16px;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(16px);
+    }
+    .step::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(480px 260px at 20% 20%, rgba(140,92,247,.22), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .step .num{
+      width:40px;height:40px;border-radius:14px;
+      display:grid; place-items:center;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      box-shadow:0 14px 30px rgba(0,0,0,.25);
+      margin-bottom:10px;
+    }
+    .step h3{margin:0 0 8px}
+    .step p{margin:0; color:rgba(255,255,255,.68); font-weight:650; line-height:1.65}
+
+    /* Big promo */
+    .promo{
+      border-radius:28px;
+      border:1px solid rgba(255,76,76,.25);
+      background:radial-gradient(900px 450px at 15% 30%, rgba(255,76,76,.16), transparent 60%),
+                 radial-gradient(900px 450px at 85% 70%, rgba(140,92,247,.12), transparent 60%),
+                 linear-gradient(145deg, rgba(20,20,34,.7), rgba(8,8,14,.6));
+      box-shadow:var(--shadow);
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .promo::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+      transform:translateX(-100%);
+      animation:shine 5s infinite;
+      opacity:.55;
+      pointer-events:none;
+    }
+    @keyframes shine{100%{transform:translateX(100%)}}
+    .promo h2{
+      margin:0 0 10px;
+      font-size:clamp(1.7rem, 3vw, 2.35rem);
+      letter-spacing:-.02em;
+      background:linear-gradient(135deg, #fff 0%, rgba(255,220,220,.92) 40%, rgba(255,139,139,.98) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .promo p{margin:0 0 16px; color:rgba(255,255,255,.72); font-weight:700; max-width:70ch; line-height:1.7}
+    .promo-actions{display:flex; flex-wrap:wrap; gap:12px}
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
+    details.faq-item{
+      grid-column:span 6;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      backdrop-filter: blur(16px);
+    }
+    details.faq-item summary{
+      list-style:none;
+      cursor:pointer;
+      padding:16px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-weight:900;
+      color:rgba(255,255,255,.92);
+    }
+    details.faq-item summary::-webkit-details-marker{display:none}
+    details.faq-item summary i{color:rgba(169,136,255,.9)}
+    details.faq-item[open] summary{background:rgba(140,92,247,.10)}
+    details.faq-item .faq-body{
+      padding:0 16px 16px;
+      color:rgba(255,255,255,.72);
+      font-weight:650;
+      line-height:1.7;
+    }
+
+    /* Footer */
+    footer{
+      padding:40px 0 60px;
+      border-top:1px solid rgba(140,92,247,.18);
+      background:rgba(10,10,16,.35);
+      backdrop-filter: blur(12px);
+      position:relative;
+      z-index:5;
+    }
+    .footer-inner{
+      display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+    }
+    .footer-inner p{margin:0; color:rgba(255,255,255,.66); font-weight:700}
+    .footer-inner a{color:rgba(169,136,255,.95); font-weight:900; text-decoration:none}
+    .footer-inner a:hover{text-decoration:underline}
+    .heart{color:var(--r); text-shadow:0 0 16px rgba(255,76,76,.65); animation:heart 1.6s ease-in-out infinite; display:inline-block}
+    @keyframes heart{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+
+    /* Loader */
+    .loader-wrap{
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(180deg, rgba(7,7,11,.98), rgba(10,10,16,.98));
+      z-index:9999;
+      transition:opacity .55s ease, visibility .55s ease;
+    }
+    .loader{
+      width:84px; height:84px; position:relative;
+      filter:drop-shadow(0 0 30px rgba(140,92,247,.55));
+    }
+    .loader::before,.loader::after{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:999px;
+      background:var(--grad);
+      animation:ring 1.6s ease infinite;
+    }
+    .loader::after{
+      inset:24%;
+      background:linear-gradient(135deg, rgba(255,76,76,.95), rgba(255,139,139,.95));
+      animation:dot 1.6s ease infinite;
+      box-shadow:0 0 28px rgba(140,92,247,.55);
+    }
+    @keyframes ring{0%{transform:scale(.35);opacity:.8}80%,100%{transform:scale(1.45);opacity:0}}
+    @keyframes dot{0%,100%{transform:scale(.9)}50%{transform:scale(1.25)}}
+
+    /* Modal (Elite) */
+    .modal-overlay{
+      position:fixed; inset:0;
+      display:grid; place-items:center;
+      background:rgba(6,6,10,.62);
+      backdrop-filter:blur(16px);
+      z-index:99999;
+      opacity:0; pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    .modal-overlay.active{opacity:1; pointer-events:auto}
+    .elite-modal{
+      width:min(980px, calc(100vw - 2rem));
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(24,24,36,.92), rgba(12,12,20,.75));
+      box-shadow:0 35px 90px rgba(0,0,0,.60), 0 0 65px rgba(255,76,76,.14);
+      transform:translateY(12px) scale(.985);
+      opacity:0;
+      transition:transform .35s var(--ease), opacity .35s ease;
+      overflow:hidden;
+      position:relative;
+    }
+    .modal-overlay.active .elite-modal{transform:translateY(0) scale(1); opacity:1}
+    .elite-modal::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:radial-gradient(680px 340px at var(--mx,50%) var(--my,40%), rgba(255,76,76,.32), transparent 60%),
+                 radial-gradient(720px 360px at 30% 25%, rgba(140,92,247,.22), transparent 60%);
+      filter:blur(10px);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .elite-modal-inner{position:relative; z-index:2; padding:18px 18px 16px}
+    .modal-top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+      padding:4px 4px 10px;
+    }
+    .modal-title{display:flex; align-items:flex-start; gap:12px}
+    .modal-icon{
+      width:46px;height:46px;border-radius:16px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(255,76,76,.20), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 40px rgba(255,76,76,.14);
+    }
+    .modal-icon i{color:#fff; filter:drop-shadow(0 0 14px rgba(255,76,76,.45))}
+    .modal-title h3{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:-.02em;
+      background:linear-gradient(135deg, #fff 0%, rgba(255,230,230,.92) 40%, rgba(255,139,139,.98) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .modal-title p{margin:.35rem 0 0; color:rgba(255,255,255,.70); font-weight:650}
+    .modal-close{
+      width:44px;height:44px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      display:grid; place-items:center;
+      transition:transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .modal-close:hover{
+      transform:translateY(-2px);
+      background:rgba(255,76,76,.12);
+      border-color:rgba(255,76,76,.25);
+    }
+
+    .modal-body{display:grid; gap:14px; padding:0 4px 4px}
+    .elite-showcase{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .elite-video-wrap{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .elite-video{
+      position:relative;
+      padding-top:56.25%;
+      height:0;
+    }
+    .elite-video iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+    .elite-highlights{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(145deg, rgba(255,76,76,.10), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+      padding:14px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .elite-cardline{
+      display:flex; gap:10px; align-items:flex-start;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      padding:12px 12px;
+    }
+    .elite-cardline .dot{
+      width:12px;height:12px;border-radius:999px;
+      background:rgba(255,76,76,.85);
+      box-shadow:0 0 18px rgba(255,76,76,.55);
+      margin-top:4px;
+      flex:0 0 auto;
+    }
+    .elite-cardline .line-text{color:rgba(255,255,255,.78); font-weight:700; line-height:1.6}
+    .elite-cardline .line-text b{color:#fff}
+    .elite-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+    .elite-chip{
+      display:flex; gap:10px; align-items:flex-start;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:12px 12px;
+    }
+    .elite-chip i{
+      width:34px;height:34px;border-radius:14px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(255,76,76,.18), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      flex:0 0 auto;
+      filter:drop-shadow(0 0 12px rgba(255,76,76,.30));
+    }
+    .elite-chip b{display:block; color:#fff; font-weight:900}
+    .elite-chip span{display:block; color:rgba(255,255,255,.70); font-weight:650; margin-top:2px}
+
+    .modal-actions{
+      display:flex; flex-wrap:wrap; gap:12px; align-items:center;
+      padding:4px 4px 0;
+    }
+    .modal-primary{
+      display:inline-flex; align-items:center; gap:.65rem;
+      padding:1rem 1.15rem;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:var(--grad-elite);
+      color:#fff;
+      text-decoration:none;
+      font-weight:900;
+      box-shadow:0 18px 55px rgba(255,76,76,.28);
+      transition:transform .25s var(--ease), box-shadow .25s ease, filter .25s ease;
+    }
+    .modal-primary:hover{transform:translateY(-3px) scale(1.02); box-shadow:0 26px 70px rgba(255,76,76,.36); filter:brightness(1.05)}
+    .modal-secondary{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:1rem 1.05rem;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      cursor:pointer;
+      transition:transform .25s ease, background .25s ease;
+    }
+    .modal-secondary:hover{transform:translateY(-2px); background:rgba(255,255,255,.09)}
+
+    /* Scroll reveal */
+    .reveal{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s var(--ease2)}
+    .reveal.in{opacity:1; transform:none}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns:1fr; gap:16px}
+      .elite-showcase{grid-template-columns:1fr}
+      .cards .card{grid-column:span 6}
+      .stats .stat{grid-column:span 6}
+      .timeline .step{grid-column:span 6}
+      details.faq-item{grid-column:span 12}
+    }
+    @media (max-width: 740px){
+      .nav-links{
+        position:fixed;
+        top:68px; left:0; right:0;
+        padding:12px;
+        display:none;
+        flex-direction:column;
+        background:rgba(10,10,16,.82);
+        border-bottom:1px solid rgba(140,92,247,.22);
+        backdrop-filter:blur(18px);
+      }
+      .nav-links.active{display:flex}
+      .nav-toggle{display:grid}
+      .nav-cta{width:100%; justify-content:center}
+      .cards .card{grid-column:span 12}
+      .stats .stat{grid-column:span 12}
+      .timeline .step{grid-column:span 12}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+      html{scroll-behavior:auto}
+      .blob{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <div class="static-stars" aria-hidden="true"></div>
+  <div class="particle-container" aria-hidden="true"></div>
+
+  <div class="loader-wrap" id="loader">
+    <div class="loader" aria-label="Loading"></div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="logo">
+          <div class="logo-mark" aria-hidden="true">
+<!-- modern ghost svg -->
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+  <defs>
+    <linearGradient id="ghostGradient" x1="5" y1="4" x2="19" y2="20">
+      <stop stop-color="#8c5cf7"/>
+      <stop offset="1" stop-color="#c46efa"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M12 3c-4 0-7 3.2-7 7.4V21l2-1.2 2 1.2 2-1.2 2 1.2 2-1.2 2 1.2V10.4C19 6.2 16 3 12 3Z"
+    stroke="url(#ghostGradient)"
+    stroke-width="1.6"
+    stroke-linejoin="round"
+  />
+
+  <circle cx="9.5" cy="11" r="1" fill="#d7b7ff"/>
+  <circle cx="14.5" cy="11" r="1" fill="#d7b7ff"/>
+</svg>
+
+          </div>
+          <div class="logo-text">
+            <strong>TruckersOP</strong>
+            <span>Ghosty External</span>
+          </div>
+        </a>
+
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="index.html" class="nav-link active"><i class="fas fa-home"></i>Home</a>
+          <a href="features.html" class="nav-link"><i class="fas fa-star"></i>Features</a>
+          <a href="spoofer.html" class="nav-link"><i class="fas fa-mask"></i>Spoofer</a>
+          <a href="https://discord.gg/j6p4yvsfN3" class="nav-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i>Support</a>
+          <a href="https://discord.gg/j6p4yvsfN3" class="nav-cta shine" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i>Join Discord</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="reveal">
+            <div class="hero-badges">
+              <span class="pill"><i class="fas fa-shield-halved"></i> External • Portable</span>
+              <span class="pill"><i class="fas fa-ghost"></i> ETS2 • TruckersMP</span>
+              <span class="pill"><i class="fas fa-bolt"></i> Fast Bootstrapper</span>
+            </div>
+
+            <h1> Ghosty — where realism meets the <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">paranormal</span>.</h1>
+            <p>
+              Ghosty is the ultimate external companion for Euro Truck Simulator 2 — made for TruckersMP and solo.
+              Minimal stress, maximum control. Keep it purple. Keep it ghost.
+            </p>
+
+            <div class="hero-cta">
+              <a class="btn btn-primary shine" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-download"></i> Ghosty Lite Bootstrapper
+              </a>
+
+              <button class="btn btn-elite shine" id="eliteOpenBtn" type="button" aria-haspopup="dialog" aria-controls="eliteModalOverlay">
+                <i class="fas fa-crown"></i> Ghosty Elite <span class="badge-paid">Paid</span>
+              </button>
+
+              <a class="btn btn-ghost" href="features.html">
+                <i class="fas fa-sparkles"></i> Explore Features
+              </a>
+            </div>
+
+            <div class="stats reveal" style="margin-top:18px">
+              <div class="stat">
+                <div class="n">⚡</div>
+                <div>
+                  <div class="t">Fast setup</div>
+                  <div class="d">Launch Bootstrapper → External → Enjoy</div>
+                </div>
+              </div>
+              <div class="stat">
+                <div class="n">🛡️</div>
+                <div>
+                  <div class="t">Safety-first</div>
+                  <div class="d">99% Of features are undetected, and the one that present a risk are marked as</div>
+                </div>
+              </div>
+              <div class="stat">
+                <div class="n">👻</div>
+                <div>
+                  <div class="t">Ghost Master</div>
+                  <div class="d">Bet you to find something ghostier than this </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-note reveal">
+              <i class="fas fa-circle-info"></i>
+              <div>
+                <strong>Ghosty Lite is available for free.</strong>
+                Packed with Admin Detector, No Damage, Infinite Fuel, and 25+ More.
+                <div style="margin-top:6px">
+                  Banned from TruckersMP? <a href="spoofer.html">Learn about Ghosty Spoofer</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card reveal" id="tiltCard">
+            <div class="hero-card-inner">
+              <div class="hero-card-top">
+                <span class="ghost-tag"><i class="fas fa-wave-square"></i> Live Preview</span>
+                <div class="ghost-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              </div>
+
+              <img
+                class="hero-preview"
+                src="https://i.ibb.co/LhYqFfNS/image-2025-06-30-105221426.png"
+                alt="Ghosty Interface Preview"
+                draggable="false"
+                loading="lazy"
+                decoding="async">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Key Features</h2>
+            <p>Built for ghosts.</p>
+          </div>
+          <a class="btn btn-ghost" href="features.html"><i class="fas fa-grid-2"></i> View all</a>
+        </div>
+
+        <div class="cards">
+          <div class="card reveal">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Speed Unlocker</h3>
+            <p>Unlockable speed for truckersmp 110+.</p>
+            <div class="chiprow">
+              <span class="chip">Undetected (ELITE ONLY)</span><span class="chip">Toggle</span><span class="chip">Stable</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+            <h3>Admin Detector</h3>
+            <p>Instant alerts when admins join — so you can chill, drive safe, and avoid trouble.</p>
+            <div class="chiprow">
+              <span class="chip">Live alerts</span><span class="chip">Stable</span><span class="chip">UNDETECTED</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="card-icon"><i class="fas fa-ghost"></i></div>
+            <h3>Ghost Mode (NOCLIP)</h3>
+            <p>Pass trough players and walls like a ghost, nothing can stop you anymore.</p>
+            <div class="chiprow">
+              <span class="chip">Troll</span><span class="chip">Usefull</span><span class="chip">Stable</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats reveal">
+          <div class="stat">
+            <div class="n">✨</div>
+            <div>
+              <div class="t">Working perfectly</div>
+              <div class="d">Any issue, report it on discord to get it fixed</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="n">🎯</div>
+            <div>
+              <div class="t">Focus</div>
+              <div class="d">Less clutter, more control</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="n">🔁</div>
+            <div>
+              <div class="t">Updates</div>
+              <div class="d">Frequent update</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>How it works</h2>
+            <p>Three steps. No drama. Just clean setup.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="step reveal">
+            <div class="num">1</div>
+            <h3>Download</h3>
+            <p>Grab the Ghosty Lite bootstrapper from the button above — it stays lightweight and quick.</p>
+          </div>
+          <div class="step reveal">
+            <div class="num">2</div>
+            <h3>Launch</h3>
+            <p>Start Ghosty first, it might appear as a false positive. Get credentials to login in bootstrapper from discord, then select external</p>
+          </div>
+          <div class="step reveal">
+            <div class="num">3</div>
+            <h3>Final</h3>
+            <p>Open game, and enjoy !.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMO -->
+    <section class="section">
+      <div class="container">
+        <div class="promo reveal">
+          <h2>Banned from TruckersMP?</h2>
+          <p>Ghosty Spoofer V3 can help you get back on the road fast — clean flow, simple steps.</p>
+          <div class="promo-actions">
+            <a class="btn btn-elite shine" href="spoofer.html">
+              <i class="fas fa-mask"></i> Learn More About Spoofer
+            </a>
+            <a class="btn btn-ghost" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-discord"></i> Support on Discord
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>FAQ</h2>
+            <p>Quick answers so you don’t lose the vibe.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details class="faq-item reveal">
+            <summary>Is Ghosty Lite free? <i class="fas fa-chevron-down"></i></summary>
+            <div class="faq-body">Yes — Ghosty Lite is free to use. Elite is the paid premium build and is available through Discord.</div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Where do I get Ghosty Elite? <i class="fas fa-chevron-down"></i></summary>
+            <div class="faq-body">Click the red <b>Ghosty Elite</b> button — it opens the showcase. Then use the Discord button to get access.</div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Does Elite have a showcase? <i class="fas fa-chevron-down"></i></summary>
+            <div class="faq-body">Yep — the popup includes a YouTube showcase video so users can see it before joining Discord.</div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Need help or support? <i class="fas fa-chevron-down"></i></summary>
+            <div class="faq-body">Use the Support link in the top nav or click Join Discord. That’s where updates and help live.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <p>Made with <span class="heart">❤️</span> by <a href="https://github.com/DizCatOff" target="_blank" rel="noopener noreferrer">©Dizcat and ©MysticN7</a></p>
+        <p>Programs developed by <a href="https://ko-fi.com/dizcatoff" target="_blank" rel="noopener noreferrer">Dizcat</a> • <a href="https://ko-fi.com/dizcatoff" target="_blank" rel="noopener noreferrer"><i class="fas fa-mug-hot"></i> Support</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ELITE MODAL (SHOWCASE) -->
+  <div class="modal-overlay" id="eliteModalOverlay" role="dialog" aria-modal="true" aria-labelledby="eliteModalTitle" aria-describedby="eliteModalDesc">
+    <div class="elite-modal" id="eliteModal" tabindex="-1">
+      <div class="elite-modal-inner">
+        <div class="modal-top">
+          <div class="modal-title">
+            <div class="modal-icon" aria-hidden="true"><i class="fas fa-crown"></i></div>
+            <div>
+              <h3 id="eliteModalTitle">Ghosty Elite</h3>
+              <p id="eliteModalDesc">Paid version — Join Discord to access it. Showcase below.</p>
+            </div>
+          </div>
+
+          <button class="modal-close" id="eliteCloseBtn" type="button" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="elite-showcase">
+            <div class="elite-video-wrap">
+              <div class="elite-video">
+                <iframe
+                  id="eliteYoutube"
+                  src="https://www.youtube.com/embed/axnpSWXOwoc?rel=0&modestbranding=1&playsinline=1"
+                  title="Ghosty Elite Showcase"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+              </div>
+            </div>
+
+            <div class="elite-highlights">
+              <div class="elite-cardline">
+                <div class="dot"></div>
+                <div class="line-text"><b>Elite</b> is the premium build — access & updates handled via Discord.</div>
+              </div>
+
+              <div class="elite-grid">
+                <div class="elite-chip">
+                  <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                  <div>
+                    <b>Premium Features</b>
+                    <span>Undetected, premium set</span>
+                  </div>
+                </div>
+
+                <div class="elite-chip">
+                  <i class="fas fa-bolt" aria-hidden="true"></i>
+                  <div>
+                    <b>Exclusive Add-ons</b>
+                    <span>Extra features & frequent adds</span>
+                  </div>
+                </div>
+
+                <div class="elite-chip">
+                  <i class="fas fa-headset" aria-hidden="true"></i>
+                  <div>
+                    <b>Priority Support</b>
+                    <span>Help via Discord</span>
+                  </div>
+                </div>
+
+                <div class="elite-chip">
+                  <i class="fas fa-lock" aria-hidden="true"></i>
+                  <div>
+                    <b>Secured Access</b>
+                    <span>Get it on our Discord</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <a class="modal-primary shine" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-discord"></i> Get Ghosty Elite on Discord
+            </a>
+            <button class="modal-secondary" type="button" id="eliteSecondaryClose">
+              <i class="fas fa-check"></i> Got it
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Safety: disable right click (as in your original)
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Loader
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      if (!loader) return;
+      loader.style.opacity = "0";
+      loader.style.visibility = "hidden";
+      setTimeout(()=> loader.remove(), 650);
+    });
+
+    // Mobile nav
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+    if (navToggle && navLinks){
+      navToggle.addEventListener("click", () => {
+        const on = navLinks.classList.toggle("active");
+        navToggle.setAttribute("aria-expanded", on ? "true" : "false");
+        document.body.style.overflow = on ? "hidden" : "";
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!navLinks.classList.contains("active")) return;
+        if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+        navLinks.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 740 && navLinks.classList.contains("active")){
+          navLinks.classList.remove("active");
+          navToggle.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+      });
+    }
+
+    // Hover glow tracking for cards
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.setProperty("--x", x + "%");
+        card.style.setProperty("--y", y + "%");
+      });
+    });
+
+    // Gentle tilt for hero preview card
+    (function(){
+      const card = document.getElementById("tiltCard");
+      if (!card) return;
+      const max = 9;
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rx = (py - 0.5) * -max;
+        const ry = (px - 0.5) * max;
+        card.style.transform = `perspective(1100px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    })();
+
+    // Scroll reveal
+    (function(){
+      const els = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) en.target.classList.add("in");
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    })();
+
+    // Stars
+    (function createStaticStars(){
+      const container = document.querySelector(".static-stars");
+      if(!container) return;
+      const count = 100;
+      for(let i=0;i<count;i++){
+        const star = document.createElement("div");
+        star.className = "static-star";
+        if(Math.random() > 0.6) star.classList.add(Math.random() > 0.5 ? "large" : "medium");
+        star.style.left = (Math.random()*100) + "vw";
+        star.style.top  = (Math.random()*100) + "vh";
+        star.style.animationDelay = (Math.random()*5) + "s";
+        star.style.animationDuration = (Math.random()*3 + 2) + "s";
+        container.appendChild(star);
+      }
+    })();
+
+    // Particles
+    function createParticles(){
+      const container = document.querySelector(".particle-container");
+      if(!container) return;
+
+      // keep it light
+      if(container.childElementCount > 120){
+        for(let i=0;i<40;i++){
+          if(container.firstChild) container.removeChild(container.firstChild);
+        }
+      }
+
+      const n = 18;
+      for(let i=0;i<n;i++){
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        const roll = Math.random();
+        if(roll < 0.14) p.classList.add("star");
+        else if(roll < 0.45) p.classList.add("small");
+        else if(roll < 0.80) p.classList.add("medium");
+        else p.classList.add("large");
+
+        p.style.left = (Math.random()*100) + "vw";
+        p.style.bottom = "-40px";
+
+        // slight hue variation
+        if(!p.classList.contains("star")){
+          const hue = Math.floor(Math.random()*55) + 235;
+          p.style.background = `hsla(${hue}, 90%, 78%, 0.6)`;
+          p.style.boxShadow = `0 0 18px hsla(${hue}, 90%, 78%, 0.7), 0 0 28px hsla(${(hue+35)%360}, 90%, 78%, 0.45)`;
+        }
+
+        p.style.animationDelay = (Math.random()*1.8) + "s";
+        p.addEventListener("animationend", ()=> p.remove());
+        container.appendChild(p);
+      }
+    }
+    setInterval(createParticles, 1000);
+    window.addEventListener("scroll", () => { if(Math.random() > 0.6) createParticles(); }, {passive:true});
+
+    // Elite Modal logic + pause video on close
+    (function(){
+      const openBtn = document.getElementById("eliteOpenBtn");
+      const overlay = document.getElementById("eliteModalOverlay");
+      const modal = document.getElementById("eliteModal");
+      const closeBtn = document.getElementById("eliteCloseBtn");
+      const closeBtn2 = document.getElementById("eliteSecondaryClose");
+      const yt = document.getElementById("eliteYoutube");
+      let lastFocused = null;
+
+      function setModalGlow(e){
+        if(!modal) return;
+        const r = modal.getBoundingClientRect();
+        const mx = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
+        const my = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100));
+        modal.style.setProperty("--mx", mx + "%");
+        modal.style.setProperty("--my", my + "%");
+      }
+
+      function pauseYoutube(){
+        try{
+          if(!yt || !yt.contentWindow) return;
+          yt.contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: "pauseVideo",
+            args: []
+          }), "*");
+        }catch(_){}
+      }
+
+      function openModal(){
+        if(!overlay) return;
+        lastFocused = document.activeElement;
+        overlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+        setTimeout(() => {
+          const primary = overlay.querySelector(".modal-primary");
+          (primary || closeBtn || modal).focus({preventScroll:true});
+        }, 10);
+      }
+
+      function closeModal(){
+        if(!overlay) return;
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+        pauseYoutube();
+        if(lastFocused && typeof lastFocused.focus === "function"){
+          setTimeout(()=> lastFocused.focus({preventScroll:true}), 0);
+        }
+      }
+
+      function trapFocus(e){
+        if(!overlay || !overlay.classList.contains("active")) return;
+        if(e.key !== "Tab") return;
+        const focusables = overlay.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el => el.offsetParent !== null);
+        if(list.length === 0) return;
+        const first = list[0];
+        const last = list[list.length - 1];
+        if(e.shiftKey && document.activeElement === first){
+          e.preventDefault();
+          last.focus();
+        }else if(!e.shiftKey && document.activeElement === last){
+          e.preventDefault();
+          first.focus();
+        }
+      }
+
+      if(openBtn) openBtn.addEventListener("click", openModal);
+      if(closeBtn) closeBtn.addEventListener("click", closeModal);
+      if(closeBtn2) closeBtn2.addEventListener("click", closeModal);
+
+      if(overlay){
+        overlay.addEventListener("mousemove", setModalGlow, {passive:true});
+        overlay.addEventListener("mousedown", (e) => { if(e.target === overlay) closeModal(); });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if(!overlay || !overlay.classList.contains("active")) return;
+        if(e.key === "Escape") closeModal();
+        trapFocus(e);
+      });
+    })();
+  </script>
+</body>
+</html>

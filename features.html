@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ghosty – Features" />
+  <title>Ghosty | Features</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <style>
+    :root{
+      --primary:#8c5cf7;
+      --primary-hover:#a988ff;
+      --bg:#0c0c0e;
+      --bg2:#14121f;
+      --surface:rgba(24,24,36,0.65);
+      --surface2:rgba(36,36,54,0.55);
+      --border:rgba(140,92,247,0.28);
+      --text:#f8f8ff;
+      --muted:#adb5bd;
+      --gradient:linear-gradient(135deg,#8c5cf7 0%,#c46efa 100%);
+      --shadow:0 22px 60px rgba(0,0,0,.38);
+      --radius:18px;
+
+      --danger:#ff4c4c;
+      --warn:#ffb020;
+      --ok:#5cf78c;
+      --chip:rgba(255,255,255,0.08);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      background:linear-gradient(to bottom,var(--bg),var(--bg2));
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* subtle glow */
+    .stars{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.55;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(140,92,247,.18), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(196,110,250,.12), transparent 45%),
+        radial-gradient(circle at 45% 40%, rgba(140,92,247,.08), transparent 55%);
+    }
+    .grain{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:1;
+      opacity:.06;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid rgba(140,92,247,.25);
+      background:linear-gradient(135deg, rgba(12,12,14,.86) 0%, rgba(28,28,42,.86) 100%);
+      backdrop-filter:blur(18px);
+      box-shadow:0 10px 30px rgba(0,0,0,.22);
+    }
+    .nav{
+      max-width:1200px;
+      margin:0 auto;
+      padding:1rem 5%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      text-decoration:none;
+      font-weight:800;
+      font-size:1.8rem;
+      letter-spacing:-.02em;
+      position:relative;
+    }
+    .logo span{
+      background:linear-gradient(135deg,#8c5cf7 0%, #ff6b6b 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .logo .glow{
+      position:absolute;
+      inset:-18px -22px;
+      background:radial-gradient(circle, rgba(140,92,247,.25) 0%, transparent 70%);
+      filter:blur(12px);
+      opacity:.85;
+      z-index:-1;
+    }
+
+    .nav-toggle{
+      display:none;
+      width:42px;height:42px;
+      border-radius:12px;
+      border:1px solid rgba(140,92,247,.22);
+      background:rgba(140,92,247,.08);
+      color:var(--text);
+      cursor:pointer;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.25rem;
+      align-items:center;
+    }
+    .nav-links a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:.95rem;
+      opacity:.86;
+      padding:.55rem .75rem;
+      border-radius:12px;
+      transition:all .22s ease;
+    }
+    .nav-links a:hover{opacity:1; background:rgba(140,92,247,.10); transform:translateY(-1px)}
+    .nav-links a.active{opacity:1; background:rgba(140,92,247,.15); color:var(--primary)}
+    .nav-links a i{margin-right:.5rem}
+
+    main{
+      position:relative;
+      z-index:2;
+      padding:4.5rem 5% 4rem;
+    }
+    .wrap{max-width:1200px; margin:0 auto}
+
+    .hero{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:2rem;
+      margin-bottom:2.75rem;
+      padding:2rem;
+      border:1px solid rgba(140,92,247,.18);
+      border-radius:22px;
+      background:linear-gradient(145deg, rgba(24,24,36,.70), rgba(36,36,54,.35));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:radial-gradient(ellipse 260px 160px at 15% 30%, rgba(140,92,247,.30) 0%, transparent 70%),
+                 radial-gradient(ellipse 260px 160px at 85% 70%, rgba(196,110,250,.18) 0%, transparent 70%);
+      filter:blur(10px);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .hero .left{position:relative; z-index:1}
+    .hero h1{
+      font-size:3rem;
+      line-height:1.05;
+      letter-spacing:-.04em;
+      margin-bottom:.75rem;
+      background:var(--gradient);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 8px 26px rgba(140,92,247,.18);
+    }
+    .hero p{color:rgba(255,255,255,.72); max-width:58ch}
+    .hero .right{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:.6rem;
+      min-width:240px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding:.55rem .85rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.80);
+      font-weight:700;
+      font-size:.9rem;
+      box-shadow:0 10px 22px rgba(0,0,0,.16);
+      user-select:none;
+    }
+    .pill i{color:var(--primary)}
+    .hint{font-size:.9rem; color:rgba(255,255,255,.65); text-align:right}
+
+    .section{margin-top:2.5rem;}
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1rem;
+    }
+    .section-title h2{font-size:1.25rem; letter-spacing:-.02em;}
+    .section-title .sub{color:rgba(255,255,255,.60); font-size:.95rem;}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+    }
+
+    .card{
+      background:linear-gradient(145deg, rgba(24,24,36,.78), rgba(36,36,54,.52));
+      border:1px solid rgba(140,92,247,.22);
+      border-radius:var(--radius);
+      padding:1.25rem;
+      position:relative;
+      overflow:hidden;
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      box-shadow:0 14px 34px rgba(0,0,0,.22);
+      min-height:150px;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(140,92,247,.40);
+      box-shadow:0 22px 60px rgba(0,0,0,.32), 0 0 28px rgba(140,92,247,.18);
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, transparent, rgba(140,92,247,.12), transparent);
+      transform:translateX(-120%);
+      transition:transform .75s ease;
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card:hover::after{transform:translateX(120%)}
+
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:.7rem;
+    }
+    .icon{
+      width:42px;height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(140,92,247,.14);
+      border:1px solid rgba(140,92,247,.20);
+      box-shadow:0 10px 20px rgba(140,92,247,.10);
+      flex:0 0 auto;
+    }
+    .icon i{color:var(--primary)}
+    .title{
+      font-size:1.05rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      line-height:1.2;
+    }
+    .desc{
+      color:rgba(255,255,255,.70);
+      font-size:.95rem;
+      line-height:1.55;
+      margin-top:.25rem;
+      max-width:60ch;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.4rem;
+      justify-content:flex-end;
+    }
+    .chip{
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:.28rem .5rem;
+      border-radius:999px;
+      background:var(--chip);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.80);
+      white-space:nowrap;
+    }
+    .chip.danger{background:rgba(255,76,76,.12); border-color:rgba(255,76,76,.25); color:#ffd0d0}
+    .chip.warn{background:rgba(255,176,32,.12); border-color:rgba(255,176,32,.25); color:#ffe7b8}
+    .chip.ok{background:rgba(92,247,140,.12); border-color:rgba(92,247,140,.25); color:#ccffe0}
+    .chip.dim{opacity:.75}
+
+    footer{
+      position:relative;
+      z-index:2;
+      border-top:1px solid rgba(140,92,247,.20);
+      background:linear-gradient(155deg,#0e0e16 0%,#1a1a28 100%);
+      padding:2.5rem 5%;
+      margin-top:4rem;
+    }
+    .foot{
+      max-width:1200px;
+      margin:0 auto;
+      text-align:center;
+      color:rgba(255,255,255,.65);
+      font-size:.95rem;
+    }
+    .foot a{color:var(--primary); text-decoration:none; font-weight:800}
+    .heart{color:#ff4c4c; text-shadow:0 0 14px rgba(255,76,76,.6)}
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .hero{flex-direction:column; align-items:flex-start}
+      .hero .right{align-items:flex-start}
+      .hint{text-align:left}
+    }
+    @media (max-width: 680px){
+      .grid{grid-template-columns:1fr}
+      .hero h1{font-size:2.2rem}
+      .nav-toggle{display:grid; place-items:center}
+      .nav-links{
+        display:none;
+        position:fixed;
+        left:0; right:0;
+        top:70px;
+        padding:1rem;
+        background:rgba(20,20,32,.94);
+        backdrop-filter:blur(12px);
+        border-bottom:1px solid rgba(140,92,247,.25);
+        flex-direction:column;
+        gap:.5rem;
+        z-index:100;
+      }
+      .nav-links.active{display:flex}
+      .nav-links a{width:100%; text-align:center}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+  <div class="grain"></div>
+
+  <header>
+    <div class="nav">
+      <a class="logo" href="index.html"><span>TruckersOP</span><span class="glow"></span></a>
+
+      <button class="nav-toggle" type="button" aria-label="Menu" onclick="toggleNav()">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html"><i class="fas fa-home"></i>Home</a>
+        <a href="features.html" class="active"><i class="fas fa-star"></i>Features</a>
+        <a href="spoofer.html"><i class="fas fa-mask"></i>Spoofer</a>
+        <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i>Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="left">
+          <h1>Features</h1>
+          <p>This feature list may not be updated, last update on website : 9/02/26.</p>
+        </div>
+        <div class="right">
+          <div class="pill"><i class="fas fa-ghost"></i> Lite And Elite Version</div>
+          <div class="hint">CLIENT = impact your game • SERVER = impact online/TMP and your game side</div>
+        </div>
+      </section>
+
+
+      <!-- ELITE ONLY FEATURES -->
+<section class="section">
+  <div class="section-title">
+    <h2 style="color:#ff4c4c;">Elite Only</h2>
+    <div class="sub">These are only available in Ghosty Elite.</div>
+  </div>
+
+  <div class="grid">
+    <!-- Fly Hack -->
+    <article class="card" style="border-color:rgba(255,76,76,.45);">
+      <div class="top">
+        <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+          <i class="fas fa-plane" style="color:#ff4c4c;"></i>
+        </div>
+        <div class="chips">
+          <span class="chip danger">ELITE</span>
+          <span class="chip">SERVER</span>
+        </div>
+      </div>
+      <div class="title">Fly Hack</div>
+      <div class="desc">
+        Full movement control in the air. Lets you move your truck freely using the fly keybinds.
+      </div>
+    </article>
+
+    <!-- SpinBot -->
+    <article class="card" style="border-color:rgba(255,76,76,.45);">
+      <div class="top">
+        <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+          <i class="fas fa-sync-alt" style="color:#ff4c4c;"></i>
+        </div>
+        <div class="chips">
+          <span class="chip danger">ELITE</span>
+          <span class="chip">SERVER</span>
+        </div>
+      </div>
+      <div class="title">SpinBot</div>
+      <div class="desc">
+        Spins your truck automatically. Mostly for trolling or chaotic driving.
+      </div>
+    </article>
+
+    <!-- Trailer Chaos -->
+    <article class="card" style="border-color:rgba(255,76,76,.45);">
+      <div class="top">
+        <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+          <i class="fas fa-trailer" style="color:#ff4c4c;"></i>
+        </div>
+        <div class="chips">
+          <span class="chip danger">ELITE</span>
+          <span class="chip">SERVER</span>
+        </div>
+      </div>
+      <div class="title">Trailer Chaos</div>
+      <div class="desc">
+        Applies force to the truck, cabin, and trailers to create chaotic movement.
+      </div>
+    </article>
+
+    <!-- Wheel Camber -->
+    <article class="card" style="border-color:rgba(255,76,76,.45);">
+      <div class="top">
+        <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+          <i class="fas fa-circle-notch" style="color:#ff4c4c;"></i>
+        </div>
+        <div class="chips">
+          <span class="chip danger">ELITE</span>
+          <span class="chip">CLIENT</span>
+        </div>
+      </div>
+      <div class="title">Wheel Camber</div>
+      <div class="desc">
+        Adjusts the tilt angle of your wheels for custom stance or visual setups.
+      </div>
+    </article>
+
+    <!-- Undetected Speed Unlocker -->
+    <article class="card" style="border-color:rgba(255,76,76,.45);">
+      <div class="top">
+        <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+          <i class="fas fa-tachometer-alt" style="color:#ff4c4c;"></i>
+        </div>
+        <div class="chips">
+          <span class="chip danger">ELITE</span>
+          <span class="chip ok">Undetected</span>
+        </div>
+      </div>
+      <div class="title">Undetected Speed Unlocker</div>
+      <div class="desc">
+        Alternative speed unlocker designed to work without triggering detection warnings.
+      </div>
+    </article>
+
+  </div>
+</section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Online / TMP</h2>
+          <div class="sub">Multiplayer-facing options.</div>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-wifi"></i></div>
+              <div class="chips"><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Fake Lag TMP (Hold A)</div>
+            <div class="desc">Simulates lag while holding the key. Changes how your movement looks online.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-gauge-high"></i></div>
+              <div class="chips">
+                <span class="chip">TMP</span>
+                <span class="chip warn">Detection warning</span>
+              </div>
+            </div>
+            <div class="title">Speed Unlocker</div>
+            <div class="desc">Unlocks speed limits in TMP. Your UI flags it as risky.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-signal"></i></div>
+              <div class="chips"><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Freeze Turn Signals</div>
+            <div class="desc">Keeps indicators locked so they don’t auto-cancel.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-arrows-rotate"></i></div>
+              <div class="chips">
+                <span class="chip">SERVER</span>
+                <span class="chip dim">Deprecated</span>
+              </div>
+            </div>
+            <div class="title">Axle Trailer Side Lock</div>
+            <div class="desc">Old trailer option. Marked deprecated, so it may not work anymore.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-bolt"></i></div>
+              <div class="chips"><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Speed Mode</div>
+            <div class="desc">Extra speed/acceleration behavior for online driving.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-hand-fist"></i></div>
+              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Hold G</span></div>
+            </div>
+            <div class="title">Instant Fling</div>
+            <div class="desc">Applies a strong force while holding the key. Quick “fling” effect.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Client / Utility</h2>
+          <div class="sub">Local options on your side.</div>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-magnifying-glass-plus"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Infinite Zoom</div>
+            <div class="desc">Zoom in/out with the +/- controls.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-gas-pump"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Infinite Fuel</div>
+            <div class="desc">Fuel doesn’t drop.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-shield-halved"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">No Damage</div>
+            <div class="desc">Stops your truck from taking damage.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-person-walking-dashed-line-arrow-right"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span><span class="chip dim">Ctrl + N</span></div>
+            </div>
+            <div class="title">Noclip</div>
+            <div class="desc">Toggle noclip with the keybind so you can pass through objects.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-rocket"></i></div>
+              <div class="chips"><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Jump Hack</div>
+            <div class="desc">Makes the truck jump. Not subtle.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-hand"></i></div>
+              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Hold B</span></div>
+            </div>
+            <div class="title">Super Brake</div>
+            <div class="desc">Hard brake while holding the key. Includes a “change keybind” option.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-gears"></i></div>
+              <div class="chips"><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Engine RPM Speedhack</div>
+            <div class="desc">Changes RPM/speed behavior. Includes reset.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-coins"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Enter Money Value</div>
+            <div class="desc">Set a money value and apply it (if supported).</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Visual / Camera</h2>
+          <div class="sub">FOV, dashboard color, seat, FPS.</div>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-user"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Passenger View Mode</div>
+            <div class="desc">Adjusts how the camera/seat feels. Mentions using FOV settings too.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-palette"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Dashboard Color Customization V2</div>
+            <div class="desc">Pick RGB colors, use presets, and apply them to the dashboard.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-rainbow"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Rainbow Mode</div>
+            <div class="desc">Cycles dashboard colors automatically.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Auto‑Apply Dashboard Color</div>
+            <div class="desc">Keeps applying the color so it stays consistent.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-up-down"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Seat Position Sliders</div>
+            <div class="desc">Adjust vertical seat position and distance seat position.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-display"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Unlimited FPS / FPS Cap</div>
+            <div class="desc">Remove the FPS limit, or set your own cap with a slider.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-droplet"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Color Saturation</div>
+            <div class="desc">Adjusts how strong the colors look.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-sun"></i></div>
+              <div class="chips"><span class="chip">TMP</span></div>
+            </div>
+            <div class="title">TruckersMP Time: Day</div>
+            <div class="desc">Forces daytime lighting in TMP (if supported).</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Recommended feature for realistic drivers</h2>
+        </div>
+
+        <div class="grid">
+          <article class="card" style="border-color: rgba(255,76,76,.35);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.12); border-color:rgba(255,76,76,.22)">
+                <i class="fas fa-user-shield" style="color:var(--danger)"></i>
+              </div>
+              <div class="chips"><span class="chip warn">BETA</span></div>
+            </div>
+            <div class="title">Admin Detector</div>
+            <div class="desc">Shows a warning when staff/admins join, so you can disable stuff fast.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-truck-monster"></i></div>
+              <div class="chips"><span class="chip">CLIENT</span></div>
+            </div>
+            <div class="title">Front / Rear Suspension</div>
+            <div class="desc">Adjust suspension (front and rear) for looks and handling.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Admin‑Hack (TMP)</h2>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-location-crosshairs"></i></div>
+              <div class="chips"><span class="chip">TMP</span><span class="chip warn">Admin‑hack</span></div>
+            </div>
+            <div class="title">Enable Teleport</div>
+            <div class="desc">Teleport option marked as admin‑hack for TMP.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-tag"></i></div>
+              <div class="chips">
+                <span class="chip">TMP</span>
+                <span class="chip warn">Admin‑hack</span>
+                <span class="chip warn">Detection warning</span>
+              </div>
+            </div>
+            <div class="title">Player Speed Tag</div>
+            <div class="desc">Shows/marks speed info. Your UI flags it as detection‑risk.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-lightbulb"></i></div>
+              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Deprecated</span></div>
+            </div>
+            <div class="title">Enable Light Manipulation</div>
+            <div class="desc">Old light control marked deprecated in your UI.</div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <p>Made with <span class="heart">❤️</span> by <a href="https://github.com/MysticN7">MysticN7</a></p>
+      <p style="margin-top:.35rem;">Trainer developed by <a href="https://ko-fi.com/dizcatoff">Dizcat</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav(){
+      const links = document.querySelector('.nav-links');
+      if(!links) return;
+      links.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
