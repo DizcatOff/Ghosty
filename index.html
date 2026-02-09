@@ -55,25 +55,10 @@
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
-      background: radial-gradient(1200px 700px at 20% 15%, rgba(140,92,247,.16), transparent 55%),
-                  radial-gradient(900px 600px at 85% 30%, rgba(196,110,250,.12), transparent 60%),
-                  radial-gradient(700px 550px at 40% 85%, rgba(255,76,76,.08), transparent 60%),
-                  linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
+      background: radial-gradient(1200px 900px at 18% 12%, rgba(140,92,247,.18), transparent 60%),
+                  radial-gradient(900px 700px at 85% 35%, rgba(196,110,250,.10), transparent 62%),
+                  linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 52%, var(--bg2) 100%);
       overflow-x:hidden;
-      cursor:crosshair;
-      -webkit-user-select:none; user-select:none;
-    }
-
-    /* Subtle film grain */
-    body::before{
-      content:"";
-      position:fixed; inset:-20%;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
-      pointer-events:none;
-      mix-blend-mode:overlay;
-      opacity:.18;
-      transform:translateZ(0);
-      z-index:-1;
     }
 
     /* Fancy background blobs */
@@ -85,11 +70,11 @@
     }
     .blob{
       position:absolute;
-      width:520px; height:520px;
+      width:480px; height:480px;
       border-radius:999px;
-      filter:blur(50px);
-      opacity:.25;
-      animation:blob 16s var(--ease2) infinite;
+      filter:blur(60px);
+      opacity:.14;
+      animation:blob 28s ease-in-out infinite;
       transform:translate3d(0,0,0);
     }
     .blob.b1{left:-140px; top:-140px; background:rgba(140,92,247,.65)}
@@ -100,47 +85,6 @@
       50%{transform:translate(50px,30px) scale(1.1)}
     }
 
-    /* Stars + particles (kept, refined) */
-    .static-stars, .particle-container{
-      position:fixed; inset:0; pointer-events:none;
-    }
-    .static-stars{z-index:1}
-    .particle-container{z-index:2}
-    .static-star{
-      position:absolute; width:2px; height:2px; border-radius:50%;
-      background:rgba(255,255,255,.9);
-      opacity:.65;
-      animation:twinkle 3s ease-in-out infinite;
-    }
-    .static-star.medium{width:3px;height:3px; box-shadow:0 0 8px rgba(255,255,255,.55)}
-    .static-star.large{width:4px;height:4px; box-shadow:0 0 12px rgba(255,255,255,.55)}
-    @keyframes twinkle{0%,100%{opacity:.2; transform:scale(.85)}50%{opacity:1; transform:scale(1.2)}}
-
-    .particle{
-      position:absolute;
-      width:8px;height:8px;border-radius:999px;
-      background:rgba(140,92,247,.6);
-      opacity:0;
-      filter:blur(2px);
-      box-shadow:0 0 18px rgba(140,92,247,.7), 0 0 28px rgba(196,110,250,.4);
-      animation:float 9s ease-in-out infinite;
-    }
-    .particle.small{width:4px;height:4px; filter:blur(1px)}
-    .particle.medium{width:8px;height:8px; animation-duration:11s}
-    .particle.large{width:12px;height:12px; animation-duration:13s}
-    .particle.star{
-      width:12px;height:12px;
-      background:rgba(255,255,255,.75);
-      clip-path:polygon(50%0%,61%35%,98%35%,68%57%,79%91%,50%70%,21%91%,32%57%,2%35%,39%35%);
-      box-shadow:0 0 18px rgba(255,255,255,.7), 0 0 28px rgba(140,92,247,.45);
-      animation-duration:15s;
-    }
-    @keyframes float{
-      0%{transform:translateY(110vh) translateX(0) rotate(0deg) scale(1); opacity:0}
-      8%{opacity:1}
-      45%{transform:translateY(55vh) translateX(60px) rotate(180deg) scale(1.1); opacity:.9}
-      100%{transform:translateY(-10vh) translateX(-90px) rotate(360deg) scale(0); opacity:0}
-    }
 
     /* Layout helpers */
     .container{width:min(1160px, 92vw); margin:0 auto}
@@ -885,9 +829,6 @@
     <div class="blob b3"></div>
   </div>
 
-  <div class="static-stars" aria-hidden="true"></div>
-  <div class="particle-container" aria-hidden="true"></div>
-
   <div class="loader-wrap" id="loader">
     <div class="loader" aria-label="Loading"></div>
   </div>
@@ -1350,63 +1291,6 @@
       }, { threshold: 0.12 });
       els.forEach(el => io.observe(el));
     })();
-
-    // Stars
-    (function createStaticStars(){
-      const container = document.querySelector(".static-stars");
-      if(!container) return;
-      const count = 100;
-      for(let i=0;i<count;i++){
-        const star = document.createElement("div");
-        star.className = "static-star";
-        if(Math.random() > 0.6) star.classList.add(Math.random() > 0.5 ? "large" : "medium");
-        star.style.left = (Math.random()*100) + "vw";
-        star.style.top  = (Math.random()*100) + "vh";
-        star.style.animationDelay = (Math.random()*5) + "s";
-        star.style.animationDuration = (Math.random()*3 + 2) + "s";
-        container.appendChild(star);
-      }
-    })();
-
-    // Particles
-    function createParticles(){
-      const container = document.querySelector(".particle-container");
-      if(!container) return;
-
-      // keep it light
-      if(container.childElementCount > 120){
-        for(let i=0;i<40;i++){
-          if(container.firstChild) container.removeChild(container.firstChild);
-        }
-      }
-
-      const n = 18;
-      for(let i=0;i<n;i++){
-        const p = document.createElement("div");
-        p.classList.add("particle");
-        const roll = Math.random();
-        if(roll < 0.14) p.classList.add("star");
-        else if(roll < 0.45) p.classList.add("small");
-        else if(roll < 0.80) p.classList.add("medium");
-        else p.classList.add("large");
-
-        p.style.left = (Math.random()*100) + "vw";
-        p.style.bottom = "-40px";
-
-        // slight hue variation
-        if(!p.classList.contains("star")){
-          const hue = Math.floor(Math.random()*55) + 235;
-          p.style.background = `hsla(${hue}, 90%, 78%, 0.6)`;
-          p.style.boxShadow = `0 0 18px hsla(${hue}, 90%, 78%, 0.7), 0 0 28px hsla(${(hue+35)%360}, 90%, 78%, 0.45)`;
-        }
-
-        p.style.animationDelay = (Math.random()*1.8) + "s";
-        p.addEventListener("animationend", ()=> p.remove());
-        container.appendChild(p);
-      }
-    }
-    setInterval(createParticles, 1000);
-    window.addEventListener("scroll", () => { if(Math.random() > 0.6) createParticles(); }, {passive:true});
 
     // Elite Modal logic + pause video on close
     (function(){
