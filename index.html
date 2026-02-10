@@ -75,6 +75,37 @@
       text-decoration: none;
     }
 
+     .discord-widget-card {
+      border: 1px solid rgba(203,136,255,.36);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      background: rgba(13,6,20,.58);
+    }
+
+    .discord-widget-card h4 {
+      margin: 0 0 8px;
+      font-family: "Orbitron", sans-serif;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .discord-widget-card p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.45;
+    }
+
+    .discord-widget-frame {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(7,2,14,.9);
+    }
+
+
     .brand-mark {
       width: 42px;
       height: 42px;
@@ -569,12 +600,24 @@
           </div>
         </article>
 
-        <aside class="panel hero-side">
-          <div class="scanline"><i class="fa-solid fa-circle-info"></i> Ghosty may appear as a false positive. Get lite bootstrapper credentials from Discord, then external.</div>
+    <aside class="panel hero-side">
+          <div class="scanline"><i class="fa-solid fa-circle-info"></i> Ghosty can appear as a false positive in some antivirus tools. Get Lite bootstrapper credentials from Discord before launching.</div>
           <div class="stat-grid">
             <div class="stat"><b>99%</b><span>Undetected and usefull features, and detected features are highlighted</span></div>
             <div class="stat"><b>Living Project</b><span>Frequent updates and fixes</span></div>
             <div class="stat"><b>Community</b><span>Discord support and 1,5k+ member community.</span></div>
+          </div>
+          <div class="discord-widget-card">
+            <h4><i class="fa-brands fa-discord"></i> Join Ghosty Discord</h4>
+            <p>Live member list and online status directly on the homepage.</p>
+            <iframe
+              class="discord-widget-frame"
+              src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=dark"
+              allowtransparency="true"
+              frameborder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              title="Ghosty Discord server widget">
+            </iframe>
           </div>
         </aside>
       </div>
