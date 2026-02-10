@@ -75,7 +75,7 @@
       text-decoration: none;
     }
 
-     .discord-widget-card {
+   .discord-widget-card {
       border: 1px solid rgba(203,136,255,.36);
       border-radius: var(--radius-sm);
       padding: 10px;
@@ -97,12 +97,54 @@
       line-height: 1.45;
     }
 
+    .discord-widget-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .discord-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(203,136,255,.34);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .78rem;
+      color: #f2e7ff;
+      background: rgba(84,43,130,.18);
+    }
+
     .discord-widget-frame {
       width: 100%;
-      height: 320px;
+      height: 500px;
       border: 0;
       border-radius: 10px;
       background: rgba(7,2,14,.9);
+    }
+
+    .discord-widget-help {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px dashed rgba(203,136,255,.34);
+      border-radius: 10px;
+      background: rgba(84,43,130,.1);
+    }
+
+    .discord-widget-help b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .82rem;
+      letter-spacing: .02em;
+    }
+
+    .discord-widget-help ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.5;
     }
 
 
@@ -600,7 +642,7 @@
           </div>
         </article>
 
-    <aside class="panel hero-side">
+     <aside class="panel hero-side">
           <div class="scanline"><i class="fa-solid fa-circle-info"></i> Ghosty can appear as a false positive in some antivirus tools. Get Lite bootstrapper credentials from Discord before launching.</div>
           <div class="stat-grid">
             <div class="stat"><b>99%</b><span>Undetected and usefull features, and detected features are highlighted</span></div>
@@ -610,9 +652,14 @@
           <div class="discord-widget-card">
             <h4><i class="fa-brands fa-discord"></i> Join Ghosty Discord</h4>
             <p>Live member list and online status directly on the homepage.</p>
+            <div class="discord-widget-meta" id="discordMeta">
+              <span class="discord-pill"><i class="fa-solid fa-circle-nodes"></i> Loading server widget…</span>
+            </div>
             <iframe
               class="discord-widget-frame"
               src="https://discord.com/widget?id=1395744314960773293&theme=dark"
+              width="350"
+              height="500"
               allowtransparency="true"
               frameborder="0"
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
@@ -623,13 +670,15 @@
               <ul>
                 <li>Server Settings → <strong>Widget</strong> → enable server widget.</li>
                 <li>Select an invite channel in Widget settings.</li>
-                <li>Keep this direct join link available: <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">discord.gg/j6p4yvsfN3</a>.</li>
+                <li>Widget API: <a href="https://discord.com/api/guilds/1395744314960773293/widget.json" target="_blank" rel="noopener noreferrer">widget.json</a>.</li>
+                <li>Direct invite: <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">discord.gg/j6p4yvsfN3</a>.</li>
               </ul>
             </div>
           </div>
         </aside>
       </div>
     </section>
+
 
 
     <section class="block">
