@@ -3,399 +3,667 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ghosty - Download, feature info, and support for ETS2 and TruckersMP companion tools." />
-  <title>Ghosty | Command Deck</title>
+  <meta name="description" content="Ghosty - Download tools, discover features, and get support for ETS2 / TruckersMP." />
+  <title>Ghosty | Neon Control Interface</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
     :root {
       --bg:#07020e;
-      --bg-soft:#10061a;
-      --win:#140b20;
-      --win-2:#1a0f29;
-      --tab:#2b1142;
-      --tab-active:#a33bf6;
-      --tab-danger:#d71f57;
-      --line:#b455ff;
-      --line-soft:rgba(180,85,255,.35);
-      --text:#f4efff;
-      --muted:#bca8d6;
-      --good:#6cffd5;
-      --warn:#ffc861;
-      --danger:#ff636f;
-      --glow:0 0 0 1px rgba(180,85,255,.65), 0 0 24px rgba(163,59,246,.35);
-      --radius:12px;
+      --bg-2:#11071b;
+      --surface:#1a0d2a;
+      --surface-2:#211235;
+      --line:rgba(197,115,255,.45);
+      --line-strong:rgba(213,149,255,.72);
+      --text:#f6efff;
+      --muted:#c9b4de;
+      --primary:#a03cf0;
+      --primary-2:#c158ff;
+      --danger:#e22b65;
+      --danger-2:#ff4a89;
+      --ok:#6cffe2;
+      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --radius:16px;
+      --radius-sm:10px;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: "Space Grotesk", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 15%, rgba(163,59,246,.18), transparent 40%),
-        radial-gradient(circle at 85% 5%, rgba(215,31,87,.15), transparent 35%),
-        var(--bg);
+        radial-gradient(800px 340px at 8% 0%, rgba(160,60,240,.2), transparent 60%),
+        radial-gradient(700px 340px at 92% 0%, rgba(226,43,101,.2), transparent 65%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
       min-height: 100vh;
     }
 
-    .shell {
-      width: min(1200px, 95vw);
-      margin: 22px auto;
-      border: 1px solid var(--line-soft);
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(20,11,32,.96), rgba(11,6,18,.98));
-      box-shadow: 0 28px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05);
-      overflow: hidden;
+    a { color: inherit; }
+
+    .container {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
     }
 
-    .titlebar {
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+      background: rgba(10,4,16,.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 12px 16px;
-      font-family: "Orbitron", sans-serif;
-      border-bottom: 1px solid var(--line-soft);
-      background: linear-gradient(90deg, #0f0519, #19082a);
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 14px 0;
     }
 
-    .titlebar .tag { font-size: .85rem; letter-spacing: .12em; color: #d8c4ff; text-transform: uppercase; }
-    .titlebar .status { color: var(--danger); font-weight: 800; letter-spacing: .08em; }
-
-    .tabs {
+    .brand {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 12px;
-      border-bottom: 1px solid var(--line-soft);
-      background: rgba(14,7,22,.8);
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
     }
 
-    .tab {
-      border: 1px solid rgba(210,154,255,.25);
-      background: var(--tab);
-      color: var(--text);
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 8px;
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(193,88,255,.26), rgba(130,42,206,.32));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 0 24px rgba(160,60,240,.3);
+    }
+
+    .brand-mark i { color: #fff; }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-text strong {
       font-family: "Orbitron", sans-serif;
-      font-size: .82rem;
-      letter-spacing: .05em;
+      font-size: 1rem;
+      letter-spacing: .08em;
       text-transform: uppercase;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      font-size: .74rem;
+      letter-spacing: .08em;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 9px 12px;
+      background: rgba(35,17,55,.72);
       transition: .2s ease;
     }
 
-    .tab:hover { transform: translateY(-1px); box-shadow: var(--glow); }
-    .tab.active { background: var(--tab-active); border-color: #dba1ff; color: #fff; }
-    .tab.danger { background: var(--tab-danger); border-color: rgba(255,145,165,.6); }
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 0 20px rgba(160,60,240,.25);
+    }
 
-    .content {
-      padding: 14px;
+    .nav-btn.active {
+      background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
+      border-color: rgba(230,180,255,.75);
+    }
+
+    .nav-btn.danger {
+      background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
+      border-color: rgba(255,181,209,.72);
+    }
+
+    .hero {
+      padding: 76px 0 36px;
+    }
+
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 14px;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 20px;
+      align-items: stretch;
     }
 
     .panel {
-      border: 1px solid var(--line-soft);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(29,14,45,.78), rgba(14,8,23,.88));
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
-      padding: 14px;
+      background: linear-gradient(180deg, rgba(32,16,50,.78), rgba(15,7,24,.92));
+      box-shadow: var(--shadow);
     }
 
-    .panel h1, .panel h2, .panel h3 {
-      margin: 0 0 10px;
-      font-family: "Orbitron", sans-serif;
-      letter-spacing: .04em;
+    .hero-main {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -25% auto auto -18%;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(193,88,255,.26), transparent 70%);
+      pointer-events: none;
+    }
+
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border: 1px dashed rgba(220,165,255,.55);
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      color: #ebd8ff;
+      font-size: .78rem;
+      letter-spacing: .06em;
       text-transform: uppercase;
+      font-family: "Orbitron", sans-serif;
+      position: relative;
+      z-index: 2;
     }
 
-    .terminal-line {
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px dashed rgba(188,139,255,.45);
-      color: #e7d6ff;
-      margin-bottom: 10px;
-      background: rgba(92,38,140,.15);
+    .hero-main h1 {
+      margin: 0 0 12px;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      line-height: 1.05;
+      font-size: clamp(2rem, 4.5vw, 3.15rem);
+      position: relative;
+      z-index: 2;
     }
 
-    .hero-copy {
-      margin: 0 0 14px;
+    .hero-main p {
+      margin: 0;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.68;
+      max-width: 55ch;
+      position: relative;
+      z-index: 2;
     }
 
-    .action-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
 
     .btn {
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
       padding: 10px 14px;
       font-weight: 700;
-      border: 1px solid rgba(224,184,255,.3);
-      color: #fff;
-      background: #2e1748;
       transition: .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(50,25,78,.75);
     }
 
-    .btn:hover { transform: translateY(-1px); box-shadow: var(--glow); }
-    .btn.primary { background: linear-gradient(90deg, #9635ed, #bf4cff); }
-    .btn.danger { background: linear-gradient(90deg, #cf1e58, #f74383); }
+    .btn:hover { transform: translateY(-1px); border-color: var(--line-strong); }
 
-    .stats {
+    .btn.primary {
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      border-color: rgba(225,168,255,.74);
+    }
+
+    .btn.danger {
+      background: linear-gradient(90deg, var(--danger), var(--danger-2));
+      border-color: rgba(255,181,209,.72);
+    }
+
+    .hero-side {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .stat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 12px;
     }
 
     .stat {
-      border: 1px solid var(--line-soft);
-      border-radius: 8px;
+      border: 1px solid rgba(203,136,255,.36);
+      border-radius: var(--radius-sm);
       padding: 10px;
-      background: rgba(9,4,15,.55);
+      background: rgba(13,6,20,.58);
     }
 
     .stat b {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1rem;
       display: block;
+      font-family: "Orbitron", sans-serif;
       margin-bottom: 3px;
+      letter-spacing: .03em;
     }
 
     .stat span { color: var(--muted); font-size: .88rem; }
 
-    .feature-list {
-      display: grid;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .feature-list li {
-      border: 1px solid rgba(216,167,255,.22);
-      border-left: 3px solid #c16bff;
-      border-radius: 8px;
+    .scanline {
+      border: 1px dashed rgba(203,136,255,.42);
+      border-radius: var(--radius-sm);
       padding: 10px;
-      background: rgba(13,6,21,.58);
+      font-size: .92rem;
+      color: #e8d9fa;
+      background: rgba(84,43,130,.14);
     }
 
-    .badge { font-size: .74rem; padding: 3px 8px; border-radius: 999px; margin-left: 8px; }
-    .safe { background: rgba(108,255,213,.14); color: var(--good); border: 1px solid rgba(108,255,213,.4); }
-    .risk { background: rgba(255,99,111,.14); color: var(--danger); border: 1px solid rgba(255,99,111,.45); }
-
-    .mini-grid { display:grid; gap:10px; }
-
-    .info-card {
-      border: 1px solid rgba(188,139,255,.28);
-      border-radius: 9px;
-      padding: 11px;
-      background: rgba(10,4,16,.65);
+    section.block {
+      padding: 18px 0 44px;
     }
 
-    .info-card p { margin: 7px 0 0; color: var(--muted); line-height: 1.5; font-size: .94rem; }
+    .section-head {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-    .faq details {
-      border: 1px solid rgba(188,139,255,.28);
-      border-radius: 8px;
-      background: rgba(8,4,12,.62);
+    .section-head h2 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+    }
+
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+    }
+
+    .card {
+      grid-column: span 4;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(31,15,48,.72), rgba(14,7,23,.9));
+      padding: 14px;
+      transition: .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1rem;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    .card p { margin: 0; color: var(--muted); line-height: 1.55; }
+
+    .flag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .flag.safe {
+      color: var(--ok);
+      border-color: rgba(108,255,226,.46);
+      background: rgba(108,255,226,.14);
+    }
+
+    .flag.warn {
+      color: #ffb5cd;
+      border-color: rgba(255,147,185,.46);
+      background: rgba(255,99,153,.13);
+    }
+
+    .dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qa details {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(12,6,20,.72);
+      padding: 10px 12px;
       margin-bottom: 8px;
-      padding: 8px 10px;
     }
 
-    .faq summary { cursor: pointer; font-weight: 700; }
-    .faq p { color: var(--muted); margin: 8px 0 4px; }
+    .qa summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
 
-    .footerbar {
+    .qa p {
+      color: var(--muted);
+      margin: 8px 0 2px;
+      line-height: 1.52;
+    }
+
+    .promo {
+      border: 1px solid rgba(255,147,185,.42);
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(52,18,48,.86), rgba(99,31,72,.82));
+      padding: 14px;
+    }
+
+    .promo h3 {
+      margin: 0 0 8px;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .promo p { margin: 0 0 10px; color: #f1d6e4; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 40px;
+      color: var(--muted);
+    }
+
+    .foot {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
-      border-top: 1px solid var(--line-soft);
-      padding: 12px 14px;
-      background: rgba(9,4,14,.8);
-      font-size: .92rem;
-      color: #cdb6ea;
     }
 
-    .footerbar a { color: #f6d7ff; text-decoration: none; }
+    .foot a { color: #f3ddff; text-decoration: none; }
 
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(3,1,6,.78);
       display: grid;
       place-items: center;
+      background: rgba(4,1,8,.76);
       opacity: 0;
       pointer-events: none;
       transition: .2s ease;
-      padding: 16px;
+      padding: 12px;
+      z-index: 40;
     }
 
-    .modal.open { opacity: 1; pointer-events: auto; }
+    .modal.active { opacity: 1; pointer-events: auto; }
 
     .modal-box {
       width: min(620px, 95vw);
+      border: 1px solid var(--line-strong);
       border-radius: 14px;
-      border: 1px solid rgba(200,145,255,.45);
-      background: linear-gradient(180deg, #1b0c2b, #12071e);
+      background: linear-gradient(180deg, rgba(34,15,53,.95), rgba(15,7,24,.97));
       padding: 16px;
-      box-shadow: 0 30px 60px rgba(0,0,0,.5);
+      box-shadow: var(--shadow);
     }
 
-    .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .icon-btn {
-      border: 1px solid rgba(220,180,255,.4);
-      background: #311651;
-      color: #fff;
-      border-radius: 7px;
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .modal-top h3 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-size: 1rem;
+    }
+
+    .x {
+      border: 1px solid var(--line);
+      border-radius: 8px;
       width: 34px;
       height: 34px;
+      background: rgba(62,27,94,.8);
+      color: #fff;
       cursor: pointer;
     }
 
-    @media (max-width: 980px) {
-      .content { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr; }
+    .modal p { margin: 0 0 12px; color: var(--muted); line-height: 1.55; }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .dual { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .card { grid-column: span 12; }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <div class="titlebar">
-      <span class="tag"><i class="fa-solid fa-ghost"></i> Ghosty Command Deck</span>
-      <span class="status">Status: Unattached</span>
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><i class="fa-solid fa-ghost"></i></span>
+        <span class="brand-text">
+          <strong>Ghosty</strong>
+          <span>External Toolkit Hub</span>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="nav-btn active" href="index.html">Home</a>
+        <a class="nav-btn" href="features.html">Features</a>
+        <a class="nav-btn" href="spoofer.html">Spoofer</a>
+        <a class="nav-btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Support</a>
+        <button class="nav-btn danger" id="eliteOpen" type="button">Ghosty Elite</button>
+      </nav>
     </div>
+  </header>
 
-    <nav class="tabs">
-      <a class="tab active" href="index.html">Home</a>
-      <a class="tab" href="features.html">Features</a>
-      <a class="tab" href="spoofer.html">Spoofer</a>
-      <a class="tab" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Support</a>
-      <button class="tab danger" id="eliteOpen" type="button">Ghosty Elite</button>
-    </nav>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="panel hero-main">
+          <div class="mini-tag"><i class="fa-solid fa-wave-square"></i> Neon Interface v2</div>
+          <h1>Ghosty, remixed for the web.</h1>
+          <p>
+            Same purpose, new skin. Download Ghosty Lite, check key info, and get support fast — all in a futuristic
+            ImGui-inspired theme that feels like Ghosty, but still behaves like a proper website.
+          </p>
 
-    <section class="content">
-      <div class="mini-grid">
-        <article class="panel">
-          <h1>Boot Sequence</h1>
-          <div class="terminal-line">Run Ghosty first, login through bootstrapper credentials from Discord, then launch external module.</div>
-          <p class="hero-copy">Same mission, brand new cockpit UI. This page is still your central place to download Ghosty Lite, learn what it does, and reach support instantly.</p>
-          <div class="action-row">
-            <a class="btn primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download Lite</a>
-            <button class="btn danger" id="eliteOpen2" type="button"><i class="fa-solid fa-crown"></i> Open Elite</button>
-            <a class="btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Join Discord</a>
-          </div>
-          <div class="stats">
-            <div class="stat"><b>99%</b><span>Features marked safe</span></div>
-            <div class="stat"><b>24/7</b><span>Discord support flow</span></div>
-            <div class="stat"><b>FAST</b><span>Quick update pushes</span></div>
+          <div class="hero-actions">
+            <a class="btn primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-download"></i> Download Ghosty Lite
+            </a>
+            <button class="btn danger" id="eliteOpen2" type="button">
+              <i class="fa-solid fa-crown"></i> Open Elite Access
+            </button>
+            <a class="btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-discord"></i> Join Discord
+            </a>
           </div>
         </article>
 
-        <article class="panel">
-          <h2>Core Functions</h2>
-          <ul class="feature-list">
-            <li>Server & client utility switches with clear safety labels <span class="badge safe">Undetected First</span></li>
-            <li>Risky options clearly flagged before use <span class="badge risk">Detection Warning</span></li>
-            <li>Spoofer path when account access is blocked <span class="badge safe">Recovery</span></li>
-          </ul>
-        </article>
+        <aside class="panel hero-side">
+          <div class="scanline"><i class="fa-solid fa-circle-info"></i> Run Ghosty first, then login through bootstrapper credentials from Discord, and launch external mode.</div>
+          <div class="stat-grid">
+            <div class="stat"><b>99%</b><span>Functions tracked as safe</span></div>
+            <div class="stat"><b>Fast</b><span>Update + fix rollout pace</span></div>
+            <div class="stat"><b>24/7</b><span>Discord support channel</span></div>
+          </div>
+        </aside>
       </div>
-
-      <aside class="mini-grid">
-        <article class="panel">
-          <h3>Intel Feed</h3>
-          <div class="info-card">
-            <strong><i class="fa-solid fa-circle-info"></i> Ghosty Lite</strong>
-            <p>Free build for daily utility use. Designed for ease and speed.</p>
-          </div>
-          <div class="info-card">
-            <strong><i class="fa-solid fa-shield"></i> Ghosty Spoofer</strong>
-            <p>Need device identity reset? Use the dedicated spoofer page.</p>
-          </div>
-          <div class="info-card">
-            <strong><i class="fa-solid fa-headset"></i> Support Node</strong>
-            <p>All help and release notes are posted in Discord.</p>
-          </div>
-        </article>
-
-        <article class="panel faq">
-          <h3>FAQ</h3>
-          <details>
-            <summary>Is Ghosty Lite free?</summary>
-            <p>Yes. Ghosty Lite stays free. Elite is paid and accessed through Discord.</p>
-          </details>
-          <details>
-            <summary>How do I get Elite?</summary>
-            <p>Open the Elite panel and use the Discord button to unlock paid access.</p>
-          </details>
-          <details>
-            <summary>Where do I report issues?</summary>
-            <p>Use the Discord support tab for bug reports and fixes.</p>
-          </details>
-        </article>
-      </aside>
     </section>
 
-    <footer class="footerbar">
-      <span>Made by ©Dizcat and ©MysticN7 • Programs by Dizcat</span>
+    <section class="block">
+      <div class="container">
+        <div class="section-head">
+          <h2>Main Feature Focus</h2>
+          <p>Clear labels, safer defaults, and support where you need it.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Safe-first utility</h3>
+            <p>Most everyday features are designed with low-risk behavior and practical use in mind for regular sessions.</p>
+            <span class="flag safe">Undetected First</span>
+          </article>
+
+          <article class="card">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Risk labeling</h3>
+            <p>Any option that could raise risk is clearly marked before use so users can make informed choices.</p>
+            <span class="flag warn">Detection Warning</span>
+          </article>
+
+          <article class="card">
+            <h3><i class="fa-solid fa-rotate-left"></i> Spoofer fallback</h3>
+            <p>Need recovery after issues? Use the dedicated Spoofer page for account/device identity flow.</p>
+            <a class="btn" href="spoofer.html" style="margin-top:10px;">Open Spoofer</a>
+          </article>
+        </div>
+
+        <div class="dual">
+          <article class="panel qa" style="padding:14px;">
+            <h3 style="margin-top:0;font-family:Orbitron,sans-serif;text-transform:uppercase;letter-spacing:.04em;">FAQ</h3>
+            <details>
+              <summary>Is Ghosty Lite free?</summary>
+              <p>Yes. Ghosty Lite is free. Elite is the premium paid branch available via Discord.</p>
+            </details>
+            <details>
+              <summary>Where do I get help?</summary>
+              <p>Use the Support button in the top nav or the Join Discord button for updates and fixes.</p>
+            </details>
+            <details>
+              <summary>Can I preview Elite first?</summary>
+              <p>Yes. Use the Elite button to open the access panel and continue through Discord.</p>
+            </details>
+          </article>
+
+          <article class="promo">
+            <h3>Ghosty Elite</h3>
+            <p>Premium extras, frequent additions, and priority pipeline features.</p>
+            <div class="hero-actions">
+              <button class="btn danger" id="eliteOpen3" type="button"><i class="fa-solid fa-bolt"></i> Elite Access Panel</button>
+              <a class="btn" href="features.html"><i class="fa-solid fa-layer-group"></i> View Features</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <span>Made by ©Dizcat and ©MysticN7 • Programs developed by Dizcat.</span>
       <span>
         <a href="https://ko-fi.com/dizcatoff" target="_blank" rel="noopener noreferrer">Buy a Coffee</a>
         ·
         <a href="https://github.com/DizCatOff" target="_blank" rel="noopener noreferrer">GitHub</a>
       </span>
-    </footer>
-  </main>
+    </div>
+  </footer>
 
   <div class="modal" id="eliteModal" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="eliteTitle">
-      <div class="modal-head">
-        <h3 id="eliteTitle" style="margin:0;font-family:Orbitron,sans-serif;">Ghosty Elite Access</h3>
-        <button class="icon-btn" id="eliteClose" aria-label="Close">✕</button>
+      <div class="modal-top">
+        <h3 id="eliteTitle">Ghosty Elite Access</h3>
+        <button class="x" id="eliteClose" aria-label="Close">✕</button>
       </div>
-      <p style="color:var(--muted);line-height:1.6;">Elite contains premium extras and frequent feature additions. Join Discord to request paid access and current setup info.</p>
-      <div class="action-row">
-        <a class="btn danger" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Get Elite on Discord</a>
-        <button class="btn" id="eliteClose2" type="button">Close</button>
+      <p>
+        Elite includes premium modules and frequent additions. Join Discord to request access,
+        pricing, and activation instructions.
+      </p>
+      <div class="hero-actions" style="margin-top:0;">
+        <a class="btn danger" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-discord"></i> Get Elite on Discord
+        </a>
+        <button class="btn" type="button" id="eliteClose2">Close</button>
       </div>
     </div>
   </div>
 
   <script>
     const modal = document.getElementById('eliteModal');
-    const openButtons = [document.getElementById('eliteOpen'), document.getElementById('eliteOpen2')];
-    const closeButtons = [document.getElementById('eliteClose'), document.getElementById('eliteClose2')];
+    const openButtons = [
+      document.getElementById('eliteOpen'),
+      document.getElementById('eliteOpen2'),
+      document.getElementById('eliteOpen3')
+    ];
 
-    openButtons.forEach(btn => btn && btn.addEventListener('click', () => {
-      modal.classList.add('open');
+    const closeButtons = [
+      document.getElementById('eliteClose'),
+      document.getElementById('eliteClose2')
+    ];
+
+    const openModal = () => {
+      modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
-    }));
+    };
 
-    closeButtons.forEach(btn => btn && btn.addEventListener('click', () => {
-      modal.classList.remove('open');
+    const closeModal = () => {
+      modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
-    }));
+    };
+
+    openButtons.forEach((button) => {
+      if (button) button.addEventListener('click', openModal);
+    });
+
+    closeButtons.forEach((button) => {
+      if (button) button.addEventListener('click', closeModal);
+    });
 
     modal.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-      }
+      if (event.target === modal) closeModal();
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-      }
+      if (event.key === 'Escape') closeModal();
     });
   </script>
 </body>
