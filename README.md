@@ -80,10 +80,9 @@ Contributions are welcome.
 
 For help or updates, join the official Discord or visit the main site.
 
-## License
+## Credit
 
-This project is provided for educational and informational purposes.
-
+Dizcat, DizCatOff
 ---
 
 **Developed by Dizcat**
