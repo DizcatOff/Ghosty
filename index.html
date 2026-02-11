@@ -221,6 +221,10 @@
       border-color: rgba(255,181,209,.72);
     }
 
+    .mobile-tabbar {
+      display: none;
+    }
+
     .hero {
       padding: 76px 0 36px;
     }
@@ -601,6 +605,70 @@
       .stat-grid { grid-template-columns: 1fr; }
       .card { grid-column: span 12; }
     }
+
+    @media (max-width: 760px) {
+      body {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+      }
+
+      .navbar {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-tabbar {
+        position: fixed;
+        left: 50%;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: min(560px, calc(100vw - 16px));
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(10,4,16,.92);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        z-index: 35;
+      }
+
+      .mobile-tab {
+        border: 1px solid rgba(197,115,255,.36);
+        border-radius: 10px;
+        min-height: 48px;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        font-size: .66rem;
+        text-transform: uppercase;
+        font-family: "Orbitron", sans-serif;
+        letter-spacing: .05em;
+        background: rgba(35,17,55,.72);
+      }
+
+      .mobile-tab i {
+        font-size: .92rem;
+      }
+
+      .mobile-tab.active {
+        background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
+        border-color: rgba(230,180,255,.75);
+      }
+
+      .mobile-tab.danger {
+        background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
+        border-color: rgba(255,181,209,.72);
+      }
+    }
   </style>
 </head>
 <body>
@@ -624,6 +692,14 @@
       </nav>
     </div>
   </header>
+
+  <nav class="mobile-tabbar" aria-label="Mobile navigation">
+    <a class="mobile-tab active" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a class="mobile-tab" href="features.html"><i class="fa-solid fa-layer-group"></i><span>Features</span></a>
+    <a class="mobile-tab" href="spoofer.html"><i class="fa-solid fa-shield-halved"></i><span>Spoofer</span></a>
+    <a class="mobile-tab" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
+    <button class="mobile-tab danger" id="eliteOpenMobile" type="button"><i class="fa-solid fa-crown"></i><span>Elite</span></button>
+  </nav>
 
   <main>
     <section class="hero">
@@ -784,7 +860,8 @@
     const openButtons = [
       document.getElementById('eliteOpen'),
       document.getElementById('eliteOpen2'),
-      document.getElementById('eliteOpen3')
+      document.getElementById('eliteOpen3'),
+      document.getElementById('eliteOpenMobile')
     ];
 
     const closeButtons = [
