@@ -1,4 +1,4 @@
-# Ghosty Official Website
+# Ghosty Official Website ╰(*°▽°*)╯
 
 Official source for the **Ghosty** website.
 This site provides information, downloads, and support links for the Ghosty project.
