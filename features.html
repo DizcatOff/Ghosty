@@ -137,6 +137,10 @@
       border-color: rgba(230,180,255,.75);
     }
 
+    .mobile-tabbar {
+      display: none;
+    }
+
     main { padding: 52px 0 40px; }
 
     .hero {
@@ -317,6 +321,70 @@
       .nav-links { width: 100%; }
       .card { grid-column: span 12; }
     }
+
+    @media (max-width: 760px) {
+      body {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+      }
+
+      .navbar {
+        padding: 12px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-tabbar {
+        position: fixed;
+        left: 50%;
+        bottom: max(10px, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: min(560px, calc(100vw - 16px));
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(10,4,16,.92);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        z-index: 35;
+      }
+
+      .mobile-tab {
+        border: 1px solid rgba(197,115,255,.36);
+        border-radius: 10px;
+        min-height: 48px;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
+        font-size: .66rem;
+        text-transform: uppercase;
+        font-family: "Orbitron", sans-serif;
+        letter-spacing: .05em;
+        background: rgba(35,17,55,.72);
+      }
+
+      .mobile-tab i {
+        font-size: .92rem;
+      }
+
+      .mobile-tab.active {
+        background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
+        border-color: rgba(230,180,255,.75);
+      }
+
+      .mobile-tab.danger {
+        background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
+        border-color: rgba(255,181,209,.72);
+      }
+    }
   </style>
 </head>
 <body>
@@ -340,6 +408,14 @@
       </nav>
     </div>
   </header>
+
+  <nav class="mobile-tabbar" aria-label="Mobile navigation">
+    <a class="mobile-tab" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a class="mobile-tab active" href="features.html"><i class="fa-solid fa-layer-group"></i><span>Features</span></a>
+    <a class="mobile-tab" href="spoofer.html"><i class="fa-solid fa-shield-halved"></i><span>Spoofer</span></a>
+    <a class="mobile-tab" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
+    <a class="mobile-tab danger" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-crown"></i><span>Elite</span></a>
+  </nav>
 
   <main>
     <div class="container">
@@ -433,48 +509,178 @@
               <div class="chips">
                 <span class="chip danger">ELITE</span>
                 <span class="chip ok">Undetected</span>
+                <span class="chip">SERVER</span>
               </div>
             </div>
-            <div class="title">Undetected Speed Unlocker</div>
+            <div class="title">Speed Booster</div>
             <div class="desc">
-              Alternative speed unlocker designed to work without triggering detection warnings.
+              Increases acceleration and top speed response for your truck.
             </div>
           </article>
 
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-road-barrier" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Collision Push</div>
+            <div class="desc">
+              Applies stronger impact force during contact with nearby players.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-car-side" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Vehicle Flip</div>
+            <div class="desc">
+              Triggers aggressive truck flipping behavior for impact tricks.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-person-falling" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Throw Player</div>
+            <div class="desc">
+              Forces nearby player trucks upward/away depending on sync and position.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-user-secret" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip warn">Risk</span>
+                <span class="chip">TMP</span>
+              </div>
+            </div>
+            <div class="title">Admin-Hack Helpers</div>
+            <div class="desc">
+              Includes risky options intended for temporary utility. Use carefully.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-bomb" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip warn">Detected</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Aggressive Crash Tools</div>
+            <div class="desc">
+              High-impact tools mostly for chaos. More likely to trigger reports.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-lightbulb" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip dim">Deprecated</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Legacy Light Hack</div>
+            <div class="desc">
+              Older light manipulation option marked deprecated.
+            </div>
+          </article>
+
+          <article class="card" style="border-color:rgba(255,76,76,.45);">
+            <div class="top">
+              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
+                <i class="fas fa-bolt" style="color:#ff4c4c;"></i>
+              </div>
+              <div class="chips">
+                <span class="chip danger">ELITE</span>
+                <span class="chip">SERVER</span>
+              </div>
+            </div>
+            <div class="title">Burst Velocity</div>
+            <div class="desc">
+              Short, strong acceleration burst for quick launches.
+            </div>
+          </article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-title">
-          <h2>Online / TMP</h2>
-          <div class="sub">Multiplayer-facing options.</div>
+          <h2>Server / Sync Features</h2>
+          <div class="sub">Online options for TruckersMP behavior.</div>
         </div>
 
         <div class="grid">
           <article class="card">
             <div class="top">
-              <div class="icon"><i class="fas fa-network-wired"></i></div>
-              <div class="chips"><span class="chip">TMP</span><span class="chip dim">Hold A</span></div>
+              <div class="icon"><i class="fas fa-ghost"></i></div>
+              <div class="chips"><span class="chip ok">Undetected</span><span class="chip">SERVER</span></div>
             </div>
-            <div class="title">Fake Lag TMP (Hold A)</div>
-            <div class="desc">Simulates lag while holding the key. Changes how your movement looks online.</div>
+            <div class="title">Ghost Mode Ping</div>
+            <div class="desc">Makes your sync behavior harder to read for nearby players.</div>
           </article>
 
           <article class="card">
             <div class="top">
-              <div class="icon"><i class="fas fa-gauge-high"></i></div>
-              <div class="chips">
-                <span class="chip">TMP</span>
-                <span class="chip warn">Detection warning</span>
-              </div>
+              <div class="icon"><i class="fas fa-location-crosshairs"></i></div>
+              <div class="chips"><span class="chip">TMP</span><span class="chip warn">Admin‑hack</span></div>
             </div>
-            <div class="title">Speed Unlocker</div>
-            <div class="desc">Unlocks speed limits in TMP. Your UI flags it as risky.</div>
+            <div class="title">Teleport Enabler</div>
+            <div class="desc">Enables teleport-style movement utilities in TMP contexts.</div>
           </article>
 
           <article class="card">
             <div class="top">
-              <div class="icon"><i class="fas fa-signal"></i></div>
+              <div class="icon"><i class="fas fa-user-shield"></i></div>
+              <div class="chips"><span class="chip ok">Undetected</span><span class="chip">SERVER</span></div>
+            </div>
+            <div class="title">Admin Detector</div>
+            <div class="desc">Warns when admin/staff are nearby so you can react fast.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-tags"></i></div>
+              <div class="chips"><span class="chip warn">Detection warning</span><span class="chip">TMP</span></div>
+            </div>
+            <div class="title">Player Speed Tag</div>
+            <div class="desc">Shows live speed tags on players. Marked as riskier in UI.</div>
+          </article>
+
+          <article class="card">
+            <div class="top">
+              <div class="icon"><i class="fas fa-toggle-on"></i></div>
               <div class="chips"><span class="chip">SERVER</span></div>
             </div>
             <div class="title">Freeze Turn Signals</div>
