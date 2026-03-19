@@ -1,835 +1,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ghosty – Features" />
-  <title>Ghosty | Features</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse the Ghosty feature list with Elite, TMP, Client, Server, warning, and deprecated labels in one official release page.">
+  <title>Ghosty | Feature List</title>
+  <link rel="icon" type="image/svg+xml" href="assets/ghost-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg:#07020e;
-      --bg-2:#11071b;
-      --surface:#1a0d2a;
-      --surface-2:#211235;
-      --line:rgba(197,115,255,.45);
-      --line-strong:rgba(213,149,255,.72);
-      --text:#f6efff;
-      --muted:#c9b4de;
-      --primary:#a03cf0;
-      --primary-2:#c158ff;
-      --danger:#e22b65;
-      --danger-2:#ff4a89;
-      --ok:#6cffe2;
-      --warn:#ffb860;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
-      --radius:16px;
-      --radius-sm:10px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Space Grotesk", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(800px 340px at 8% 0%, rgba(160,60,240,.2), transparent 60%),
-        radial-gradient(700px 340px at 92% 0%, rgba(226,43,101,.2), transparent 65%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      min-height: 100vh;
-    }
-
-    .container {
-      width: min(1180px, 92vw);
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(8px);
-      background: rgba(10,4,16,.78);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, rgba(193,88,255,.26), rgba(130,42,206,.32));
-      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 0 24px rgba(160,60,240,.3);
-    }
-
-    .brand-mark i { color: #fff; }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text strong {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .brand-text span {
-      color: var(--muted);
-      font-size: .78rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .nav-btn {
-      text-decoration: none;
-      color: inherit;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      font-size: .74rem;
-      letter-spacing: .08em;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 9px 12px;
-      background: rgba(35,17,55,.72);
-      transition: .2s ease;
-    }
-
-    .nav-btn:hover {
-      transform: translateY(-1px);
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 0 20px rgba(160,60,240,.25);
-    }
-
-    .nav-btn.active {
-      background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
-      border-color: rgba(230,180,255,.75);
-    }
-
-    .mobile-tabbar {
-      display: none;
-    }
-
-    main { padding: 52px 0 40px; }
-
-    .hero {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(32,16,50,.78), rgba(15,7,24,.92));
-      box-shadow: var(--shadow);
-      padding: 22px;
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -30% auto auto -16%;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(193,88,255,.24), transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero .left, .hero .right { position: relative; z-index: 2; }
-
-    .hero h1 {
-      margin-bottom: 8px;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-    }
-
-    .hero p { color: var(--muted); }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px dashed rgba(220,165,255,.55);
-      border-radius: 999px;
-      padding: 6px 10px;
-      color: #ebd8ff;
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      font-family: "Orbitron", sans-serif;
-      margin-bottom: 6px;
-    }
-
-    .hint { color: var(--muted); font-size: .9rem; max-width: 36ch; text-align: right; }
-
-    .section { margin-top: 18px; }
-
-    .section-title {
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .section-title h2 {
-      font-family: "Orbitron", sans-serif;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-    }
-
-    .section-title .sub { color: var(--muted); font-size: .9rem; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 10px;
-    }
-
-    .card {
-      grid-column: span 4;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(31,15,48,.72), rgba(14,7,23,.9));
-      padding: 14px;
-      transition: .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
-    }
-
-    .top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(203,136,255,.36);
-      background: rgba(13,6,20,.58);
-      flex-shrink: 0;
-    }
-
-    .icon i { color: #f6ddff; }
-
-    .chips { display: flex; flex-wrap: wrap; justify-content: end; gap: 5px; }
-
-    .chip {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,.2);
-      color: #ecd9ff;
-      background: rgba(255,255,255,.08);
-      white-space: nowrap;
-    }
-
-    .chip.ok { color: var(--ok); border-color: rgba(108,255,226,.46); background: rgba(108,255,226,.14); }
-    .chip.warn { color: #ffe3bf; border-color: rgba(255,184,96,.46); background: rgba(255,184,96,.13); }
-    .chip.danger { color: #ffcadf; border-color: rgba(255,147,185,.46); background: rgba(255,99,153,.13); }
-    .chip.dim { opacity: .75; }
-
-    .title {
-      margin-bottom: 6px;
-      font-family: "Orbitron", sans-serif;
-      font-size: .98rem;
-      letter-spacing: .03em;
-      text-transform: uppercase;
-      line-height: 1.3;
-    }
-
-    .desc { color: var(--muted); line-height: 1.55; font-size: .95rem; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 0 40px;
-      color: var(--muted);
-    }
-
-    .foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: .95rem;
-    }
-
-    .foot a { color: #f3ddff; text-decoration: none; }
-    .heart { color: #ff4a89; }
-
-    @media (max-width: 980px) {
-      .hero { flex-direction: column; align-items: flex-start; }
-      .hint { text-align: left; }
-      .card { grid-column: span 6; }
-    }
-
-    @media (max-width: 680px) {
-      .navbar { flex-direction: column; align-items: flex-start; }
-      .nav-links { width: 100%; }
-      .card { grid-column: span 12; }
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding-bottom: calc(80px + env(safe-area-inset-bottom));
-      }
-
-      .navbar {
-        padding: 12px 0;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-tabbar {
-        position: fixed;
-        left: 50%;
-        bottom: max(10px, env(safe-area-inset-bottom));
-        transform: translateX(-50%);
-        width: min(560px, calc(100vw - 16px));
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        padding: 8px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: rgba(10,4,16,.92);
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow);
-        z-index: 35;
-      }
-
-      .mobile-tab {
-        border: 1px solid rgba(197,115,255,.36);
-        border-radius: 10px;
-        min-height: 48px;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 3px;
-        font-size: .66rem;
-        text-transform: uppercase;
-        font-family: "Orbitron", sans-serif;
-        letter-spacing: .05em;
-        background: rgba(35,17,55,.72);
-      }
-
-      .mobile-tab i {
-        font-size: .92rem;
-      }
-
-      .mobile-tab.active {
-        background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
-        border-color: rgba(230,180,255,.75);
-      }
-
-      .mobile-tab.danger {
-        background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
-        border-color: rgba(255,181,209,.72);
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-  <header>
-    <div class="container navbar">
-      <a class="brand" href="index.html">
-        <span class="brand-mark"><i class="fa-solid fa-ghost"></i></span>
-        <span class="brand-text">
+<body class="page-features">
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="Ghosty home">
+        <span class="brand-token">
+          <img src="assets/ghost-mark.svg" alt="">
+        </span>
+        <span class="brand-copy">
           <strong>Ghosty</strong>
-          <span>Ghosty | Official</span>
+          <span>Feature list</span>
         </span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a class="nav-btn" href="index.html">Home</a>
-        <a class="nav-btn active" href="features.html">Features</a>
-        <a class="nav-btn" href="spoofer.html">Spoofer</a>
-        <a class="nav-btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Support</a>
-        <a class="nav-btn" href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">Youtube</a>
-        <button class="nav-btn danger" id="eliteOpen" type="button">Ghosty Elite</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation" data-site-nav>
+        <div class="nav-links">
+          <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+          <a class="nav-link is-active" href="features.html"><i class="fa-solid fa-sparkles"></i> Features</a>
+          <a class="nav-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Guard</a>
+        </div>
+        <div class="nav-actions">
+          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>
+          <button class="button primary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+        </div>
       </nav>
     </div>
   </header>
 
-  <nav class="mobile-tabbar" aria-label="Mobile navigation">
-    <a class="mobile-tab" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a class="mobile-tab active" href="features.html"><i class="fa-solid fa-layer-group"></i><span>Features</span></a>
-    <a class="mobile-tab" href="spoofer.html"><i class="fa-solid fa-shield-halved"></i><span>Spoofer</span></a>
-    <a class="mobile-tab" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
-    <a class="mobile-tab danger" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-crown"></i><span>Elite</span></a>
+  <nav class="mobile-dock" aria-label="Mobile quick navigation">
+    <a class="dock-link" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a class="dock-link is-active" href="features.html"><i class="fa-solid fa-sparkles"></i><span>Features</span></a>
+    <a class="dock-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i><span>Guard</span></a>
+    <a class="dock-link" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
   </nav>
 
   <main>
-    <div class="container">
-      <section class="hero">
-        <div class="left">
-          <h1>Features</h1>
-          <p>This feature list may not be updated, last update on website : 9/02/26.</p>
-        </div>
-        <div class="right">
-          <div class="pill"><i class="fas fa-ghost"></i> Lite And Elite Version</div>
-          <div class="hint">CLIENT = impact your game • SERVER = impact online/TMP and your game side</div>
-        </div>
-      </section>
+    <section class="page-hero">
+      <div class="container hero-layout">
+        <article class="panel hero-copy" data-reveal>
+          <div class="eyebrow"><span class="dot"></span> Feature list</div>
+          <h1 class="hero-title">Ghosty <span class="gradient">Features</span></h1>
+          <p class="hero-lead">
+            This feature list may not always be fully updated. Last website update: 9/02/26.
+          </p>
+          <div class="hero-actions">
+            <a class="button secondary" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back home</a>
+            <a class="button soft" href="guard.html"><i class="fa-solid fa-shield-halved"></i> View Guard</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-solid fa-layer-group"></i> Versions</span>
+              <span class="metric-value">Lite and Elite</span>
+              <div class="metric-copy">Some features are only available in Ghosty Elite.</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-solid fa-desktop"></i> Labels</span>
+              <span class="metric-value">Client / Server / TMP</span>
+              <div class="metric-copy">Each feature is marked by where it works.</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-solid fa-triangle-exclamation"></i> Warnings</span>
+              <span class="metric-value">Risky tools are marked</span>
+              <div class="metric-copy">Detected and deprecated features are highlighted.</div>
+            </div>
+          </div>
+        </article>
 
-      <section class="section">
-        <div class="section-title">
-          <h2 style="color:#ff4c4c;">Elite Only</h2>
-          <div class="sub">These are only available in Ghosty Elite.</div>
-        </div>
+        <aside class="panel hero-visual" data-reveal style="--reveal-delay: 0.12s;">
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Labels</p>
+            <h3>CLIENT, SERVER, TMP</h3>
+            <p>Check the label first so you know where the feature works.</p>
+          </div>
 
-        <div class="grid">
-          <article class="card" style="border-color:rgba(255,76,76,.45);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
-                <i class="fas fa-plane" style="color:#ff4c4c;"></i>
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Current list</p>
+            <div class="stack-row">
+              <div class="stack-item">
+                <div>
+                  <strong>Elite only</strong>
+                  <span>The premium-only list is still the same.</span>
+                </div>
+                <b>5</b>
               </div>
-              <div class="chips">
-                <span class="chip danger">ELITE</span>
-                <span class="chip">SERVER</span>
+              <div class="stack-item">
+                <div>
+                  <strong>Suspension</strong>
+                  <span>Front / Rear Suspension is still here.</span>
+                </div>
+                <b>Live</b>
               </div>
-            </div>
-            <div class="title">Fly Hack</div>
-            <div class="desc">
-              Full movement control in the air. Lets you move your truck freely using the fly keybinds.
-            </div>
-          </article>
-
-          <article class="card" style="border-color:rgba(255,76,76,.45);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
-                <i class="fas fa-sync-alt" style="color:#ff4c4c;"></i>
-              </div>
-              <div class="chips">
-                <span class="chip danger">ELITE</span>
-                <span class="chip">SERVER</span>
-              </div>
-            </div>
-            <div class="title">SpinBot</div>
-            <div class="desc">
-              Spins your truck automatically. Mostly for trolling or chaotic driving.
-            </div>
-          </article>
-
-          <article class="card" style="border-color:rgba(255,76,76,.45);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
-                <i class="fas fa-trailer" style="color:#ff4c4c;"></i>
-              </div>
-              <div class="chips">
-                <span class="chip danger">ELITE</span>
-                <span class="chip">SERVER</span>
-              </div>
-            </div>
-            <div class="title">Trailer Chaos</div>
-            <div class="desc">
-              Applies force to the truck, cabin, and trailers to create chaotic movement.
-            </div>
-          </article>
-
-          <article class="card" style="border-color:rgba(255,76,76,.45);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
-                <i class="fas fa-circle-notch" style="color:#ff4c4c;"></i>
-              </div>
-              <div class="chips">
-                <span class="chip danger">ELITE</span>
-                <span class="chip">CLIENT</span>
+              <div class="stack-item">
+                <div>
+                  <strong>Warnings</strong>
+                  <span>Risky and old features are still marked clearly.</span>
+                </div>
+                <b>Warn</b>
               </div>
             </div>
-            <div class="title">Wheel Camber</div>
-            <div class="desc">
-              Adjusts the tilt angle of your wheels for custom stance or visual setups.
-            </div>
-          </article>
+          </div>
 
-          <article class="card" style="border-color:rgba(255,76,76,.45);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.15); border-color:rgba(255,76,76,.35);">
-                <i class="fas fa-tachometer-alt" style="color:#ff4c4c;"></i>
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Website note</p>
+            <h3>Based on the current menu</h3>
+            <p>This page follows the current feature set from your screenshots instead of the old leftover list.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="kicker">Feature labels</p>
+            <h2>How to read the list.</h2>
+            <p>CLIENT affects your local game. SERVER affects online behavior. TMP is for TruckersMP-specific tools.</p>
+          </div>
+        </div>
+        <div class="legend-panel" data-reveal style="--reveal-delay: 0.06s;">
+          <span class="legend-pill violet"><i class="fa-solid fa-crown"></i> Elite</span>
+          <span class="legend-pill"><i class="fa-solid fa-desktop"></i> Client</span>
+          <span class="legend-pill"><i class="fa-solid fa-server"></i> Server</span>
+          <span class="legend-pill"><i class="fa-solid fa-globe"></i> TMP</span>
+          <span class="legend-pill ok"><i class="fa-solid fa-circle-check"></i> Undetected</span>
+          <span class="legend-pill warn"><i class="fa-solid fa-triangle-exclamation"></i> Warning</span>
+          <span class="legend-pill danger"><i class="fa-solid fa-clock-rotate-left"></i> Deprecated</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container atlas-grid">
+        <article class="atlas-card" data-reveal>
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-crown"></i></div>
+            <div class="tag-row">
+              <span class="tag violet">Elite only</span>
+              <span class="tag">5 features</span>
+            </div>
+          </div>
+          <div>
+            <p class="card-eyebrow">Elite only</p>
+            <h3 class="card-title">Elite features</h3>
+            <p class="card-copy">These are only available in Ghosty Elite and stay the same.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Fly Hack</h4>
+                <div class="tag-row"><span class="trace-tag violet">Elite</span><span class="trace-tag">Server</span></div>
               </div>
-              <div class="chips">
-                <span class="chip danger">ELITE</span>
-                <span class="chip ok">Undetected</span>
+              <p class="trace-copy">Full movement control in the air with dedicated fly keybinds.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">SpinBot</h4>
+                <div class="tag-row"><span class="trace-tag violet">Elite</span><span class="trace-tag">Server</span></div>
               </div>
+              <p class="trace-copy">Automatic truck spinning for a chaotic driving effect.</p>
             </div>
-            <div class="title">Undetected Speed Unlocker</div>
-            <div class="desc">
-              Alternative speed unlocker designed to work without triggering detection warnings.
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>Online / TMP</h2>
-          <div class="sub">Multiplayer-facing options.</div>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-network-wired"></i></div>
-              <div class="chips"><span class="chip">TMP</span><span class="chip dim">Hold A</span></div>
-            </div>
-            <div class="title">Fake Lag TMP (Hold A)</div>
-            <div class="desc">Simulates lag while holding the key. Changes how your movement looks online.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-gauge-high"></i></div>
-              <div class="chips">
-                <span class="chip">TMP</span>
-                <span class="chip warn">Detection warning</span>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Trailer Chaos</h4>
+                <div class="tag-row"><span class="trace-tag violet">Elite</span><span class="trace-tag">Server</span></div>
               </div>
+              <p class="trace-copy">Applies force to the truck, cabin, and trailers for unstable movement.</p>
             </div>
-            <div class="title">Speed Unlocker</div>
-            <div class="desc">Unlocks speed limits in TMP. Your UI flags it as risky.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-signal"></i></div>
-              <div class="chips"><span class="chip">SERVER</span></div>
-            </div>
-            <div class="title">Freeze Turn Signals</div>
-            <div class="desc">Keeps indicators locked so they don’t auto-cancel.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-arrows-rotate"></i></div>
-              <div class="chips">
-                <span class="chip">SERVER</span>
-                <span class="chip dim">Deprecated</span>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Wheel Camber</h4>
+                <div class="tag-row"><span class="trace-tag violet">Elite</span><span class="trace-tag">Client</span></div>
               </div>
+              <p class="trace-copy">Adjusts wheel tilt for custom visual setups and stance.</p>
             </div>
-            <div class="title">Axle Trailer Side Lock</div>
-            <div class="desc">Old trailer option. Marked deprecated, so it may not work anymore.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-bolt"></i></div>
-              <div class="chips"><span class="chip">SERVER</span></div>
-            </div>
-            <div class="title">Speed Mode</div>
-            <div class="desc">Extra speed/acceleration behavior for online driving.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-hand-fist"></i></div>
-              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Hold G</span></div>
-            </div>
-            <div class="title">Instant Fling</div>
-            <div class="desc">Applies a strong force while holding the key. Quick “fling” effect.</div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>Client / Utility</h2>
-          <div class="sub">Local options on your side.</div>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-magnifying-glass-plus"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Infinite Zoom</div>
-            <div class="desc">Zoom in/out with the +/- controls.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-gas-pump"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Infinite Fuel</div>
-            <div class="desc">Fuel doesn’t drop.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-shield-halved"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">No Damage</div>
-            <div class="desc">Stops your truck from taking damage.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-person-walking-dashed-line-arrow-right"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span><span class="chip dim">Ctrl + N</span></div>
-            </div>
-            <div class="title">Noclip</div>
-            <div class="desc">Toggle noclip with the keybind so you can pass through objects.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-rocket"></i></div>
-              <div class="chips"><span class="chip">SERVER</span></div>
-            </div>
-            <div class="title">Jump Hack</div>
-            <div class="desc">Makes the truck jump. Not subtle.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-hand"></i></div>
-              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Hold B</span></div>
-            </div>
-            <div class="title">Super Brake</div>
-            <div class="desc">Hard brake while holding the key. Includes a “change keybind” option.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-gears"></i></div>
-              <div class="chips"><span class="chip">SERVER</span></div>
-            </div>
-            <div class="title">Engine RPM Speedhack</div>
-            <div class="desc">Changes RPM/speed behavior. Includes reset.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-coins"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Enter Money Value</div>
-            <div class="desc">Set a money value and apply it (if supported).</div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>Visual / Camera</h2>
-          <div class="sub">FOV, dashboard color, seat, FPS.</div>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-user"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Passenger View Mode</div>
-            <div class="desc">Adjusts how the camera/seat feels. Mentions using FOV settings too.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-palette"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Dashboard Color Customization V2</div>
-            <div class="desc">Pick RGB colors, use presets, and apply them to the dashboard.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-rainbow"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Rainbow Mode</div>
-            <div class="desc">Cycles dashboard colors automatically.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Auto‑Apply Dashboard Color</div>
-            <div class="desc">Keeps applying the color so it stays consistent.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-up-down"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Seat Position Sliders</div>
-            <div class="desc">Adjust vertical seat position and distance seat position.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-display"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Unlimited FPS / FPS Cap</div>
-            <div class="desc">Remove the FPS limit, or set your own cap with a slider.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-droplet"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
-            </div>
-            <div class="title">Color Saturation</div>
-            <div class="desc">Adjusts how strong the colors look.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-sun"></i></div>
-              <div class="chips"><span class="chip">TMP</span></div>
-            </div>
-            <div class="title">TruckersMP Time: Day</div>
-            <div class="desc">Forces daytime lighting in TMP (if supported).</div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>Recommended feature for realistic drivers</h2>
-        </div>
-
-        <div class="grid">
-          <article class="card" style="border-color: rgba(255,76,76,.35);">
-            <div class="top">
-              <div class="icon" style="background:rgba(255,76,76,.12); border-color:rgba(255,76,76,.22)">
-                <i class="fas fa-user-shield" style="color:var(--danger)"></i>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Undetected Speed Unlocker</h4>
+                <div class="tag-row"><span class="trace-tag violet">Elite</span><span class="trace-tag ok">Undetected</span></div>
               </div>
-              <div class="chips"><span class="chip warn">BETA</span></div>
+              <p class="trace-copy">Alternative speed unlocker designed to avoid warning flags.</p>
             </div>
-            <div class="title">Admin Detector</div>
-            <div class="desc">Shows a warning when staff/admins join, so you can disable stuff fast.</div>
-          </article>
+          </div>
+        </article>
 
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-truck-monster"></i></div>
-              <div class="chips"><span class="chip">CLIENT</span></div>
+        <article class="atlas-card" data-reveal style="--reveal-delay: 0.08s;">
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-globe"></i></div>
+            <div class="tag-row">
+              <span class="tag">Online / TMP</span>
+              <span class="tag">7 features</span>
             </div>
-            <div class="title">Front / Rear Suspension</div>
-            <div class="desc">Adjust suspension (front and rear) for looks and handling.</div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>Admin‑Hack (TMP)</h2>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-location-crosshairs"></i></div>
-              <div class="chips"><span class="chip">TMP</span><span class="chip warn">Admin‑hack</span></div>
-            </div>
-            <div class="title">Enable Teleport</div>
-            <div class="desc">Teleport option marked as admin‑hack for TMP.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-tag"></i></div>
-              <div class="chips">
-                <span class="chip">TMP</span>
-                <span class="chip warn">Admin‑hack</span>
-                <span class="chip warn">Detection warning</span>
+          </div>
+          <div>
+            <p class="card-eyebrow">Online / TMP</p>
+            <h3 class="card-title">Server and TruckersMP features</h3>
+            <p class="card-copy">Current multiplayer-facing options from the in-app list.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Fake Lag TMP</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span><span class="trace-tag">Hold A</span></div>
               </div>
+              <p class="trace-copy">Fake lag toggle for multiplayer driving.</p>
             </div>
-            <div class="title">Player Speed Tag</div>
-            <div class="desc">Shows/marks speed info. Your UI flags it as detection‑risk.</div>
-          </article>
-
-          <article class="card">
-            <div class="top">
-              <div class="icon"><i class="fas fa-lightbulb"></i></div>
-              <div class="chips"><span class="chip">SERVER</span><span class="chip dim">Deprecated</span></div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Speed Unlocker</h4>
+                <div class="tag-row"><span class="trace-tag">TMP</span><span class="trace-tag warn">Warning</span></div>
+              </div>
+              <p class="trace-copy">Speed unlocker with a visible detection warning.</p>
             </div>
-            <div class="title">Enable Light Manipulation</div>
-            <div class="desc">Old light control marked deprecated in your UI.</div>
-          </article>
-        </div>
-      </section>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Freeze Turn Signals</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Keeps turn signals active until you switch them off manually.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Ghost Mode</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Ghost mode option from the current in-app list.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Speed Mode</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Extra speed mode for server-side driving behavior.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Enable Teleport</h4>
+                <div class="tag-row"><span class="trace-tag">TMP</span><span class="trace-tag warn">Admin-hack</span></div>
+              </div>
+              <p class="trace-copy">Admin-hack teleport option for TruckersMP.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Instant Fling</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span><span class="trace-tag">Hold G</span></div>
+              </div>
+              <p class="trace-copy">Instant fling action while holding the assigned key.</p>
+            </div>
+          </div>
+        </article>
 
-    </div>
+        <article class="atlas-card" data-reveal>
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-sliders"></i></div>
+            <div class="tag-row">
+              <span class="tag">Utility</span>
+              <span class="tag">7 features</span>
+            </div>
+          </div>
+          <div>
+            <p class="card-eyebrow">Utility / Account</p>
+            <h3 class="card-title">Current utility tools</h3>
+            <p class="card-copy">Main utility and account-related features from the current list.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Chat Message</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Send custom messages from the in-app chat field.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Level</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Set level values directly from the current utility panel.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Money</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Set and add money values from the utility section.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">No Damage</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Stops the truck from taking damage locally.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Infinite Fuel</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Fuel stays full and can be filled instantly.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Fix Cargo</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Quick cargo fix action from the current utility panel.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Noclip</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span><span class="trace-tag">Ctrl + N</span></div>
+              </div>
+              <p class="trace-copy">Toggle noclip with the assigned keybind.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="atlas-card" data-reveal style="--reveal-delay: 0.08s;">
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-gauge-high"></i></div>
+            <div class="tag-row">
+              <span class="tag">Engine / Movement</span>
+              <span class="tag">6 features</span>
+            </div>
+          </div>
+          <div>
+            <p class="card-eyebrow">Engine / Movement</p>
+            <h3 class="card-title">Movement and engine controls</h3>
+            <p class="card-copy">Movement tools and the current engine slider section.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Jump Hack</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Jump action for the truck from the current movement list.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Super Brake</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span><span class="trace-tag">Hold B</span></div>
+              </div>
+              <p class="trace-copy">Strong brake while holding the assigned key.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">RPM</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Current engine RPM slider control.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Idle</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Current idle RPM slider control.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Limit</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span></div>
+              </div>
+              <p class="trace-copy">Current RPM limit slider control.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Front / Rear Suspension</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Suspension control is still present in the current list.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="atlas-card" data-reveal>
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-camera"></i></div>
+            <div class="tag-row">
+              <span class="tag">Visual / Camera</span>
+              <span class="tag">8 features</span>
+            </div>
+          </div>
+          <div>
+            <p class="card-eyebrow">Visual / Camera</p>
+            <h3 class="card-title">Dashboard, seat, and camera tools</h3>
+            <p class="card-copy">Current visual and camera features from the app.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Passenger View Mode</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Passenger view mode with FOV-based distance adjustment.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Infinite Zoom</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Infinite zoom control with loop option.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Dashboard Color Customization V2</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Dashboard color controls with RGB values and quick presets.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Light Boost</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Light boost slider from the dashboard section.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Rainbow Mode</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Cycles dashboard colors automatically.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Auto-Apply Dashboard Color</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Keeps applying the selected dashboard color.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Vertical Seat Position</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Vertical seat slider from the current camera panel.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Distance Seat Position</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Distance seat slider from the current camera panel.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="atlas-card" data-reveal style="--reveal-delay: 0.08s;">
+          <div class="card-top">
+            <div class="icon-box"><i class="fa-solid fa-display"></i></div>
+            <div class="tag-row">
+              <span class="tag">Graphics</span>
+              <span class="tag">5 features</span>
+            </div>
+          </div>
+          <div>
+            <p class="card-eyebrow">Graphics and Presentation</p>
+            <h3 class="card-title">Graphics and presentation</h3>
+            <p class="card-copy">Current graphics controls from the in-app list.</p>
+          </div>
+          <div class="trace-list">
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Unlimited FPS</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Unlimited FPS toggle from the graphics section.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">FPS Cap</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Adjustable FPS cap slider.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Color Saturation</h4>
+                <div class="tag-row"><span class="trace-tag">Client</span></div>
+              </div>
+              <p class="trace-copy">Color saturation control in the graphics panel.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">TruckersMP Time: Day</h4>
+                <div class="tag-row"><span class="trace-tag">TMP</span></div>
+              </div>
+              <p class="trace-copy">Forces TruckersMP time to day.</p>
+            </div>
+            <div class="trace-item">
+              <div class="trace-head">
+                <h4 class="trace-name">Enable Light Manipulation</h4>
+                <div class="tag-row"><span class="trace-tag">Server</span><span class="trace-tag danger">Deprecated</span></div>
+              </div>
+              <p class="trace-copy">Deprecated server-side light manipulation option.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container faq-layout">
+        <section class="faq-panel" data-reveal>
+          <p class="card-eyebrow">Good to know</p>
+          <h3>A few simple notes</h3>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-check"></i><span><strong>Elite only</strong> stays the same and is limited to the premium-only list.</span></li>
+            <li><i class="fa-solid fa-check"></i><span><strong>Client</strong> features affect your local game, while <strong>Server</strong> and <strong>TMP</strong> features affect online behavior.</span></li>
+            <li><i class="fa-solid fa-check"></i><span><strong>Warning</strong> means there is a known detection risk, and <strong>Deprecated</strong> means the feature is old and should be treated carefully.</span></li>
+            <li><i class="fa-solid fa-check"></i><span>Suspension is still included as <strong>Front / Rear Suspension</strong> in the current list.</span></li>
+          </ul>
+        </section>
+
+        <aside class="cta-panel" data-reveal style="--reveal-delay: 0.08s;">
+          <p class="card-eyebrow">Useful links</p>
+          <h3>Open the right page next</h3>
+          <p class="card-copy">Use Home for the main product page, Guard for recovery access, and Discord for support or Elite.</p>
+          <div class="pill-row">
+            <span class="pill"><i class="fa-solid fa-house"></i> Home</span>
+            <span class="pill"><i class="fa-solid fa-shield-halved"></i> Guard</span>
+            <span class="pill"><i class="fa-brands fa-discord"></i> Discord</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="index.html"><i class="fa-solid fa-house"></i> Back home</a>
+            <a class="button secondary" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Open Guard</a>
+            <button class="button soft" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="container foot">
-      <span>©Dizcat • Programs developed by Dizcat.</span>
-      <span>
-        <a href="https://ko-fi.com/dizcatoff" target="_blank" rel="noopener noreferrer">Buy me a Coffee ❤️</a>
-        ·
-        <a href="https://github.com/DizCatOff" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </span>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-panel">
+        <div class="footer-copy">&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat.</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="guard.html">Guard</a>
+          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+        </div>
+      </div>
     </div>
   </footer>
+
+  <div class="modal" id="elite-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="elite-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="elite-title">Ghosty Elite access</h2>
+        <button class="modal-close" type="button" aria-label="Close modal" data-modal-close>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="modal-copy">
+        Elite is a paid premium version. Join Discord to get access and setup info.
+      </p>
+      <div class="modal-stack">
+        <div class="stack-item">
+          <div>
+            <strong>Premium features</strong>
+            <span>Fly Hack, private access, and more.</span>
+          </div>
+          <b>Elite</b>
+        </div>
+        <div class="stack-item">
+          <div>
+            <strong>Discord access</strong>
+            <span>Delivery and support stay in one place.</span>
+          </div>
+          <b>Support</b>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Continue in Discord</a>
+        <button class="button soft" type="button" data-modal-close><i class="fa-solid fa-xmark"></i> Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/site.js"></script>
 </body>
 </html>
