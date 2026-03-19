@@ -1,0 +1,27 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ghostBody" x1="26" y1="18" x2="98" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.48" stop-color="#E6CCFF"/>
+      <stop offset="1" stop-color="#C46CFF"/>
+    </linearGradient>
+    <linearGradient id="ghostGlow" x1="22" y1="10" x2="108" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B860FF"/>
+      <stop offset="1" stop-color="#6A2DF2"/>
+    </linearGradient>
+    <filter id="softGlow" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="7" result="effect1_foregroundBlur"/>
+    </filter>
+  </defs>
+  <circle cx="64" cy="64" r="50" fill="url(#ghostGlow)" fill-opacity="0.24"/>
+  <g filter="url(#softGlow)">
+    <path d="M64 18C84.4345 18 101 34.5655 101 55V94.5C101 97.8137 97.1913 99.7198 94.5181 97.7109L84.75 90.3655L73.5125 98.0688C71.8078 99.2373 69.5456 99.1834 67.8985 97.9352L58.625 90.9062L47.9778 98.0312C46.2116 99.2126 43.8983 99.1605 42.1868 97.9013L32.75 90.9609L21.7756 97.9625C19.0724 99.6867 15.5 97.7451 15.5 94.5388V55C15.5 34.5655 32.0655 18 52.5 18H64Z" fill="url(#ghostBody)"/>
+  </g>
+  <path d="M64 20C83.3301 20 99 35.6699 99 55V91.5C99 93.8812 96.2856 95.2527 94.3654 93.8552L84.7275 86.8426C83.3216 85.8199 81.4259 85.7964 79.9951 86.7837L72.8892 91.6875C71.4574 92.6755 69.5607 92.6512 68.1546 91.6263L58.9658 84.9288C57.5836 83.9212 55.7102 83.8857 54.2909 84.8402L47.5735 89.3579C46.0832 90.3602 44.1086 90.3126 42.669 89.2396L33.5337 82.4309C32.0866 81.3521 30.0956 81.3072 28.6017 82.3198L21.0701 87.4252C19.1298 88.7406 16.5 87.3502 16.5 84.9884V55C16.5 35.6699 32.1699 20 51.5 20H64Z" fill="url(#ghostBody)" stroke="#FFFFFF" stroke-opacity="0.28" stroke-width="1.4"/>
+  <ellipse cx="50" cy="54" rx="6.5" ry="9" fill="#1A0E2A"/>
+  <ellipse cx="78" cy="54" rx="6.5" ry="9" fill="#1A0E2A"/>
+  <path d="M50 78.2C54.5333 82.7333 61.8 84 68 84C74.2 84 80.1333 82.7333 84 78.2" stroke="#2F1848" stroke-width="5" stroke-linecap="round"/>
+  <path d="M43 31.5C48.3443 27.0803 55.196 24.5 62.5 24.5H64.2C79.66 24.5 92.2 37.0401 92.2 52.5V68.6" stroke="white" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+</svg>
