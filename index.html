@@ -1,899 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ghosty - The Ultimate External Tool for Euro Truck Simulator 2 and TruckersMP" />
-  
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1235/1235097.png" />
-
-  <title>Ghosty | Official</title>
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ghosty Lite, Ghosty Elite, and Ghosty Guard with downloads, videos, feature lists, and support links in one official website.">
+  <title>Ghosty | Official Website</title>
+  <link rel="icon" type="image/svg+xml" href="assets/ghost-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg:#07020e;
-      --bg-2:#11071b;
-      --surface:#1a0d2a;
-      --surface-2:#211235;
-      --line:rgba(197,115,255,.45);
-      --line-strong:rgba(213,149,255,.72);
-      --text:#f6efff;
-      --muted:#c9b4de;
-      --primary:#a03cf0;
-      --primary-2:#c158ff;
-      --danger:#e22b65;
-      --danger-2:#ff4a89;
-      --ok:#6cffe2;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
-      --radius:16px;
-      --radius-sm:10px;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Space Grotesk", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(800px 340px at 8% 0%, rgba(160,60,240,.2), transparent 60%),
-        radial-gradient(700px 340px at 92% 0%, rgba(226,43,101,.2), transparent 65%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      min-height: 100vh;
-    }
-
-    a { color: inherit; }
-
-    .container {
-      width: min(1180px, 92vw);
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(8px);
-      background: rgba(10,4,16,.78);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-   .discord-widget-card {
-      border: 1px solid rgba(203,136,255,.36);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      background: rgba(13,6,20,.58);
-    }
-
-    .discord-widget-card h4 {
-      margin: 0 0 8px;
-      font-family: "Orbitron", sans-serif;
-      font-size: .9rem;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-
-    .discord-widget-card p {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: .86rem;
-      line-height: 1.45;
-    }
-
-    .discord-widget-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .discord-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(203,136,255,.34);
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: .78rem;
-      color: #f2e7ff;
-      background: rgba(84,43,130,.18);
-    }
-
-.discord-widget-frame {
-  width: 100%;
-  height: 210px; /* smaller than before */
-  border: 0;
-  border-radius: 10px;
-  background: rgba(7,2,14,.9);
-}
-
-
-
-    .discord-widget-help {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px dashed rgba(203,136,255,.34);
-      border-radius: 10px;
-      background: rgba(84,43,130,.1);
-    }
-
-    .discord-widget-help b {
-      display: block;
-      margin-bottom: 6px;
-      font-size: .82rem;
-      letter-spacing: .02em;
-    }
-
-    .discord-widget-help ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: .8rem;
-      line-height: 1.5;
-    }
-
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, rgba(193,88,255,.26), rgba(130,42,206,.32));
-      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 0 24px rgba(160,60,240,.3);
-    }
-
-    .brand-mark i { color: #fff; }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text strong {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .brand-text span {
-      color: var(--muted);
-      font-size: .78rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .nav-btn {
-      text-decoration: none;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      font-size: .74rem;
-      letter-spacing: .08em;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 9px 12px;
-      background: rgba(35,17,55,.72);
-      transition: .2s ease;
-    }
-
-    .nav-btn:hover {
-      transform: translateY(-1px);
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 0 20px rgba(160,60,240,.25);
-    }
-
-    .nav-btn.active {
-      background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
-      border-color: rgba(230,180,255,.75);
-    }
-
-    .nav-btn.danger {
-      background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
-      border-color: rgba(255,181,209,.72);
-    }
-
-    .mobile-tabbar {
-      display: none;
-    }
-
-    .hero {
-      padding: 76px 0 36px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(32,16,50,.78), rgba(15,7,24,.92));
-      box-shadow: var(--shadow);
-    }
-
-    .hero-main {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: -25% auto auto -18%;
-      width: 330px;
-      height: 330px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(193,88,255,.26), transparent 70%);
-      pointer-events: none;
-    }
-
-    .mini-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: fit-content;
-      border: 1px dashed rgba(220,165,255,.55);
-      border-radius: 999px;
-      padding: 6px 10px;
-      margin-bottom: 12px;
-      color: #ebd8ff;
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      font-family: "Orbitron", sans-serif;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-main h1 {
-      margin: 0 0 12px;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-      line-height: 1.05;
-      font-size: clamp(2rem, 4.5vw, 3.15rem);
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-main p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.68;
-      max-width: 55ch;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-actions {
-      margin-top: 18px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .btn {
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--line);
-      padding: 10px 14px;
-      font-weight: 700;
-      transition: .2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(50,25,78,.75);
-    }
-
-    .btn:hover { transform: translateY(-1px); border-color: var(--line-strong); }
-
-    .btn.primary {
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-      border-color: rgba(225,168,255,.74);
-    }
-
-    .btn.danger {
-      background: linear-gradient(90deg, var(--danger), var(--danger-2));
-      border-color: rgba(255,181,209,.72);
-    }
-
-    .hero-side {
-      padding: 18px;
-      display: grid;
-      gap: 10px;
-      align-content: center;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .stat {
-      border: 1px solid rgba(203,136,255,.36);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      background: rgba(13,6,20,.58);
-    }
-
-    .stat b {
-      display: block;
-      font-family: "Orbitron", sans-serif;
-      margin-bottom: 3px;
-      letter-spacing: .03em;
-    }
-
-    .stat span { color: var(--muted); font-size: .88rem; }
-
-    .scanline {
-      border: 1px dashed rgba(203,136,255,.42);
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      font-size: .92rem;
-      color: #e8d9fa;
-      background: rgba(84,43,130,.14);
-    }
-
-    section.block {
-      padding: 18px 0 44px;
-    }
-
-  .showcase-wrap {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(24,11,38,.85), rgba(11,5,18,.95));
-      padding: 12px;
-      box-shadow: var(--shadow);
-    }
-
-    .showcase-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 2px 4px 10px;
-    }
-
-    .showcase-title h3 {
-      margin: 0;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      font-size: 1rem;
-    }
-
-    .showcase-title span {
-      color: var(--muted);
-      font-size: .82rem;
-    }
-
-    .showcase-media {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 12px;
-      border: 1px solid rgba(206,147,255,.45);
-      background: rgba(7,2,14,.7);
-      object-fit: cover;
-      display: block;
-    }
-
-
-    .section-head {
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-family: "Orbitron", sans-serif;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      font-size: clamp(1.25rem, 2vw, 1.75rem);
-    }
-
-    .section-head p { margin: 0; color: var(--muted); }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 10px;
-    }
-
-    .card {
-      grid-column: span 4;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(31,15,48,.72), rgba(14,7,23,.9));
-      padding: 14px;
-      transition: .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, 0 10px 20px rgba(0,0,0,.25);
-    }
-
-    .card h3 {
-      margin: 0 0 8px;
-      font-family: "Orbitron", sans-serif;
-      font-size: 1rem;
-      letter-spacing: .03em;
-      text-transform: uppercase;
-    }
-
-    .card p { margin: 0; color: var(--muted); line-height: 1.55; }
-
-    .flag {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: .72rem;
-      font-weight: 700;
-      border: 1px solid;
-    }
-
-    .flag.safe {
-      color: var(--ok);
-      border-color: rgba(108,255,226,.46);
-      background: rgba(108,255,226,.14);
-    }
-
-    .flag.warn {
-      color: #ffb5cd;
-      border-color: rgba(255,147,185,.46);
-      background: rgba(255,99,153,.13);
-    }
-
-    .dual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .qa details {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: rgba(12,6,20,.72);
-      padding: 10px 12px;
-      margin-bottom: 8px;
-    }
-
-    .qa summary {
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .qa p {
-      color: var(--muted);
-      margin: 8px 0 2px;
-      line-height: 1.52;
-    }
-
-    .promo {
-      border: 1px solid rgba(255,147,185,.42);
-      border-radius: 14px;
-      background: linear-gradient(90deg, rgba(52,18,48,.86), rgba(99,31,72,.82));
-      padding: 14px;
-    }
-
-    .promo h3 {
-      margin: 0 0 8px;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-
-    .promo p { margin: 0 0 10px; color: #f1d6e4; }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 0 40px;
-      color: var(--muted);
-    }
-
-    .foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .foot a { color: #f3ddff; text-decoration: none; }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: rgba(4,1,8,.76);
-      opacity: 0;
-      pointer-events: none;
-      transition: .2s ease;
-      padding: 12px;
-      z-index: 40;
-    }
-
-    .modal.active { opacity: 1; pointer-events: auto; }
-
-    .modal-box {
-      width: min(620px, 95vw);
-      border: 1px solid var(--line-strong);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(34,15,53,.95), rgba(15,7,24,.97));
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .modal-top h3 {
-      margin: 0;
-      font-family: "Orbitron", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      font-size: 1rem;
-    }
-
-    .x {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      width: 34px;
-      height: 34px;
-      background: rgba(62,27,94,.8);
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .modal p { margin: 0 0 12px; color: var(--muted); line-height: 1.55; }
-
-    @media (max-width: 960px) {
-      .hero-grid,
-      .dual { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: 1fr; }
-      .card { grid-column: span 12; }
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding-bottom: calc(80px + env(safe-area-inset-bottom));
-      }
-
-      .navbar {
-        padding: 12px 0;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-tabbar {
-        position: fixed;
-        left: 50%;
-        bottom: max(10px, env(safe-area-inset-bottom));
-        transform: translateX(-50%);
-        width: min(560px, calc(100vw - 16px));
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
-        padding: 8px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: rgba(10,4,16,.92);
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow);
-        z-index: 35;
-      }
-
-      .mobile-tab {
-        border: 1px solid rgba(197,115,255,.36);
-        border-radius: 10px;
-        min-height: 48px;
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 3px;
-        font-size: .66rem;
-        text-transform: uppercase;
-        font-family: "Orbitron", sans-serif;
-        letter-spacing: .05em;
-        background: rgba(35,17,55,.72);
-      }
-
-      .mobile-tab i {
-        font-size: .92rem;
-      }
-
-      .mobile-tab.active {
-        background: linear-gradient(90deg, rgba(160,60,240,.9), rgba(193,88,255,.95));
-        border-color: rgba(230,180,255,.75);
-      }
-
-      .mobile-tab.danger {
-        background: linear-gradient(90deg, rgba(226,43,101,.85), rgba(255,74,137,.95));
-        border-color: rgba(255,181,209,.72);
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-  <header>
-    <div class="container navbar">
-      <a class="brand" href="index.html">
-        <span class="brand-mark"><i class="fa-solid fa-ghost"></i></span>
-        <span class="brand-text">
+<body class="page-home">
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="Ghosty home">
+        <span class="brand-token">
+          <img src="assets/ghost-mark.svg" alt="">
+        </span>
+        <span class="brand-copy">
           <strong>Ghosty</strong>
-          <span>Ghosty | Official</span>
+          <span>Official website</span>
         </span>
       </a>
 
-      <nav class="nav-links">
-        <a class="nav-btn active" href="index.html">Home</a>
-        <a class="nav-btn" href="features.html">Features</a>
-        <a class="nav-btn" href="spoofer.html">Spoofer</a>
-        <a class="nav-btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Support</a>
-        <a class="nav-btn" href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">Youtube</a>
-        <button class="nav-btn danger" id="eliteOpen" type="button">Ghosty Elite</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation" data-site-nav>
+        <div class="nav-links">
+          <a class="nav-link is-active" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+          <a class="nav-link" href="features.html"><i class="fa-solid fa-sparkles"></i> Features</a>
+          <a class="nav-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Guard</a>
+        </div>
+        <div class="nav-actions">
+          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>
+          <button class="button primary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+        </div>
       </nav>
     </div>
   </header>
 
-  <nav class="mobile-tabbar" aria-label="Mobile navigation">
-    <a class="mobile-tab active" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a class="mobile-tab" href="features.html"><i class="fa-solid fa-layer-group"></i><span>Features</span></a>
-    <a class="mobile-tab" href="spoofer.html"><i class="fa-solid fa-shield-halved"></i><span>Spoofer</span></a>
-    <a class="mobile-tab" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
-    <button class="mobile-tab danger" id="eliteOpenMobile" type="button"><i class="fa-solid fa-crown"></i><span>Elite</span></button>
+  <nav class="mobile-dock" aria-label="Mobile quick navigation">
+    <a class="dock-link is-active" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a class="dock-link" href="features.html"><i class="fa-solid fa-sparkles"></i><span>Features</span></a>
+    <a class="dock-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i><span>Guard</span></a>
+    <a class="dock-link" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
   </nav>
 
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <article class="panel hero-main">
-          <div class="mini-tag"><i class="fa-solid fa-wave-square"></i> Official website</div>
-          <h1>Ghosty, The #1 Cheat & Tool For ETS2</h1>
-          <p>
-           Fast, powerful, and packed with exclusive features. — made for TruckersMP and solo.
-              Minimal stress, maximum control. Keep it purple. Keep it ghost.
+    <section class="page-hero">
+      <div class="container hero-layout">
+        <article class="panel hero-copy" data-reveal>
+          <div class="eyebrow"><span class="dot"></span> Official website</div>
+          <h1 class="hero-title">Ghosty, The <span class="gradient">#1 Tool</span> For ETS2</h1>
+          <p class="hero-lead">
+            Fast, powerful, and packed with exclusive features. Made for TruckersMP and solo. Minimal stress, maximum control. Keep it purple. Keep it ghost.
           </p>
-
           <div class="hero-actions">
-            <a class="btn primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">
-              <i class="fa-solid fa-download"></i> Download Lite
-            </a>
-            <button class="btn danger" id="eliteOpen2" type="button">
-              <i class="fa-solid fa-crown"></i> Ghosty Elite
-            </button>
-            <a class="btn" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
-              <i class="fa-brands fa-discord"></i> Join Discord
-            </a>
+            <a class="button primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download Lite</a>
+            <a class="button secondary" href="features.html"><i class="fa-solid fa-layer-group"></i> Explore Features</a>
+            <a class="button soft" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Open Guard</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-solid fa-shield-halved"></i> Status</span>
+              <span class="metric-value">99% Undetected</span>
+              <div class="metric-copy">Detected features are highlighted so they are easy to spot.</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Updates</span>
+              <span class="metric-value">Living Project</span>
+              <div class="metric-copy">Frequent updates, fixes, and new features.</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label"><i class="fa-brands fa-discord"></i> Community</span>
+              <span class="metric-value">1.5K+ Ghosties</span>
+              <div class="metric-copy">Discord support, showcases, and help when you need it.</div>
+            </div>
           </div>
         </article>
 
-     <aside class="panel hero-side">
-          <div class="scanline"><i class="fa-solid fa-circle-info"></i> Ghosty can appear as a false positive in some antivirus tools. Get Lite bootstrapper credentials from Discord before launching.</div>
-          <div class="stat-grid">
-            <div class="stat"><b>99%</b><span>Undetected and usefull features, and detected features are highlighted</span></div>
-            <div class="stat"><b>Living Project</b><span>Frequent updates and fixes</span></div>
-            <div class="stat"><b>Community</b><span>Discord support and 2k+ ghosties.</span></div>
+        <aside class="panel hero-visual" data-reveal style="--reveal-delay: 0.12s;">
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Important</p>
+            <h3>Bootstrapper note</h3>
+            <p>Get the free bootstrapper credentials from Discord before launching.</p>
           </div>
-         <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit;">
-  <div class="discord-widget-card">
-    <h4><i class="fa-brands fa-discord"></i> Join our 1,5K+ Members Community</h4>
-    <div class="discord-widget-meta" id="discordMeta"></div>
 
-    <iframe
-      class="discord-widget-frame"
-      src="https://discord.com/widget?id=1395744314960773293&theme=dark"
-      width="100%"
-      height="210"
-      allowtransparency="true"
-      frameborder="0"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-      title="Ghosty Discord server widget">
-    </iframe>
-  </div>
-</a>
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Quick routes</p>
+            <div class="stack-row">
+              <div class="stack-item">
+                <div>
+                  <strong>Ghosty Lite</strong>
+                  <span>Free version with main functions and quick setup.</span>
+                </div>
+                <b>Lite</b>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <strong>Ghosty Elite</strong>
+                  <span>Paid version with premium-only features.</span>
+                </div>
+                <b>Elite</b>
+              </div>
+              <div class="stack-item">
+                <div>
+                  <strong>Ghosty Guard</strong>
+                  <span>Recovery flow, plans, setup, and support in one place.</span>
+                </div>
+                <b>Guard</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-side-card">
+            <p class="card-eyebrow">Support</p>
+            <h3>Discord is the main place to be</h3>
+            <p>Use Discord for help, keys, credentials, premium access, and the latest updates.</p>
+          </div>
         </aside>
       </div>
     </section>
 
-
-
-    <section class="block">
-       <div class="container" style="padding-bottom: 6px;">
-        <div class="showcase-wrap">
-          <div class="showcase-title">
-            <h3><i class="fa-solid fa-circle-play"></i> Showcase</h3>
-            <span>Quick look at Ghosty in action</span>
-          </div>
-          <video class="showcase-media" autoplay muted loop playsinline preload="metadata" aria-label="Ghosty feature showcase video">
-            <source src="video.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-
+    <section class="section-space">
       <div class="container">
-        <div class="section-head">
-          <h2>Key Features</h2>
-          <p>Main Ghosty functions and quick links.</p>
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="kicker">Ghosty products</p>
+            <h2>Choose your version.</h2>
+            <p>Start with Lite, check the full feature list, or open Guard if you need the recovery flow.</p>
+          </div>
+          <div class="section-note">Everything important is one click away.</div>
         </div>
 
-        <div class="cards">
-          <article class="card">
-            <h3><i class="fa-solid fa-shield-halved"></i> Teleport Enabler</h3>
-            <p>Enable teleport for any player in truckersmp to teleport with freecam.</p>
-            <span class="flag safe">Undetected</span>
+        <div class="card-grid">
+          <article class="ghost-card" data-reveal>
+            <div class="card-top">
+              <div class="icon-box"><i class="fa-solid fa-download"></i></div>
+              <div class="tag-row">
+                <span class="tag violet">Lite</span>
+                <span class="tag ok">Quick start</span>
+              </div>
+            </div>
+            <div>
+              <p class="card-eyebrow">Free version</p>
+              <h3 class="card-title">Ghosty Lite</h3>
+              <p class="card-copy">Main Ghosty functions with quick setup and direct download.</p>
+            </div>
+            <ul class="bullet-list">
+              <li><i class="fa-solid fa-check"></i><span>Fast bootstrapper download.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Use Discord for help and credentials.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Best starting point for new users.</span></li>
+            </ul>
+            <div class="inline-actions">
+              <a class="button primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>
+            </div>
           </article>
 
-          <article class="card">
-            <h3><i class="fa-solid fa-triangle-exclamation"></i> Admin Detector</h3>
-            <p>Detect admin around you, prevent bans.</p>
-            <span class="flag safe">Undetected</span>
+          <article class="ghost-card" data-reveal style="--reveal-delay: 0.08s;">
+            <div class="card-top">
+              <div class="icon-box"><i class="fa-solid fa-crown"></i></div>
+              <div class="tag-row">
+                <span class="tag danger">Elite</span>
+                <span class="tag violet">Premium</span>
+              </div>
+            </div>
+            <div>
+              <p class="card-eyebrow">Paid version</p>
+              <h3 class="card-title">Ghosty Elite</h3>
+              <p class="card-copy">Paid version with insane features and frequent adds.</p>
+            </div>
+            <ul class="bullet-list">
+              <li><i class="fa-solid fa-check"></i><span>Premium-only features like Fly Hack and more.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Private access through Discord.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Made for people who want the full Ghosty experience.</span></li>
+            </ul>
+            <div class="inline-actions">
+              <button class="button secondary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-bolt"></i> Open Elite</button>
+            </div>
           </article>
 
-          <article class="card">
-            <h3><i class="fa-solid fa-rotate-left"></i> Ghosty Spoofer</h3>
-            <p>Banned from TruckersMP? Use Ghosty Spoofer for recovery flow.</p>
-            <a class="btn" href="spoofer.html" style="margin-top:10px;">Learn about Spoofer</a>
-          </article>
-        </div>
-
-        <div class="dual">
-          <article class="panel qa" style="padding:14px;">
-            <h3 style="margin-top:0;font-family:Orbitron,sans-serif;text-transform:uppercase;letter-spacing:.04em;">Frequently Asked Questions</h3>
-            <details>
-              <summary>Is Ghosty Lite free?</summary>
-              <p>Yes. Ghosty Lite is free. Elite is the premium paid version with insane features !</p>
-            </details>
-            <details>
-              <summary>Where do I get help?</summary>
-              <p>Use the Support button in the top navigation or Join Discord for updates and help.</p>
-            </details>
-            <details>
-              <summary>Can I preview Elite first?</summary>
-              <p>Yes. Click Ghosty Elite to open the panel, then continue on Discord to see showcases and more.</p>
-            </details>
-          </article>
-
-          <article class="promo">
-            <h3>Ghosty Elite</h3>
-            <p>Paid version with insane features such as fly hack and frequent adds.</p>
-            <div class="hero-actions">
-              <button class="btn danger" id="eliteOpen3" type="button"><i class="fa-solid fa-bolt"></i> Open Elite</button>
-              <a class="btn" href="features.html"><i class="fa-solid fa-layer-group"></i> View all features</a>
+          <article class="ghost-card" data-reveal style="--reveal-delay: 0.16s;">
+            <div class="card-top">
+              <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="tag-row">
+                <span class="tag ok">Guard</span>
+                <span class="tag violet">Recovery</span>
+              </div>
+            </div>
+            <div>
+              <p class="card-eyebrow">Recovery flow</p>
+              <h3 class="card-title">Ghosty Guard</h3>
+              <p class="card-copy">Banned from TruckersMP? Use Ghosty Guard for the recovery flow.</p>
+            </div>
+            <ul class="bullet-list">
+              <li><i class="fa-solid fa-check"></i><span>Plans from 5 EUR.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Setup steps and FAQ on one page.</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Discord delivery and support.</span></li>
+            </ul>
+            <div class="inline-actions">
+              <a class="button soft" href="guard.html"><i class="fa-solid fa-arrow-right"></i> Open Guard</a>
             </div>
           </article>
         </div>
       </div>
     </section>
+
+    <section class="section-space">
+      <div class="container showcase-grid">
+        <article class="showcase-panel" data-reveal>
+          <div class="video-frame">
+            <div class="media-head">
+              <div class="media-title"><i class="fa-solid fa-circle-play"></i> Ghosty preview</div>
+              <div class="media-badge">Local</div>
+            </div>
+            <video class="showcase-video" autoplay muted loop playsinline preload="metadata" aria-label="Ghosty preview video">
+              <source src="video.mp4" type="video/mp4">
+            </video>
+          </div>
+        </article>
+
+        <aside class="insight-panel" data-reveal style="--reveal-delay: 0.1s;">
+          <p class="card-eyebrow">Elite</p>
+          <h3>See how Elite looks before you open it.</h3>
+          <ul class="insight-list">
+            <li><i class="fa-solid fa-check"></i><span>The homepage keeps the local Ghosty preview video.</span></li>
+            <li><i class="fa-solid fa-check"></i><span>Use Discord for Elite access and setup.</span></li>
+            <li><i class="fa-solid fa-check"></i><span>You can also open the official Elite video on YouTube.</span></li>
+            <li><i class="fa-solid fa-check"></i><span>Guard still has its own page and its own video.</span></li>
+          </ul>
+          <div class="inline-actions">
+            <a class="button secondary" href="features.html"><i class="fa-solid fa-list-check"></i> View features</a>
+            <a class="button soft" href="https://www.youtube.com/watch?v=axnpSWXOwoc" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"></i> Elite video</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="kicker">Ghosty standards</p>
+            <h2>What people come for.</h2>
+            <p>Fast setup, useful tools, clear routes, and active support.</p>
+          </div>
+        </div>
+
+        <div class="stats-strip">
+          <article class="story-panel" data-reveal>
+            <p class="card-eyebrow">Lite</p>
+            <span class="stat-value">Free start</span>
+            <div class="stat-copy">Download the free version and get going fast.</div>
+          </article>
+          <article class="story-panel" data-reveal style="--reveal-delay: 0.06s;">
+            <p class="card-eyebrow">Elite</p>
+            <span class="stat-value">Premium features</span>
+            <div class="stat-copy">Open Elite for the paid version and private access.</div>
+          </article>
+          <article class="story-panel" data-reveal style="--reveal-delay: 0.12s;">
+            <p class="card-eyebrow">Guard</p>
+            <span class="stat-value">Recovery flow</span>
+            <div class="stat-copy">Plans, setup, and support in one place.</div>
+          </article>
+          <article class="story-panel" data-reveal style="--reveal-delay: 0.18s;">
+            <p class="card-eyebrow">Discord</p>
+            <span class="stat-value">Fast help</span>
+            <div class="stat-copy">Main hub for support, showcases, and keys.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-space">
+      <div class="container faq-layout">
+        <section class="faq-panel" data-reveal>
+          <p class="card-eyebrow">Quick answers</p>
+          <h3>Common Ghosty questions</h3>
+          <div class="accordion-list" data-accordion>
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                <span>Is Ghosty Lite free?</span>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-copy">Yes. Ghosty Lite is free. Elite is the premium paid version with insane features.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                <span>Where do I get help?</span>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-copy">Use the Support button or join Discord for help, updates, and credentials.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                <span>What is Ghosty Guard?</span>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-copy">Ghosty Guard has plans, setup info, and the full recovery flow in one page.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                <span>How do I get Elite?</span>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <div class="accordion-content">
+                <div class="accordion-copy">Open Ghosty Elite and continue in Discord for access details and setup.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="cta-panel" data-reveal style="--reveal-delay: 0.1s;">
+          <p class="card-eyebrow">Need more</p>
+          <h3>Pick your route and get started.</h3>
+          <p class="card-copy">Download Lite, open the full feature list, or join Discord for Elite and support.</p>
+          <div class="pill-row">
+            <span class="pill"><i class="fa-solid fa-download"></i> Lite</span>
+            <span class="pill"><i class="fa-solid fa-crown"></i> Elite</span>
+            <span class="pill"><i class="fa-solid fa-shield-halved"></i> Guard</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="features.html"><i class="fa-solid fa-layer-group"></i> View features</a>
+            <button class="button secondary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="container foot">
-      <span>©Dizcat • Programs developed by Dizcat.</span>
-      <span>
-        <a href="https://ko-fi.com/dizcatoff" target="_blank" rel="noopener noreferrer">Buy me a Coffee ❤️</a>
-        ·
-        <a href="https://github.com/DizCatOff" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </span>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-panel">
+        <div class="footer-copy">&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat.</div>
+        <div class="footer-links">
+          <a href="features.html">Features</a>
+          <a href="guard.html">Guard</a>
+          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <div class="modal" id="eliteModal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="eliteTitle">
-      <div class="modal-top">
-        <h3 id="eliteTitle">Download Elite</h3>
+  <div class="modal" id="elite-modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="elite-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="elite-title">Ghosty Elite access</h2>
+        <button class="modal-close" type="button" aria-label="Close modal" data-modal-close>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
-      <p>
+      <p class="modal-copy">
         Elite is a paid premium version. Join Discord to get access and setup info.
       </p>
-      <div class="hero-actions" style="margin-top:0;">
-        <a class="btn danger" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
-          <i class="fa-brands fa-discord"></i> Get Elite via our Discord
-        </a>
-        <button class="btn" type="button" id="eliteClose2" style="color: white;">
-  Close
-</button>
+      <div class="modal-stack">
+        <div class="stack-item">
+          <div>
+            <strong>Premium features</strong>
+            <span>Fly Hack, private access, and more.</span>
+          </div>
+          <b>Elite</b>
+        </div>
+        <div class="stack-item">
+          <div>
+            <strong>Discord access</strong>
+            <span>Delivery and support stay in one place.</span>
+          </div>
+          <b>Support</b>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Continue in Discord</a>
+        <button class="button soft" type="button" data-modal-close><i class="fa-solid fa-xmark"></i> Close</button>
       </div>
     </div>
   </div>
 
-  <script>
-    const modal = document.getElementById('eliteModal');
-    const openButtons = [
-      document.getElementById('eliteOpen'),
-      document.getElementById('eliteOpen2'),
-      document.getElementById('eliteOpen3'),
-      document.getElementById('eliteOpenMobile')
-    ];
-
-    const closeButtons = [
-      document.getElementById('eliteClose'),
-      document.getElementById('eliteClose2')
-    ];
-
-    const openModal = () => {
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-    };
-
-    const closeModal = () => {
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-    };
-
-    openButtons.forEach((button) => {
-      if (button) button.addEventListener('click', openModal);
-    });
-
-    closeButtons.forEach((button) => {
-      if (button) button.addEventListener('click', closeModal);
-    });
-
-    modal.addEventListener('click', (event) => {
-      if (event.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeModal();
-    });
-  </script>
+  <script src="assets/site.js"></script>
 </body>
 </html>
