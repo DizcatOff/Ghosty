@@ -4,24 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Ghosty Lite, Ghosty Elite, and Ghosty Guard with downloads, videos, feature lists, and support links in one official website.">
-  <title>Ghosty | Official Website</title>
-  <link rel="icon" type="image/svg+xml" href="assets/ghost-mark.svg">
+  <title>Ghosty</title>
+  <link rel="icon" type="image/png" href="assets/ghost-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="assets/site.css">
 </head>
-<body class="page-home">
+<body class="page-home" id="top">
+  <div class="home-starfield" aria-hidden="true" data-home-starfield></div>
   <header class="site-header">
     <div class="container nav-shell">
       <a class="brand" href="index.html" aria-label="Ghosty home">
         <span class="brand-token">
-          <img src="assets/ghost-mark.svg" alt="">
+          <img src="assets/ghost-icon.png" alt="">
         </span>
         <span class="brand-copy">
           <strong>Ghosty</strong>
-          <span>Official website</span>
         </span>
       </a>
 
@@ -38,8 +38,8 @@
           <a class="nav-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Guard</a>
         </div>
         <div class="nav-actions">
-          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>
-          <button class="button primary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+          <button class="button primary" type="button" data-modal-open="elite-modal">Elite</button>
         </div>
       </nav>
     </div>
@@ -52,305 +52,228 @@
     <a class="dock-link" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span>Support</span></a>
   </nav>
 
-  <main>
-    <section class="page-hero">
-      <div class="container hero-layout">
-        <article class="panel hero-copy" data-reveal>
-          <div class="eyebrow"><span class="dot"></span> Official website</div>
-          <h1 class="hero-title">Ghosty, The <span class="gradient">#1 Tool</span> For ETS2</h1>
-          <p class="hero-lead">
-            Fast, powerful, and packed with exclusive features. Made for TruckersMP and solo. Minimal stress, maximum control. Keep it purple. Keep it ghost.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download Lite</a>
-            <a class="button secondary" href="features.html"><i class="fa-solid fa-layer-group"></i> Explore Features</a>
-            <a class="button soft" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Open Guard</a>
+  <main class="home-shell">
+    <section class="home-hero-lunar">
+      <div class="container home-hero-grid">
+        <article class="home-hero-copy-v2" data-reveal>
+          <div class="hero-chip">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>LITE</span>
           </div>
-          <div class="hero-metrics">
-            <div class="metric-card">
-              <span class="metric-label"><i class="fa-solid fa-shield-halved"></i> Status</span>
-              <span class="metric-value">99% Undetected</span>
-              <div class="metric-copy">Detected features are highlighted so they are easy to spot.</div>
-            </div>
-            <div class="metric-card">
-              <span class="metric-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Updates</span>
-              <span class="metric-value">Living Project</span>
-              <div class="metric-copy">Frequent updates, fixes, and new features.</div>
-            </div>
-            <div class="metric-card">
-              <span class="metric-label"><i class="fa-brands fa-discord"></i> Community</span>
-              <span class="metric-value">1.5K+ Ghosties</span>
-              <div class="metric-copy">Discord support, showcases, and help when you need it.</div>
-            </div>
+          <h1>Ghosty, The #1 Tool For ETS2</h1>
+          <p>
+            Downloads, feature info, and Discord help for ETS2.
+            Start with Lite, check the feature list, or open Guard when you need it.
+          </p>
+          <div class="hero-actions hero-actions-v2">
+            <a class="button primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-download"></i>
+              Download Lite
+            </a>
+            <a class="rating-pill" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">
+              <span class="rating-stack" aria-hidden="true">
+                <span>G</span>
+                <span>H</span>
+                <span>O</span>
+              </span>
+              <span class="rating-copy">
+                <strong>2K+</strong>
+                <span>ghostie members</span>
+              </span>
+              <span class="rating-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
           </div>
         </article>
 
-        <aside class="panel hero-visual" data-reveal style="--reveal-delay: 0.12s;">
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Important</p>
-            <h3>Bootstrapper note</h3>
-            <p>Get the free bootstrapper credentials from Discord before launching.</p>
-          </div>
+        <aside class="home-hero-product" data-reveal style="--reveal-delay: 0.12s;">
+          <div class="hero-product-card">
+            <div class="hero-product-scene">
+              <div class="product-scene-glow"></div>
+              <img class="product-moon" src="webSaved/lunarcheats.gg/img/moon.png" alt="">
 
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Quick routes</p>
-            <div class="stack-row">
-              <div class="stack-item">
-                <div>
-                  <strong>Ghosty Lite</strong>
-                  <span>Free version with main functions and quick setup.</span>
+              <div class="ghosty-box-3d">
+                <div class="ghosty-box-top"></div>
+                <div class="ghosty-box-front">
+                  <span class="ghosty-box-pill">LITE</span>
+                  <img class="ghosty-box-mark" src="assets/ghost-icon.png" alt="">
+                  <div class="ghosty-box-title"> </div>
+                  <div class="ghosty-box-subtitle">Ghosty</div>
+                  <div class="ghosty-box-script"></div>
                 </div>
-                <b>Lite</b>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <strong>Ghosty Elite</strong>
-                  <span>Paid version with premium-only features.</span>
+                <div class="ghosty-box-side">
+                  <span>ETS2</span>
+                  <span>ETS2MP</span>
                 </div>
-                <b>Elite</b>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <strong>Ghosty Guard</strong>
-                  <span>Recovery flow, plans, setup, and support in one place.</span>
-                </div>
-                <b>Guard</b>
               </div>
             </div>
-          </div>
 
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Support</p>
-            <h3>Discord is the main place to be</h3>
-            <p>Use Discord for help, keys, credentials, premium access, and the latest updates.</p>
+            <a class="hero-product-strip" href="#ghosty-instructions">
+              <div class="hero-product-thumb">
+                <img src="assets/ghost-icon.png" alt="">
+              </div>
+              <div class="hero-product-meta">
+                <strong>Ghosty Lite</strong>
+                <span>Free download and quick setup.</span>
+              </div>
+              <span class="hero-product-link" aria-hidden="true">
+                <i class="fa-solid fa-arrow-right"></i>
+              </span>
+            </a>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="section-space">
+    <section class="home-reference-section">
       <div class="container">
-        <div class="section-heading" data-reveal>
-          <div>
-            <p class="kicker">Ghosty products</p>
-            <h2>Choose your version.</h2>
-            <p>Start with Lite, check the full feature list, or open Guard if you need the recovery flow.</p>
+        <div class="home-title-block" data-reveal>
+          <div class="hero-chip center">
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Lite Version</span>
           </div>
-          <div class="section-note">Everything important is one click away.</div>
+          <h2>The stuff you need, For free.</h2>
+          <div class="moon-divider" aria-hidden="true">
+            <span></span>
+            <img class="ghost-divider-mark" src="assets/ghost-icon.png" alt="">
+            <span></span>
+          </div>
         </div>
 
-        <div class="card-grid">
-          <article class="ghost-card" data-reveal>
-            <div class="card-top">
-              <div class="icon-box"><i class="fa-solid fa-download"></i></div>
-              <div class="tag-row">
-                <span class="tag violet">Lite</span>
-                <span class="tag ok">Quick start</span>
-              </div>
+        <article class="feature-showcase-card" data-reveal>
+          <div class="feature-showcase-copy">
+            <div class="feature-showcase-icon">
+              <img src="assets/ghost-icon.png" alt="">
             </div>
-            <div>
-              <p class="card-eyebrow">Free version</p>
-              <h3 class="card-title">Ghosty Lite</h3>
-              <p class="card-copy">Main Ghosty functions with quick setup and direct download.</p>
+            <h3>Built to be usefull.</h3>
+            <p>
+              Download Lite, check the features, open Guard, and get help through Discord without digging through menus.
+            </p>
+            <div class="feature-showcase-actions">
+              <a class="button white" href="features.html">Read features</a>
+              <a class="button primary" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Join Discord</a>
             </div>
-            <ul class="bullet-list">
-              <li><i class="fa-solid fa-check"></i><span>Fast bootstrapper download.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Use Discord for help and credentials.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Best starting point for new users.</span></li>
-            </ul>
-            <div class="inline-actions">
-              <a class="button primary" href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-download"></i> Download</a>
-            </div>
-          </article>
+          </div>
 
-          <article class="ghost-card" data-reveal style="--reveal-delay: 0.08s;">
-            <div class="card-top">
-              <div class="icon-box"><i class="fa-solid fa-crown"></i></div>
-              <div class="tag-row">
-                <span class="tag danger">Elite</span>
-                <span class="tag violet">Premium</span>
-              </div>
-            </div>
-            <div>
-              <p class="card-eyebrow">Paid version</p>
-              <h3 class="card-title">Ghosty Elite</h3>
-              <p class="card-copy">Paid version with insane features and frequent adds.</p>
-            </div>
-            <ul class="bullet-list">
-              <li><i class="fa-solid fa-check"></i><span>Premium-only features like Fly Hack and more.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Private access through Discord.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Made for people who want the full Ghosty experience.</span></li>
-            </ul>
-            <div class="inline-actions">
-              <button class="button secondary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-bolt"></i> Open Elite</button>
-            </div>
-          </article>
-
-          <article class="ghost-card" data-reveal style="--reveal-delay: 0.16s;">
-            <div class="card-top">
-              <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
-              <div class="tag-row">
-                <span class="tag ok">Guard</span>
-                <span class="tag violet">Recovery</span>
-              </div>
-            </div>
-            <div>
-              <p class="card-eyebrow">Recovery flow</p>
-              <h3 class="card-title">Ghosty Guard</h3>
-              <p class="card-copy">Banned from TruckersMP? Use Ghosty Guard for the recovery flow.</p>
-            </div>
-            <ul class="bullet-list">
-              <li><i class="fa-solid fa-check"></i><span>Plans from 5 EUR.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Setup steps and FAQ on one page.</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Discord delivery and support.</span></li>
-            </ul>
-            <div class="inline-actions">
-              <a class="button soft" href="guard.html"><i class="fa-solid fa-arrow-right"></i> Open Guard</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-space">
-      <div class="container showcase-grid">
-        <article class="showcase-panel" data-reveal>
-          <div class="video-frame">
-            <div class="media-head">
-              <div class="media-title"><i class="fa-solid fa-circle-play"></i> Ghosty preview</div>
-              <div class="media-badge">Local</div>
-            </div>
-            <video class="showcase-video" autoplay muted loop playsinline preload="metadata" aria-label="Ghosty preview video">
+          <div class="feature-showcase-media">
+            <video class="feature-showcase-video" autoplay muted loop playsinline preload="metadata" aria-label="Ghosty preview video">
               <source src="video.mp4" type="video/mp4">
             </video>
           </div>
         </article>
 
-        <aside class="insight-panel" data-reveal style="--reveal-delay: 0.1s;">
-          <p class="card-eyebrow">Elite</p>
-          <h3>See how Elite looks before you open it.</h3>
-          <ul class="insight-list">
-            <li><i class="fa-solid fa-check"></i><span>The homepage keeps the local Ghosty preview video.</span></li>
-            <li><i class="fa-solid fa-check"></i><span>Use Discord for Elite access and setup.</span></li>
-            <li><i class="fa-solid fa-check"></i><span>You can also open the official Elite video on YouTube.</span></li>
-            <li><i class="fa-solid fa-check"></i><span>Guard still has its own page and its own video.</span></li>
-          </ul>
-          <div class="inline-actions">
-            <a class="button secondary" href="features.html"><i class="fa-solid fa-list-check"></i> View features</a>
-            <a class="button soft" href="https://www.youtube.com/watch?v=axnpSWXOwoc" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"></i> Elite video</a>
-          </div>
-        </aside>
+        <div class="feature-card-row instruction-row" id="ghosty-instructions">
+          <article class="reference-feature-card instruction-card" data-reveal>
+            <div class="reference-feature-copy">
+              <span class="instruction-step">01</span>
+              <h3>Download Ghosty Lite</h3>
+              <p>Use the main download to get the bootstrapper on your PC.</p>
+            </div>
+          </article>
+
+          <article class="reference-feature-card instruction-card" data-reveal style="--reveal-delay: 0.06s;">
+            <div class="reference-feature-copy">
+              <span class="instruction-step">02</span>
+              <h3>Open it</h3>
+              <p>Launch the file and follow the first startup flow.</p>
+            </div>
+          </article>
+
+          <article class="reference-feature-card instruction-card" data-reveal style="--reveal-delay: 0.12s;">
+            <div class="reference-feature-copy">
+              <span class="instruction-step">03</span>
+              <h3>Get free credentials in the Discord</h3>
+              <p>Discord is where you get the free login details and help if you need it.</p>
+            </div>
+          </article>
+
+          <article class="reference-feature-card instruction-card" data-reveal style="--reveal-delay: 0.18s;">
+            <div class="reference-feature-copy">
+              <span class="instruction-step">04</span>
+              <h3>Enjoy</h3>
+              <p>Once you are in, you are ready to use Ghosty without a messy setup.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="section-space">
+    <section class="home-stats-section">
       <div class="container">
-        <div class="section-heading" data-reveal>
-          <div>
-            <p class="kicker">Ghosty standards</p>
-            <h2>What people come for.</h2>
-            <p>Fast setup, useful tools, clear routes, and active support.</p>
+        <div class="home-stats-panel" data-reveal>
+          <div class="home-title-block compact">
+            <h2>Get where you need fast.</h2>
+            <p></p>
+          </div>
+
+          <div class="home-stats-grid">
+            <article class="home-stat-item">
+              <div class="home-stat-icon success"><i class="fa-solid fa-users"></i></div>
+              <strong>2k+</strong>
+              <span>Discord members</span>
+            </article>
+            <article class="home-stat-item">
+              <div class="home-stat-icon danger"><i class="fa-solid fa-chart-line"></i></div>
+              <strong>Undetected</strong>
+              <span>for 99% of the features</span>
+            </article>
+            <article class="home-stat-item">
+              <div class="home-stat-icon info"><i class="fa-solid fa-download"></i></div>
+              <strong>24/7</strong>
+              <span>Access and support</span>
+            </article>
+          </div>
+
+          <div class="home-stats-actions">
+            <a class="button primary" href="#top">Get Started <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
-
-        <div class="stats-strip">
-          <article class="story-panel" data-reveal>
-            <p class="card-eyebrow">Lite</p>
-            <span class="stat-value">Free start</span>
-            <div class="stat-copy">Download the free version and get going fast.</div>
-          </article>
-          <article class="story-panel" data-reveal style="--reveal-delay: 0.06s;">
-            <p class="card-eyebrow">Elite</p>
-            <span class="stat-value">Premium features</span>
-            <div class="stat-copy">Open Elite for the paid version and private access.</div>
-          </article>
-          <article class="story-panel" data-reveal style="--reveal-delay: 0.12s;">
-            <p class="card-eyebrow">Guard</p>
-            <span class="stat-value">Recovery flow</span>
-            <div class="stat-copy">Plans, setup, and support in one place.</div>
-          </article>
-          <article class="story-panel" data-reveal style="--reveal-delay: 0.18s;">
-            <p class="card-eyebrow">Discord</p>
-            <span class="stat-value">Fast help</span>
-            <div class="stat-copy">Main hub for support, showcases, and keys.</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-space">
-      <div class="container faq-layout">
-        <section class="faq-panel" data-reveal>
-          <p class="card-eyebrow">Quick answers</p>
-          <h3>Common Ghosty questions</h3>
-          <div class="accordion-list" data-accordion>
-            <div class="accordion-item">
-              <button class="accordion-trigger" type="button" aria-expanded="false">
-                <span>Is Ghosty Lite free?</span>
-                <i class="fa-solid fa-plus"></i>
-              </button>
-              <div class="accordion-content">
-                <div class="accordion-copy">Yes. Ghosty Lite is free. Elite is the premium paid version with insane features.</div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <button class="accordion-trigger" type="button" aria-expanded="false">
-                <span>Where do I get help?</span>
-                <i class="fa-solid fa-plus"></i>
-              </button>
-              <div class="accordion-content">
-                <div class="accordion-copy">Use the Support button or join Discord for help, updates, and credentials.</div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <button class="accordion-trigger" type="button" aria-expanded="false">
-                <span>What is Ghosty Guard?</span>
-                <i class="fa-solid fa-plus"></i>
-              </button>
-              <div class="accordion-content">
-                <div class="accordion-copy">Ghosty Guard has plans, setup info, and the full recovery flow in one page.</div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <button class="accordion-trigger" type="button" aria-expanded="false">
-                <span>How do I get Elite?</span>
-                <i class="fa-solid fa-plus"></i>
-              </button>
-              <div class="accordion-content">
-                <div class="accordion-copy">Open Ghosty Elite and continue in Discord for access details and setup.</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <aside class="cta-panel" data-reveal style="--reveal-delay: 0.1s;">
-          <p class="card-eyebrow">Need more</p>
-          <h3>Pick your route and get started.</h3>
-          <p class="card-copy">Download Lite, open the full feature list, or join Discord for Elite and support.</p>
-          <div class="pill-row">
-            <span class="pill"><i class="fa-solid fa-download"></i> Lite</span>
-            <span class="pill"><i class="fa-solid fa-crown"></i> Elite</span>
-            <span class="pill"><i class="fa-solid fa-shield-halved"></i> Guard</span>
-          </div>
-          <div class="hero-actions">
-            <a class="button primary" href="features.html"><i class="fa-solid fa-layer-group"></i> View features</a>
-            <button class="button secondary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
-          </div>
-        </aside>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer footer-lunar-home">
     <div class="container">
-      <div class="footer-panel">
-        <div class="footer-copy">&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat.</div>
-        <div class="footer-links">
+      <div class="footer-lunar-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Ghosty home">
+            <span class="brand-token">
+              <img src="assets/ghost-icon.png" alt="">
+            </span>
+            <span class="brand-copy">
+              <strong>Ghosty</strong>
+            </span>
+          </a>
+          <p>Ghosty downloads, feature info, and support for ETS2.</p>
+          <div class="footer-socials">
+            <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-link-column">
+          <h3>Products</h3>
+          <a href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">Ghosty Lite</a>
+          <button type="button" data-modal-open="elite-modal">Ghosty Elite</button>
+          <a href="guard.html">Ghosty Guard</a>
+        </div>
+
+        <div class="footer-link-column">
+          <h3>Navigate</h3>
+          <a href="index.html">Home</a>
           <a href="features.html">Features</a>
           <a href="guard.html">Guard</a>
-          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
         </div>
+
+        <div class="footer-link-column">
+          <h3>Support</h3>
+          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="guard.html">Recovery flow</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-line">
+        <span>&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat. Some AI was used to make this website.</span>
       </div>
     </div>
   </footer>
@@ -364,7 +287,7 @@
         </button>
       </div>
       <p class="modal-copy">
-        Elite is a paid premium version. Join Discord to get access and setup info.
+        Elite is the paid version. Join Discord for access and setup.
       </p>
       <div class="modal-stack">
         <div class="stack-item">
@@ -377,14 +300,13 @@
         <div class="stack-item">
           <div>
             <strong>Discord access</strong>
-            <span>Delivery and support stay in one place.</span>
+            <span>Access and support are handled in Discord.</span>
           </div>
           <b>Support</b>
         </div>
       </div>
       <div class="hero-actions">
         <a class="button primary" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Continue in Discord</a>
-        <button class="button soft" type="button" data-modal-close><i class="fa-solid fa-xmark"></i> Close</button>
       </div>
     </div>
   </div>
