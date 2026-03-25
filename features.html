@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Browse the Ghosty feature list with Elite, TMP, Client, Server, warning, and deprecated labels in one official release page.">
   <title>Ghosty | Feature List</title>
-  <link rel="icon" type="image/svg+xml" href="assets/ghost-mark.svg">
+  <link rel="icon" type="image/png" href="assets/ghost-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -17,11 +17,10 @@
     <div class="container nav-shell">
       <a class="brand" href="index.html" aria-label="Ghosty home">
         <span class="brand-token">
-          <img src="assets/ghost-mark.svg" alt="">
+          <img src="assets/ghost-icon.png" alt="">
         </span>
         <span class="brand-copy">
           <strong>Ghosty</strong>
-          <span>Feature list</span>
         </span>
       </a>
 
@@ -38,8 +37,8 @@
           <a class="nav-link" href="guard.html"><i class="fa-solid fa-shield-halved"></i> Guard</a>
         </div>
         <div class="nav-actions">
-          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a>
-          <button class="button primary" type="button" data-modal-open="elite-modal"><i class="fa-solid fa-crown"></i> Ghosty Elite</button>
+          <a class="button soft" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+          <button class="button primary" type="button" data-modal-open="elite-modal">Get Elite</button>
         </div>
       </nav>
     </div>
@@ -56,10 +55,10 @@
     <section class="page-hero">
       <div class="container hero-layout">
         <article class="panel hero-copy" data-reveal>
-          <div class="eyebrow"><span class="dot"></span> Feature list</div>
+          <div class="eyebrow"><span class="dot"></span> Feature menu</div>
           <h1 class="hero-title">Ghosty <span class="gradient">Features</span></h1>
           <p class="hero-lead">
-            This feature list may not always be fully updated. Last website update: 9/02/26.
+            Feature list based on the menu shown in the app. Last site update: 9/02/26.
           </p>
           <div class="hero-actions">
             <a class="button secondary" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back home</a>
@@ -69,59 +68,56 @@
             <div class="metric-card">
               <span class="metric-label"><i class="fa-solid fa-layer-group"></i> Versions</span>
               <span class="metric-value">Lite and Elite</span>
-              <div class="metric-copy">Some features are only available in Ghosty Elite.</div>
+              <div class="metric-copy">Some options are only in Ghosty Elite.</div>
             </div>
             <div class="metric-card">
               <span class="metric-label"><i class="fa-solid fa-desktop"></i> Labels</span>
               <span class="metric-value">Client / Server / TMP</span>
-              <div class="metric-copy">Each feature is marked by where it works.</div>
+              <div class="metric-copy">Each feature shows where it works.</div>
             </div>
             <div class="metric-card">
               <span class="metric-label"><i class="fa-solid fa-triangle-exclamation"></i> Warnings</span>
               <span class="metric-value">Risky tools are marked</span>
-              <div class="metric-copy">Detected and deprecated features are highlighted.</div>
+              <div class="metric-copy">Risky and old options are marked clearly.</div>
             </div>
           </div>
         </article>
 
-        <aside class="panel hero-visual" data-reveal style="--reveal-delay: 0.12s;">
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Labels</p>
-            <h3>CLIENT, SERVER, TMP</h3>
-            <p>Check the label first so you know where the feature works.</p>
-          </div>
+        <aside class="panel hero-visual hero-visual-features" data-reveal style="--reveal-delay: 0.12s;">
+          <div class="feature-hero-stage">
+            <div class="feature-board">
+              <article class="feature-board-card feature-board-card-labels">
+                <p class="card-eyebrow">Labels</p>
+                <h3>CLIENT, SERVER, TMP</h3>
+                <p>Check the label first so you know what each feature does and where it works.</p>
+              </article>
 
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Current list</p>
-            <div class="stack-row">
-              <div class="stack-item">
-                <div>
-                  <strong>Elite only</strong>
-                  <span>The premium-only list is still the same.</span>
+              <article class="feature-board-card feature-board-card-list">
+                <div class="stack-row">
+                  <div class="stack-item">
+                    <div>
+                      <strong>Elite only</strong>
+                      <span>Premium-only features are still separated clearly.</span>
+                    </div>
+                    <b>5</b>
+                  </div>
+                  <div class="stack-item">
+                    <div>
+                      <strong>Suspension</strong>
+                      <span>Front / Rear Suspension is still included.</span>
+                    </div>
+                    <b>Live</b>
+                  </div>
+                  <div class="stack-item">
+                    <div>
+                      <strong>Warnings</strong>
+                      <span>Risky and old features are marked clearly.</span>
+                    </div>
+                    <b>Warn</b>
+                  </div>
                 </div>
-                <b>5</b>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <strong>Suspension</strong>
-                  <span>Front / Rear Suspension is still here.</span>
-                </div>
-                <b>Live</b>
-              </div>
-              <div class="stack-item">
-                <div>
-                  <strong>Warnings</strong>
-                  <span>Risky and old features are still marked clearly.</span>
-                </div>
-                <b>Warn</b>
-              </div>
+              </article>
             </div>
-          </div>
-
-          <div class="hero-side-card">
-            <p class="card-eyebrow">Website note</p>
-            <h3>Based on the current menu</h3>
-            <p>This page follows the current feature set from your screenshots instead of the old leftover list.</p>
           </div>
         </aside>
       </div>
@@ -133,7 +129,7 @@
           <div>
             <p class="kicker">Feature labels</p>
             <h2>How to read the list.</h2>
-            <p>CLIENT affects your local game. SERVER affects online behavior. TMP is for TruckersMP-specific tools.</p>
+            <p>CLIENT affects your local game. SERVER affects online behaviour. TMP is for TruckersMP tools.</p>
           </div>
         </div>
         <div class="legend-panel" data-reveal style="--reveal-delay: 0.06s;">
@@ -149,7 +145,7 @@
     </section>
 
     <section class="section-space">
-      <div class="container atlas-grid">
+      <div class="container atlas-grid feature-atlas">
         <article class="atlas-card" data-reveal>
           <div class="card-top">
             <div class="icon-box"><i class="fa-solid fa-crown"></i></div>
@@ -161,7 +157,7 @@
           <div>
             <p class="card-eyebrow">Elite only</p>
             <h3 class="card-title">Elite features</h3>
-            <p class="card-copy">These are only available in Ghosty Elite and stay the same.</p>
+            <p class="card-copy">These are only in Ghosty Elite.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -213,7 +209,7 @@
           <div>
             <p class="card-eyebrow">Online / TMP</p>
             <h3 class="card-title">Server and TruckersMP features</h3>
-            <p class="card-copy">Current multiplayer-facing options from the in-app list.</p>
+            <p class="card-copy">Multiplayer-facing options from the current build.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -279,7 +275,7 @@
           <div>
             <p class="card-eyebrow">Utility / Account</p>
             <h3 class="card-title">Current utility tools</h3>
-            <p class="card-copy">Main utility and account-related features from the current list.</p>
+            <p class="card-copy">Utility and account-related features from the current build.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -345,7 +341,7 @@
           <div>
             <p class="card-eyebrow">Engine / Movement</p>
             <h3 class="card-title">Movement and engine controls</h3>
-            <p class="card-copy">Movement tools and the current engine slider section.</p>
+            <p class="card-copy">Movement tools and the engine slider section.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -404,7 +400,7 @@
           <div>
             <p class="card-eyebrow">Visual / Camera</p>
             <h3 class="card-title">Dashboard, seat, and camera tools</h3>
-            <p class="card-copy">Current visual and camera features from the app.</p>
+            <p class="card-copy">Visual and camera options from the app.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -477,7 +473,7 @@
           <div>
             <p class="card-eyebrow">Graphics and Presentation</p>
             <h3 class="card-title">Graphics and presentation</h3>
-            <p class="card-copy">Current graphics controls from the in-app list.</p>
+            <p class="card-copy">Graphics controls from the current build.</p>
           </div>
           <div class="trace-list">
             <div class="trace-item">
@@ -523,7 +519,7 @@
     <section class="section-space">
       <div class="container faq-layout">
         <section class="faq-panel" data-reveal>
-          <p class="card-eyebrow">Good to know</p>
+          <p class="card-eyebrow">Notes</p>
           <h3>A few simple notes</h3>
           <ul class="check-list">
             <li><i class="fa-solid fa-check"></i><span><strong>Elite only</strong> stays the same and is limited to the premium-only list.</span></li>
@@ -534,9 +530,9 @@
         </section>
 
         <aside class="cta-panel" data-reveal style="--reveal-delay: 0.08s;">
-          <p class="card-eyebrow">Useful links</p>
+          <p class="card-eyebrow">Next step</p>
           <h3>Open the right page next</h3>
-          <p class="card-copy">Use Home for the main product page, Guard for recovery access, and Discord for support or Elite.</p>
+          <p class="card-copy">Use Home for the main page, Guard for recovery access, and Discord for support or Elite.</p>
           <div class="pill-row">
             <span class="pill"><i class="fa-solid fa-house"></i> Home</span>
             <span class="pill"><i class="fa-solid fa-shield-halved"></i> Guard</span>
@@ -552,16 +548,49 @@
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer footer-lunar-home">
     <div class="container">
-      <div class="footer-panel">
-        <div class="footer-copy">&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat.</div>
-        <div class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="guard.html">Guard</a>
-          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+      <div class="footer-lunar-grid">
+        <div class="footer-brand-block">
+          <a class="brand footer-brand" href="index.html" aria-label="Ghosty home">
+            <span class="brand-token">
+              <img src="assets/ghost-icon.png" alt="">
+            </span>
+            <span class="brand-copy">
+              <strong>Ghosty</strong>
+            </span>
+          </a>
+          <p>Feature labels, version info, and links for the current Ghosty build.</p>
+          <div class="footer-socials">
+            <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
         </div>
+
+        <div class="footer-link-column">
+          <h3>Pages</h3>
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="guard.html">Guard</a>
+        </div>
+
+        <div class="footer-link-column">
+          <h3>Products</h3>
+          <a href="https://st7.ranoz.gg/DTygp4yK-Ghosty%20Bootstrapper.exe" target="_blank" rel="noopener noreferrer">Ghosty Lite</a>
+          <button type="button" data-modal-open="elite-modal">Ghosty Elite</button>
+          <a href="guard.html">Ghosty Guard</a>
+        </div>
+
+        <div class="footer-link-column">
+          <h3>Support</h3>
+          <a href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a href="https://www.youtube.com/@collideghost" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="index.html">Main website</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-line">
+        <span>&copy; <span data-current-year></span> Ghosty. Programs developed by Dizcat. Some AI was used to make this website.</span>
       </div>
     </div>
   </footer>
@@ -575,7 +604,7 @@
         </button>
       </div>
       <p class="modal-copy">
-        Elite is a paid premium version. Join Discord to get access and setup info.
+        Elite is the paid version. Join Discord for access and setup info.
       </p>
       <div class="modal-stack">
         <div class="stack-item">
@@ -588,14 +617,13 @@
         <div class="stack-item">
           <div>
             <strong>Discord access</strong>
-            <span>Delivery and support stay in one place.</span>
+            <span>Access and support are handled in Discord.</span>
           </div>
           <b>Support</b>
         </div>
       </div>
       <div class="hero-actions">
         <a class="button primary" href="https://discord.gg/j6p4yvsfN3" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Continue in Discord</a>
-        <button class="button soft" type="button" data-modal-close><i class="fa-solid fa-xmark"></i> Close</button>
       </div>
     </div>
   </div>
