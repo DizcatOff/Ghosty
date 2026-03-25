@@ -1,27 +1,40 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="ghostBody" x1="26" y1="18" x2="98" y2="112" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="0.48" stop-color="#E6CCFF"/>
-      <stop offset="1" stop-color="#C46CFF"/>
+    <linearGradient id="bgGlow" x1="20" y1="16" x2="110" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D28BFF"/>
+      <stop offset="0.45" stop-color="#8E36FF"/>
+      <stop offset="1" stop-color="#2C0E54"/>
     </linearGradient>
-    <linearGradient id="ghostGlow" x1="22" y1="10" x2="108" y2="122" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#B860FF"/>
-      <stop offset="1" stop-color="#6A2DF2"/>
+    <linearGradient id="ghostSkin" x1="28" y1="22" x2="96" y2="104" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCF7FF"/>
+      <stop offset="0.55" stop-color="#D7B0FF"/>
+      <stop offset="1" stop-color="#9E55FF"/>
     </linearGradient>
-    <filter id="softGlow" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <linearGradient id="shadowFade" x1="64" y1="58" x2="64" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4B157A" stop-opacity="0"/>
+      <stop offset="1" stop-color="#14051F" stop-opacity="0.72"/>
+    </linearGradient>
+    <filter id="glow" x="6" y="8" width="116" height="112" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feFlood flood-opacity="0" result="BackgroundImageFix"/>
       <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-      <feGaussianBlur stdDeviation="7" result="effect1_foregroundBlur"/>
+      <feGaussianBlur stdDeviation="8" result="effect1_foregroundBlur"/>
     </filter>
   </defs>
-  <circle cx="64" cy="64" r="50" fill="url(#ghostGlow)" fill-opacity="0.24"/>
-  <g filter="url(#softGlow)">
-    <path d="M64 18C84.4345 18 101 34.5655 101 55V94.5C101 97.8137 97.1913 99.7198 94.5181 97.7109L84.75 90.3655L73.5125 98.0688C71.8078 99.2373 69.5456 99.1834 67.8985 97.9352L58.625 90.9062L47.9778 98.0312C46.2116 99.2126 43.8983 99.1605 42.1868 97.9013L32.75 90.9609L21.7756 97.9625C19.0724 99.6867 15.5 97.7451 15.5 94.5388V55C15.5 34.5655 32.0655 18 52.5 18H64Z" fill="url(#ghostBody)"/>
+
+  <circle cx="64" cy="64" r="48" fill="url(#bgGlow)" fill-opacity="0.22"/>
+  <g filter="url(#glow)">
+    <path d="M64 18C86.0914 18 104 35.9086 104 58V93.2C104 96.6471 100.176 98.6961 97.3161 96.7761L87.6623 90.2927C86.102 89.2449 84.0765 89.2555 82.5273 90.3196L74.0689 96.1302C72.3557 97.3071 70.0827 97.2464 68.4347 95.9797L59.0678 88.7799C57.5898 87.6436 55.5484 87.5882 54.011 88.6428L44.9454 94.861C43.3028 95.9878 41.1356 96.0001 39.4804 94.892L30.4797 88.8642C28.9382 87.8321 26.9129 87.8494 25.3893 88.9077L18.7395 93.5258C15.8676 95.5207 12 93.4648 12 89.9678V58C12 35.9086 29.9086 18 52 18H64Z" fill="url(#ghostSkin)"/>
   </g>
-  <path d="M64 20C83.3301 20 99 35.6699 99 55V91.5C99 93.8812 96.2856 95.2527 94.3654 93.8552L84.7275 86.8426C83.3216 85.8199 81.4259 85.7964 79.9951 86.7837L72.8892 91.6875C71.4574 92.6755 69.5607 92.6512 68.1546 91.6263L58.9658 84.9288C57.5836 83.9212 55.7102 83.8857 54.2909 84.8402L47.5735 89.3579C46.0832 90.3602 44.1086 90.3126 42.669 89.2396L33.5337 82.4309C32.0866 81.3521 30.0956 81.3072 28.6017 82.3198L21.0701 87.4252C19.1298 88.7406 16.5 87.3502 16.5 84.9884V55C16.5 35.6699 32.1699 20 51.5 20H64Z" fill="url(#ghostBody)" stroke="#FFFFFF" stroke-opacity="0.28" stroke-width="1.4"/>
-  <ellipse cx="50" cy="54" rx="6.5" ry="9" fill="#1A0E2A"/>
-  <ellipse cx="78" cy="54" rx="6.5" ry="9" fill="#1A0E2A"/>
-  <path d="M50 78.2C54.5333 82.7333 61.8 84 68 84C74.2 84 80.1333 82.7333 84 78.2" stroke="#2F1848" stroke-width="5" stroke-linecap="round"/>
-  <path d="M43 31.5C48.3443 27.0803 55.196 24.5 62.5 24.5H64.2C79.66 24.5 92.2 37.0401 92.2 52.5V68.6" stroke="white" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+
+  <path d="M64 20.5C84.7107 20.5 101.5 37.2893 101.5 58V89.0374C101.5 91.449 98.8528 92.9164 96.8057 91.6386L88.6727 86.5611C86.7879 85.3843 84.4024 85.3968 82.53 86.5934L74.6653 91.6214C72.6133 92.9327 69.9585 92.841 68.0018 91.3914L59.8577 85.3592C58.0778 84.041 55.6571 83.9774 53.8108 85.2006L45.6306 90.619C43.6759 91.9139 41.135 91.9283 39.1658 90.6557L31.0525 85.4108C29.2206 84.2264 26.8597 84.2467 25.0484 85.4623L19.1377 89.43C17.0894 90.8052 14.5 89.3373 14.5 86.8704V58C14.5 37.2893 31.2893 20.5 52 20.5H64Z" stroke="#FFF7FF" stroke-opacity="0.3" stroke-width="1.4"/>
+
+  <path d="M46 34C49.2582 28.7711 55.0396 25.5 61.2 25.5H67.4C74.2623 25.5 80.6108 29.1389 84.072 35.0548" stroke="#FFF7FF" stroke-opacity="0.44" stroke-width="3" stroke-linecap="round"/>
+
+  <path d="M42.5 51.5L56 46.5L50.2 60.8C49.5098 62.5006 47.4951 63.1807 45.9232 62.2343L39.8678 58.5894C38.0213 57.4774 38.3754 52.998 40.4229 52.2426L42.5 51.5Z" fill="#16061F"/>
+  <path d="M85.5 51.5L72 46.5L77.8 60.8C78.4902 62.5006 80.5049 63.1807 82.0768 62.2343L88.1322 58.5894C89.9787 57.4774 89.6246 52.998 87.5771 52.2426L85.5 51.5Z" fill="#16061F"/>
+
+  <path d="M45.5 78.5C49.2337 81.5205 55.7061 84 64 84C72.2939 84 78.7663 81.5205 82.5 78.5" stroke="#2A0B40" stroke-width="5.6" stroke-linecap="round"/>
+  <path d="M55.8 77.8L60.2 86.2L64.5 79.8L68.9 86.2L73.3 77.8" stroke="#2A0B40" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M64 58C78.9117 58 91 70.0883 91 85V90.5C91 92.9853 88.9853 95 86.5 95H41.5C39.0147 95 37 92.9853 37 90.5V85C37 70.0883 49.0883 58 64 58Z" fill="url(#shadowFade)"/>
 </svg>

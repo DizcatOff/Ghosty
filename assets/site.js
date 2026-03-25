@@ -130,6 +130,42 @@ document.querySelectorAll("[data-current-year]").forEach((node) => {
   node.textContent = String(new Date().getFullYear());
 });
 
+const populateStarfield = (container, starClass, totalStars) => {
+  if (!container) return;
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < totalStars; i += 1) {
+    const star = document.createElement("span");
+    const size = Math.random() < 0.1 ? 2 : Math.random() < 0.4 ? 1.4 : 0.9;
+    star.className = starClass;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.setProperty("--star-size", `${size}px`);
+    star.style.setProperty("--star-opacity", `${0.16 + Math.random() * 0.42}`);
+    star.style.setProperty("--star-delay", `${Math.random() * -12}s`);
+    star.style.setProperty("--star-duration", `${8 + Math.random() * 12}s`);
+    star.style.setProperty("--star-drift-x", `${-7 + Math.random() * 14}px`);
+    star.style.setProperty("--star-drift-y", `${-9 + Math.random() * 18}px`);
+    fragment.appendChild(star);
+  }
+
+  container.appendChild(fragment);
+};
+
+const homeStarfield = document.querySelector("[data-home-starfield]");
+
+if (homeStarfield) {
+  populateStarfield(homeStarfield, "home-star", window.innerWidth < 768 ? 55 : 95);
+}
+
+if (document.body.matches(".page-features, .page-guard, .page-redirect")) {
+  const siteStarfield = document.createElement("div");
+  siteStarfield.className = "site-starfield";
+  siteStarfield.setAttribute("aria-hidden", "true");
+  document.body.prepend(siteStarfield);
+  populateStarfield(siteStarfield, "site-star", window.innerWidth < 768 ? 40 : 72);
+}
+
 document.querySelectorAll("[data-drift]").forEach((stage) => {
   stage.addEventListener("pointermove", (event) => {
     const rect = stage.getBoundingClientRect();
