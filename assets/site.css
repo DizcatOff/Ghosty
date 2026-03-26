@@ -130,78 +130,6 @@ body::after {
   opacity: 0.42;
 }
 
-.ghost-cursor-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 4;
-}
-
-.ghost-cursor,
-.ghost-cursor-particle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  will-change: transform, opacity, filter;
-}
-
-.ghost-cursor {
-  width: 24px;
-  height: 28px;
-  margin-left: -12px;
-  margin-top: -14px;
-  filter: drop-shadow(0 6px 18px rgba(var(--accent-rgb), 0.14));
-  transition: opacity 0.26s ease;
-}
-
-.ghost-cursor::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92) 18%, rgba(var(--accent-2-rgb), 0.66) 48%, rgba(var(--accent-rgb), 0.14) 78%, transparent 100%);
-  -webkit-mask: url("./ghost-mark.svg") center / contain no-repeat;
-  mask: url("./ghost-mark.svg") center / contain no-repeat;
-}
-
-.ghost-cursor::after {
-  content: "";
-  position: absolute;
-  inset: 6px 7px 8px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 35% 42%, rgba(14, 12, 24, 0.78) 0 7%, transparent 8%),
-    radial-gradient(circle at 65% 42%, rgba(14, 12, 24, 0.78) 0 7%, transparent 8%),
-    radial-gradient(circle at 50% 68%, rgba(255, 255, 255, 0.14) 0 8%, transparent 9%);
-  opacity: 0.56;
-  transform: scale(0.78);
-}
-
-.ghost-cursor-particle {
-  width: calc(var(--particle-size, 10px) * 1.15);
-  height: calc(var(--particle-size, 10px) * 1.15);
-  margin-left: calc(var(--particle-size, 10px) * -0.575);
-  margin-top: calc(var(--particle-size, 10px) * -0.575);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 32%, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.34) 24%, rgba(var(--accent-2-rgb), 0.2) 52%, rgba(var(--accent-rgb), 0.04) 80%, transparent 100%);
-  filter: blur(calc(var(--particle-size, 10px) * 0.1));
-  mix-blend-mode: screen;
-}
-
-.ghost-cursor-particle::before {
-  content: "";
-  position: absolute;
-  inset: 18%;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.04) 72%, transparent 100%);
-  opacity: 0.68;
-}
-
 img,
 video {
   display: block;
@@ -3139,10 +3067,6 @@ main {
     animation: none !important;
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
-  }
-
-  .ghost-cursor-layer {
-    display: none !important;
   }
 }
 
