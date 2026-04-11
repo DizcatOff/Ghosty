@@ -3505,41 +3505,64 @@ body.page-home::after {
 
 .ghosty-box-3d {
   --box-shift-x: 1.25rem;
-  --box-tilt: -7deg;
+  --hero-rotate-y: -12deg;
+  --hero-rotate-x: 4deg;
+  --hero-rotate-z: -2deg;
+  --hero-rotate-y-hover: -18deg;
+  --hero-rotate-x-hover: 7deg;
+  --hero-rotate-z-hover: -3deg;
+  --hero-scale-hover: 1.065;
   position: relative;
-  width: min(37rem, 100%);
-  height: clamp(36rem, 56vw, 53rem);
+  width: min(34rem, 100%);
+  height: clamp(30rem, 50vw, 46rem);
   margin: 0 auto;
-  transform: translateX(var(--box-shift-x)) rotate(var(--box-tilt));
-  animation: homeProductBob 5.4s ease-in-out infinite;
-  filter: drop-shadow(0 1.6rem 2.6rem rgba(0, 0, 0, 0.34));
+  perspective: 1280px;
+  perspective-origin: 46% 42%;
   z-index: 2;
 }
 
-.product-carousel {
+.ghosty-product-tilt {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: translate3d(var(--box-shift-x), 0, 0) rotateY(var(--hero-rotate-y)) rotateX(var(--hero-rotate-x))
+    rotateZ(var(--hero-rotate-z));
+  transform-origin: 50% 55%;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s ease;
+  filter: drop-shadow(0 1.35rem 2.35rem rgba(0, 0, 0, 0.34));
 }
 
-.ghosty-product-art {
-  position: absolute;
-  inset: 0;
+.ghosty-box-3d:hover .ghosty-product-tilt,
+.ghosty-box-3d:focus-within .ghosty-product-tilt {
+  transform: translate3d(var(--box-shift-x), 0, 0) rotateY(var(--hero-rotate-y-hover)) rotateX(var(--hero-rotate-x-hover))
+    rotateZ(var(--hero-rotate-z-hover)) scale3d(var(--hero-scale-hover), var(--hero-scale-hover), var(--hero-scale-hover));
+  filter: drop-shadow(0 1.85rem 3rem rgba(0, 0, 0, 0.42));
+}
+
+.ghosty-product-float {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: homeProductBob 5.4s ease-in-out infinite;
+}
+
+.ghosty-product-hero {
+  width: auto;
+  max-width: min(100%, 30rem);
+  height: auto;
+  max-height: 100%;
   display: block;
   object-fit: contain;
-  opacity: 0;
   user-select: none;
   -webkit-user-drag: none;
-}
-
-.ghosty-product-art.is-lite {
-  animation: homeProductSwapLite 9.5s ease-in-out infinite;
-}
-
-.ghosty-product-art.is-elite {
-  animation: homeProductSwapElite 9.5s ease-in-out infinite;
 }
 
 .ghosty-box-top,
@@ -4161,43 +4184,11 @@ body.page-home::after {
 @keyframes homeProductBob {
   0%,
   100% {
-    transform: translateX(var(--box-shift-x)) translateY(0) rotate(var(--box-tilt));
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateX(var(--box-shift-x)) translateY(-6px) rotate(calc(var(--box-tilt) + 0.8deg));
-  }
-}
-
-@keyframes homeProductSwapLite {
-  0%,
-  43% {
-    opacity: 1;
-  }
-
-  50%,
-  93% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes homeProductSwapElite {
-  0%,
-  43% {
-    opacity: 0;
-  }
-
-  50%,
-  93% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
+    transform: translateY(-6px);
   }
 }
 
@@ -4431,10 +4422,14 @@ body.page-home::after {
   }
 
   .ghosty-box-3d {
-    width: min(31rem, 100%);
-    height: clamp(30rem, 100vw, 42rem);
+    width: min(29rem, 100%);
+    height: clamp(26rem, 88vw, 38rem);
     --box-shift-x: 0.8rem;
-    --box-tilt: -6deg;
+    --hero-rotate-y: -10deg;
+    --hero-rotate-x: 3.5deg;
+    --hero-rotate-y-hover: -15deg;
+    --hero-rotate-x-hover: 5.5deg;
+    --hero-scale-hover: 1.055;
   }
 
   .ghosty-box-mark {
@@ -4511,10 +4506,14 @@ body.page-home::after {
   }
 
   .ghosty-box-3d {
-    width: min(25.5rem, 100%);
-    height: 32rem;
+    width: min(24rem, 100%);
+    height: 28rem;
     --box-shift-x: 0.2rem;
-    --box-tilt: -5deg;
+    --hero-rotate-y: -9deg;
+    --hero-rotate-x: 3deg;
+    --hero-rotate-y-hover: -14deg;
+    --hero-rotate-x-hover: 5deg;
+    --hero-scale-hover: 1.05;
   }
 
   .ghosty-box-top {
@@ -5534,10 +5533,14 @@ body.page-redirect::after {
   }
 
   .ghosty-box-3d {
-    width: min(22rem, 92vw);
-    height: 27rem;
+    width: min(21rem, 92vw);
+    height: 24rem;
     --box-shift-x: 0rem;
-    --box-tilt: -4deg;
+    --hero-rotate-y: -8deg;
+    --hero-rotate-x: 2.5deg;
+    --hero-rotate-y-hover: -12deg;
+    --hero-rotate-x-hover: 4.5deg;
+    --hero-scale-hover: 1.045;
   }
 
   .feature-showcase-card,
@@ -5688,8 +5691,11 @@ body.page-redirect::after {
   }
 
   .ghosty-box-3d {
-    width: min(19rem, 96vw);
-    height: 23.5rem;
+    width: min(18.5rem, 96vw);
+    height: 21rem;
+    --hero-rotate-y: -7deg;
+    --hero-rotate-y-hover: -11deg;
+    --hero-scale-hover: 1.04;
   }
 
   .feature-showcase-copy h3,
